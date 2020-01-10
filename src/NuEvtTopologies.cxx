@@ -82,8 +82,8 @@ HepMC3Nu::labels::EventSummary GetEventSummary(HepMC3::GenEvent const &evt) {
     topo = HepMC3Nu::labels::Topology::kNPi;
   }
 
-  return {FSPart->pid % 2 ? HepMC3Nu::labels::Current::kCC
-                          : HepMC3Nu::labels::Current::kNC,
+  return {FSPart->pid() % 2 ? HepMC3Nu::labels::Current::kCC
+                            : HepMC3Nu::labels::Current::kNC,
           ps, topo};
 }
 

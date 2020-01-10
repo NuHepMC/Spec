@@ -1,6 +1,7 @@
 #pragma once
 
 #include <utility>
+#include <iostream>
 
 namespace HepMC3Nu {
 
@@ -32,3 +33,25 @@ struct EventSummary {
 } // namespace labels
 
 } // namespace HepMC3Nu
+
+inline std::ostream &operator<<(std::ostream &os, HepMC3Nu::labels::Current c) {
+  switch (c) {
+  case HepMC3Nu::labels::Current::kCC:
+    return os << "kCC";
+  case HepMC3Nu::labels::Current::kNC:
+    return os << "kNC";
+  default:
+    return os << "UnknownCurrent";
+  }
+}
+
+inline std::ostream &operator<<(std::ostream &os, HepMC3Nu::labels::State s) {
+  switch (s) {
+  case HepMC3Nu::labels::State::kIS:
+    return os << "kIS";
+  case HepMC3Nu::labels::State::kFS:
+    return os << "kFS";
+  default:
+    return os << "UnknownState";
+  }
+}

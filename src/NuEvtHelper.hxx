@@ -69,3 +69,9 @@ HepMC3::ConstGenParticlePtr GetFSProbe(HepMC3::GenEvent const &evt, int pid);
 HepMC3::ConstGenParticlePtr GetFSProbe(HepMC3::GenEvent const &evt);
 
 } // namespace HepMC3Nu
+
+inline std::ostream &operator<<(std::ostream &os,
+                                HepMC3::FourVector const &fv) {
+  return os << "[ " << fv.x() << ", " << fv.y() << ", " << fv.z()
+            << ", E: " << fv.e() << " ]";
+}

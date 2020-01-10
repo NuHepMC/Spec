@@ -1,12 +1,22 @@
 
 #include "NuEvtHelper.hxx"
 
+// #define NUEVTHELP_DEBUG
+
 #include <unordered_set>
+#ifdef NUEVTHELP_DEBUG
+#include <iostream>
+#endif
 
 namespace HepMC3Nu {
 
 std::vector<HepMC3::ConstGenParticlePtr>
 GetParticles(HepMC3::GenEvent const &evt, int pid, labels::State st) {
+
+#ifdef NUEVTHELP_DEBUG
+  std::cout << "[INFO]<<: Looking for particles in state: " << st
+            << ", with pid: " << pid << std::endl;
+#endif
 
   // These methods only deal with the lab frame vertex
   if (st == labels::State::kOther) {
@@ -21,6 +31,10 @@ GetParticles(HepMC3::GenEvent const &evt, int pid, labels::State st) {
   for (auto part : (st == labels::State::kIS) ? LabFrameVtx->particles_in()
                                               : LabFrameVtx->particles_out()) {
     if (part->pid() == pid) {
+#ifdef NUEVTHELP_DEBUG
+      std::cout << "[INFO]: Found one, "
+                << part->pid() << ", E = " << part->momentum().e() << std::endl;
+#endif
       rtnlist.push_back(part);
     }
   }
@@ -34,6 +48,15 @@ GetParticles(HepMC3::GenEvent const &evt, std::vector<int> const &pids,
   std::vector<HepMC3::ConstGenParticlePtr> rtnlist;
 
   std::unordered_set<int> distinct_pids(pids.begin(), pids.end());
+
+#ifdef NUEVTHELP_DEBUG
+  std::cout << "[INFO]: Looking for particles in state: " << st
+            << ", with pids in: {";
+  for (int pid : distinct_pids) {
+    std::cout << pid << ", ";
+  }
+  std::cout << "}." << std::endl;
+#endif
 
   for (int pid : distinct_pids) {
     for (auto part : GetParticles(evt, pid, st)) {
@@ -71,7 +94,7 @@ HepMC3::ConstGenParticlePtr GetFSProbe(HepMC3::GenEvent const &evt, int pid) {
 HepMC3::ConstGenParticlePtr GetFSProbe(HepMC3::GenEvent const &evt) {
   auto ISProbe = GetProbe(evt);
 
-  return GetHMISParticle(evt, ISProbe->pid());
+  return GetFSProbe(evt, ISProbe->pid());
 }
 
 } // namespace HepMC3Nu

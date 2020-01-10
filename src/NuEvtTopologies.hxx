@@ -2,6 +2,8 @@
 
 #include "NuEvtEnums.hxx"
 
+#include "HepMC3/GenEvent.h"
+
 namespace HepMC3Nu {
 
 namespace topo {

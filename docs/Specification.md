@@ -23,3 +23,5 @@ Specify/Reserve some status, others available for use
  3: Decayed
  4-9: Reserved for future HepMCNuEvtTools use
  10+: Available for use
+
+ Generator specific flags should be defined in the GenRunInfo metadata.
