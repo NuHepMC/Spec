@@ -1,8 +1,8 @@
-#include "NuEvtTopologies.hxx"
+#include "HepMCNuEvtTools/Topologies.hxx"
 
-#include "NuEvtHelper.hxx"
+#include "HepMCNuEvtTools/ParticleStackReaderHelper.hxx"
 
-#include "NuEvtPidCodes.hxx"
+#include "HepMCNuEvtTools/PidCodes.hxx"
 
 namespace HepMC3Nu {
 
@@ -23,11 +23,11 @@ HepMC3Nu::labels::ProbeSummary GetProbeSummary(HepMC3::GenEvent const &evt) {
   }
   case HepMC3Nu::pid::kNuMu: {
     return {HepMC3Nu::labels::Matter::kMatter,
-            HepMC3Nu::labels::ProbeSpecies::kNumu};
+            HepMC3Nu::labels::ProbeSpecies::kNuMu};
   }
   case HepMC3Nu::pid::kNuMuBar: {
     return {HepMC3Nu::labels::Matter::kAntiMatter,
-            HepMC3Nu::labels::ProbeSpecies::kNumu};
+            HepMC3Nu::labels::ProbeSpecies::kNuMu};
   }
   case HepMC3Nu::pid::kElec: {
     return {HepMC3Nu::labels::Matter::kMatter,
@@ -45,7 +45,7 @@ HepMC3Nu::labels::EventSummary GetEventSummary(HepMC3::GenEvent const &evt) {
 
   std::vector<int> expected_pids;
 
-  if (ps.spec == HepMC3Nu::labels::ProbeSpecies::kNumu) {
+  if (ps.spec == HepMC3Nu::labels::ProbeSpecies::kNuMu) {
     expected_pids =
         (ps.matter == HepMC3Nu::labels::Matter::kMatter)
             ? std::vector<int>{HepMC3Nu::pid::kNuMu, HepMC3Nu::pid::kMuon}

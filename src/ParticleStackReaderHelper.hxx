@@ -1,6 +1,6 @@
 #pragma once
 
-#include "NuEvtEnums.hxx"
+#include "HepMCNuEvtTools/Enums.hxx"
 
 #include "HepMC3/GenEvent.h"
 #include "HepMC3/GenParticle.h"
@@ -9,35 +9,35 @@
 namespace HepMC3Nu {
 
 std::vector<HepMC3::ConstGenParticlePtr> GetParticles(HepMC3::GenEvent const &,
-                                                      int pid, labels::State);
+                                                      int pid, labels::ParticleState);
 
 inline std::vector<HepMC3::ConstGenParticlePtr>
 GetISParticles(HepMC3::GenEvent const &evt, int pid) {
-  return GetParticles(evt, pid, labels::State::kIS);
+  return GetParticles(evt, pid, labels::ParticleState::kInitialState);
 }
 
 inline std::vector<HepMC3::ConstGenParticlePtr>
 GetFSParticles(HepMC3::GenEvent const &evt, int pid) {
-  return GetParticles(evt, pid, labels::State::kFS);
+  return GetParticles(evt, pid, labels::ParticleState::kFinalState);
 }
 
 std::vector<HepMC3::ConstGenParticlePtr>
 GetParticles(HepMC3::GenEvent const &, std::vector<int> const &pids,
-             labels::State);
+             labels::ParticleState);
 
 inline std::vector<HepMC3::ConstGenParticlePtr>
 GetISParticles(HepMC3::GenEvent const &evt, std::vector<int> const &pids) {
-  return GetParticles(evt, pids, labels::State::kIS);
+  return GetParticles(evt, pids, labels::ParticleState::kInitialState);
 }
 
 inline std::vector<HepMC3::ConstGenParticlePtr>
 GetFSParticles(HepMC3::GenEvent const &evt, std::vector<int> const &pids) {
-  return GetParticles(evt, pids, labels::State::kFS);
+  return GetParticles(evt, pids, labels::ParticleState::kFinalState);
 }
 
 template <typename pidspec>
 inline HepMC3::ConstGenParticlePtr
-GetHMParticle(HepMC3::GenEvent const &evt, pidspec pid, labels::State st) {
+GetHMParticle(HepMC3::GenEvent const &evt, pidspec pid, labels::ParticleState st) {
 
   HepMC3::ConstGenParticlePtr hm(nullptr);
   double max_p3mod2 = 0;
@@ -55,13 +55,13 @@ GetHMParticle(HepMC3::GenEvent const &evt, pidspec pid, labels::State st) {
 template <typename pidspec>
 inline HepMC3::ConstGenParticlePtr GetHMISParticle(HepMC3::GenEvent const &evt,
                                                    pidspec pid) {
-  return GetHMParticle(evt, pid, labels::State::kIS);
+  return GetHMParticle(evt, pid, labels::ParticleState::kInitialState);
 }
 
 template <typename pidspec>
 inline HepMC3::ConstGenParticlePtr GetHMFSParticle(HepMC3::GenEvent const &evt,
                                                    pidspec pid) {
-  return GetHMParticle(evt, pid, labels::State::kFS);
+  return GetHMParticle(evt, pid, labels::ParticleState::kFinalState);
 }
 
 HepMC3::ConstGenParticlePtr GetProbe(HepMC3::GenEvent const &evt);

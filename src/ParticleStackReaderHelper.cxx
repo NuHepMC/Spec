@@ -1,5 +1,5 @@
 
-#include "NuEvtHelper.hxx"
+#include "HepMCNuEvtTools/ParticleStackReaderHelper.hxx"
 
 // #define NUEVTHELP_DEBUG
 
@@ -8,12 +8,10 @@
 #include <iostream>
 #endif
 
-
-
 namespace HepMC3Nu {
 
 std::vector<HepMC3::ConstGenParticlePtr>
-GetParticles(HepMC3::GenEvent const &evt, int pid, labels::State st) {
+GetParticles(HepMC3::GenEvent const &evt, int pid, labels::ParticleState st) {
 
 #ifdef NUEVTHELP_DEBUG
   std::cout << "[INFO]<<: Looking for particles in state: " << st
@@ -21,7 +19,7 @@ GetParticles(HepMC3::GenEvent const &evt, int pid, labels::State st) {
 #endif
 
   // These methods only deal with the lab frame vertex
-  if (st == labels::State::kOther) {
+  if (st == labels::ParticleState::kOther) {
     return {};
   }
 
@@ -30,12 +28,17 @@ GetParticles(HepMC3::GenEvent const &evt, int pid, labels::State st) {
   // Only look at the first vertex
   HepMC3::ConstGenVertexPtr LabFrameVtx = evt.vertices().front();
 
-  for (auto part : (st == labels::State::kIS) ? LabFrameVtx->particles_in()
-                                              : LabFrameVtx->particles_out()) {
+  if (LabFrameVtx->status() != labels::e2i(labels::VertexState::kLabFrame)) {
+    return {};
+  }
+
+  for (auto part : (st == labels::ParticleState::kInitialState)
+                       ? LabFrameVtx->particles_in()
+                       : LabFrameVtx->particles_out()) {
     if (part->pid() == pid) {
 #ifdef NUEVTHELP_DEBUG
-      std::cout << "[INFO]: Found one, "
-                << part->pid() << ", E = " << part->momentum().e() << std::endl;
+      std::cout << "[INFO]: Found one, " << part->pid()
+                << ", E = " << part->momentum().e() << std::endl;
 #endif
       rtnlist.push_back(part);
     }
@@ -46,7 +49,7 @@ GetParticles(HepMC3::GenEvent const &evt, int pid, labels::State st) {
 
 std::vector<HepMC3::ConstGenParticlePtr>
 GetParticles(HepMC3::GenEvent const &evt, std::vector<int> const &pids,
-             labels::State st) {
+             labels::ParticleState st) {
   std::vector<HepMC3::ConstGenParticlePtr> rtnlist;
 
   std::unordered_set<int> distinct_pids(pids.begin(), pids.end());

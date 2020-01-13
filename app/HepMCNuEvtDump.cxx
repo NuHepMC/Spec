@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "HepMCNuEvtTools/NuEvtTools"
+#include "HepMCNuEvtTools/ReaderTools"
 
 #include "HepMC3/Print.h"
 #include "HepMC3/ReaderRootTree.h"

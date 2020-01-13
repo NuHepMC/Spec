@@ -1,6 +1,6 @@
 #pragma once
 
-#include "NuEvtEnums.hxx"
+#include "HepMCNuEvtTools/Enums.hxx"
 
 #include "HepMC3/GenEvent.h"
 

@@ -1,5 +1,5 @@
-#include "NuEvtKinematics.hxx"
-#include "NuEvtHelper.hxx"
+#include "HepMCNuEvtTools/Kinematics.hxx"
+#include "HepMCNuEvtTools/ParticleStackReaderHelper.hxx"
 
 #include <iostream>
 

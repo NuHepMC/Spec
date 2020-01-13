@@ -1,13 +1,17 @@
 SET(implementation_files
-  NuEvtHelper.cxx
-  NuEvtKinematics.cxx
-  NuEvtTopologies.cxx)
+  ParticleStackReaderHelper.cxx
+  Kinematics.cxx
+  Topologies.cxx)
 
 SET(header_files
-  NuEvtHelper.cxx
-  NuEvtKinematics.cxx
-  NuEvtTopologies.cxx
-  NuEvtTools)
+  ParticleStackReaderHelper.hxx
+  Kinematics.hxx
+  Topologies.hxx
+  PidCodes.hxx
+  GenRunInfoReaderHelper.hxx
+  GenRunInfoWriterHelper.hxx
+  ReaderTools
+  WriterTools)
 
 add_library(HepMCNuEvtTools SHARED ${implementation_files})
 

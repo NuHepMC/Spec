@@ -47,8 +47,7 @@ include(cmake/parseConfigApp.cmake)
 ##################################  ROOT  ######################################
 include(${CMAKE_SOURCE_DIR}/cmake/ROOTSetup.cmake)
 
-include_directories(src)
-include_directories(${CMAKE_INSTALL_PREFIX}/include)
+include_directories(${CMAKE_SOURCE_DIR})
 
 ###############################  HepMC  #####################################
 include(${CMAKE_SOURCE_DIR}/cmake/HepMCSetup.cmake)

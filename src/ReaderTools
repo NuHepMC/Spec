@@ -1,0 +1,6 @@
+#pragma once
+
+#include "HepMCNuEvtTools/Kinematics.hxx"
+#include "HepMCNuEvtTools/Topologies.hxx"
+#include "HepMCNuEvtTools/ParticleStackReaderHelper.hxx"
+#include "HepMCNuEvtTools/GenRunInfoReaderHelper.hxx"

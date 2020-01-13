@@ -15,13 +15,33 @@ later vertices can be used for hadronic re-scatters, and particle decays.
 
 N.B. every event is expected to have at least one vertex, most will have two (coherent nuclear scattering events will only contain the lab frame vertex).
 
-Specify/Reserve some status, others available for use
--1: Incoming, lab
- 0: Generic intermediate (i.e. not visible in the lab)
- 1: Outgoing, lab
- 2: Re-interacted
- 3: Decayed
+Specify/Reserve some vertex status codes, others available for use
+ 0: Lab frame vertex
+ 1: ISI vertex
+ 2: Hard scatter vertex
+ 3: FSI vertex
  4-9: Reserved for future HepMCNuEvtTools use
  10+: Available for use
 
- Generator specific flags should be defined in the GenRunInfo metadata.
+Specify/Reserve some particle status codes, others available for use
+ 0: Incoming, lab
+ 1: Generic intermediate (i.e. not visible in the lab)
+ 2: Outgoing, lab
+ 3: Re-interacted
+ 4: Decayed
+ 5-9: Reserved for future HepMCNuEvtTools use
+ 10+: Available for use
+
+It is recommended that generator flags which are a subset of the HepMCNuEvtTools
+definitions should include use the corresponding HEPMCNuEvtTools flag as the
+lowest digit, e.g. GENERATORX has 'Decayed intra-nuclear' and
+'Decayed extra-nuclear' flags, it is recommended, but not enforced, that these
+should be 14 and 24, respectively. If all flags can be used like flag % 10 and
+then correctly project onto the HEPMCNuEvtTools enumerations, the GenRunInfo
+attribute StatusEnumsVersion=1.0 should be set. Future versions will be updated
+here.
+
+Generator specific flags should be defined in the GenRunInfo metadata.
+This should be done by adding a int->string map attribute that defines any extra
+enum values, one should separately be added for the Vertex and Particle Status.
+Helper functions for doing this can be found in NuEvtGenRunInfoHelper.hxx
