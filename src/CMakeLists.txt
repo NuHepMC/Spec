@@ -1,7 +1,9 @@
 SET(implementation_files
   ParticleStackReaderHelper.cxx
   Kinematics.cxx
-  Topologies.cxx)
+  Topologies.cxx
+  GenRunInfoReaderHelper.cxx
+  GenRunInfoWriterHelper.cxx)
 
 SET(header_files
   ParticleStackReaderHelper.hxx
