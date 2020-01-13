@@ -11,6 +11,10 @@ namespace topo {
 HepMC3Nu::labels::ProbeSummary GetProbeSummary(HepMC3::GenEvent const &);
 HepMC3Nu::labels::EventSummary GetEventSummary(HepMC3::GenEvent const &);
 
+/// These methods are fine for high-level access to event properties where
+/// optimization is not needed, but are inefficient lookups when you want to
+/// query multiple event properties procedurally.
+
 bool IsNu(HepMC3::GenEvent const &);
 bool IsNuBar(HepMC3::GenEvent const &);
 

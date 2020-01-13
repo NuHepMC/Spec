@@ -68,6 +68,11 @@ HepMC3::ConstGenParticlePtr GetProbe(HepMC3::GenEvent const &evt);
 HepMC3::ConstGenParticlePtr GetFSProbe(HepMC3::GenEvent const &evt, int pid);
 HepMC3::ConstGenParticlePtr GetFSProbe(HepMC3::GenEvent const &evt);
 
+template<typename List>
+inline bool ListContains(List const &L, typename List::value_type const & v){
+  return (std::find(L.begin(), L.end(), v) != L.end());
+}
+
 } // namespace HepMC3Nu
 
 inline std::ostream &operator<<(std::ostream &os,
