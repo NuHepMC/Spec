@@ -17,8 +17,8 @@ std::shared_ptr<HepMC3::GenRunInfo> GRIFactory(std::string const &gen_name,
 
 /// Set the HepMCNuEvtTools VertexEnumStandard used
 /// Use 0.0 to disable
-void SetVertexEnumStandard(std::shared_ptr<HepMC3::GenRunInfo> gri, int v = 0,
-                           int s = 0) {
+void SetVertexEnumStandard(std::shared_ptr<HepMC3::GenRunInfo> gri, int v,
+                           int s) {
   gri->add_attribute("VertexEnumStandard",
                      std::make_shared<HepMC3::StringAttribute>(
                          std::to_string(v) + "." + std::to_string(s)));
@@ -28,7 +28,7 @@ void AddVertexEnumDefinitions(std::shared_ptr<HepMC3::GenRunInfo> gri,
   std::vector<int> keys;
   std::vector<std::string> values;
   for (auto kv : defns) {
-    if(kv.first < 10){
+    if (kv.first < 10) {
       throw "Not allowed to define new Vertex enums < 10.";
     }
     keys.push_back(kv.first);
@@ -42,8 +42,8 @@ void AddVertexEnumDefinitions(std::shared_ptr<HepMC3::GenRunInfo> gri,
 
 /// Set the HepMCNuEvtTools ParticleEnumStandard used
 /// Use 0.0 to disable
-void SetParticleEnumStandard(std::shared_ptr<HepMC3::GenRunInfo> gri, int v = 0,
-                             int s = 0) {
+void SetParticleEnumStandard(std::shared_ptr<HepMC3::GenRunInfo> gri, int v,
+                             int s) {
   gri->add_attribute("ParticleEnumStandard",
                      std::make_shared<HepMC3::StringAttribute>(
                          std::to_string(v) + "." + std::to_string(s)));
@@ -53,7 +53,7 @@ void AddParticleEnumDefinitions(std::shared_ptr<HepMC3::GenRunInfo> gri,
   std::vector<int> keys;
   std::vector<std::string> values;
   for (auto kv : defns) {
-        if(kv.first < 10){
+    if (kv.first < 10) {
       throw "Not allowed to define new Particle enums < 10.";
     }
     keys.push_back(kv.first);
@@ -65,7 +65,7 @@ void AddParticleEnumDefinitions(std::shared_ptr<HepMC3::GenRunInfo> gri,
                      std::make_shared<HepMC3::VectorStringAttribute>(values));
 }
 
-void SetHardScatterModeDefinitions(std::shared_ptr<HepMC3::GenRunInfo> &gri,
+void SetHardScatterModeDefinitions(std::shared_ptr<HepMC3::GenRunInfo> gri,
                                    std::map<int, std::string> const &defns) {
   std::vector<int> keys;
   std::vector<std::string> values;
