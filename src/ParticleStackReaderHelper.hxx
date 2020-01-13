@@ -8,6 +8,8 @@
 
 namespace HepMC3Nu {
 
+HepMC3::ConstGenVertexPtr GetLabFrameVertex(HepMC3::GenEvent const &);
+
 std::vector<HepMC3::ConstGenParticlePtr> GetParticles(HepMC3::GenEvent const &,
                                                       int pid, labels::ParticleState);
 

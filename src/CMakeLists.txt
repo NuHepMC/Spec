@@ -12,6 +12,8 @@ SET(header_files
   PidCodes.hxx
   GenRunInfoReaderHelper.hxx
   GenRunInfoWriterHelper.hxx
+  Enums.hxx
+  StandardEnums.hxx
   ReaderTools
   WriterTools)
 
