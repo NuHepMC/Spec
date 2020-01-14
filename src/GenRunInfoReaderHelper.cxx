@@ -1,66 +1,103 @@
 #include "HepMCNuEvtTools/GenRunInfoReaderHelper.hxx"
 
 #include "HepMCNuEvtTools/StandardEnums.hxx"
+#include "HepMCNuEvtTools/StringUtils.hxx"
+
+#include <algorithm>
 
 namespace HepMC3Nu {
 
 namespace genruninfo {
 
-GRIHelper::GRIHelper(std::shared_ptr<HepMC3::GenRunInfo> const gri) {
-  fGRI = gri;
+void ReadIntStringMap(std::shared_ptr<HepMC3::GenRunInfo> const gri,
+                      std::string const &attr_name,
+                      std::map<int, std::string> &m) {
 
-  std::shared_ptr<HepMC3::StringAttribute> VES =
-      fGRI->attribute<HepMC3::StringAttribute>("VertexEnumStandard");
-  if (VES) {
-    VertexEnumMap = HepMC3Nu::labels::GetVertexDefinitions(VES->value());
+  std::shared_ptr<HepMC3::VectorIntAttribute> keys =
+      gri->attribute<HepMC3::VectorIntAttribute>(attr_name + ".keys");
+  std::shared_ptr<HepMC3::StringAttribute> vals =
+      gri->attribute<HepMC3::StringAttribute>(attr_name + ".vals");
+
+  if (keys && vals) {
+    std::vector<std::string> valsv =
+        HepMC3Nu::strutil::UnSerializeStringVector(vals->value());
+    for (size_t i = 0; i < keys->value().size(); ++i) {
+      m[keys->value()[i]] = valsv[i];
+    }
+  }
+}
+
+void ReadStringStringMap(std::shared_ptr<HepMC3::GenRunInfo> const gri,
+                         std::string const &attr_name,
+                         std::map<std::string, std::string> &m) {
+
+  std::shared_ptr<HepMC3::StringAttribute> keys =
+      gri->attribute<HepMC3::StringAttribute>(attr_name + ".keys");
+  std::shared_ptr<HepMC3::StringAttribute> vals =
+      gri->attribute<HepMC3::StringAttribute>(attr_name + ".vals");
+
+  if (keys && vals) {
+    std::vector<std::string> keysv =
+        HepMC3Nu::strutil::UnSerializeStringVector(keys->value());
+    std::vector<std::string> valsv =
+        HepMC3Nu::strutil::UnSerializeStringVector(vals->value());
+    for (size_t i = 0; i < keysv.size(); ++i) {
+      m[keysv[i]] = valsv[i];
+    }
+  }
+}
+
+GRIHelper::GRIHelper(std::shared_ptr<HepMC3::GenRunInfo> const gri)
+    : FluxAverageTotalCrossSection(0) {
+  if (!gri) {
+    std::cout << "[ERROR]: Instantiated GRIHelper with a nullptr" << std::endl;
+    throw;
   }
 
-  std::shared_ptr<HepMC3::VectorIntAttribute> VEE_k =
-      fGRI->attribute<HepMC3::VectorIntAttribute>("VertexEnumExtra_keys");
-  std::shared_ptr<HepMC3::VectorStringAttribute> VEE_v =
-      fGRI->attribute<HepMC3::VectorStringAttribute>("VertexEnumExtra_values");
+  std::vector<std::string> const standard_names = {
+      "VertexEnum", "VertexEnumExtra", "ParticleEnum", "ParticleEnumExtra",
+      "HardScatterMode"};
 
-  if (VEE_k && VEE_v) {
-    for (size_t i = 0; i < VEE_k->value().size(); ++i) {
-      VertexEnumMap[VEE_k->value()[i]] = VEE_v->value()[i];
+  ReadIntStringMap(gri, "VertexEnum", VertexEnumMap);
+  ReadIntStringMap(gri, "VertexEnumExtra", VertexEnumMap);
+
+  ReadIntStringMap(gri, "ParticleEnum", ParticleEnumMap);
+  ReadIntStringMap(gri, "ParticleEnumExtra", ParticleEnumMap);
+
+  ReadIntStringMap(gri, "HardScatterMode", ModeDefinitions);
+
+  std::vector<std::string> attr_names = gri->attribute_names();
+  for (auto aname : attr_names) {
+    if (aname.find(".keys") == (aname.length() - 5)) {
+      std::string attr_name = aname.substr(0, aname.length() - 5);
+      if (std::find(standard_names.begin(), standard_names.end(), attr_name) ==
+          standard_names.end()) { // Not a pre-known key
+        std::cout << "Found extra info: " << attr_name << std::endl;
+
+        if (std::find(attr_names.begin(), attr_names.end(),
+                      attr_name + ".vals") != attr_names.end()) {
+          ReadStringStringMap(gri, attr_name, ExtraDefinitions[attr_name]);
+        }
+      }
     }
   }
 
-  std::shared_ptr<HepMC3::StringAttribute> PES =
-      fGRI->attribute<HepMC3::StringAttribute>("ParticleEnumStandard");
-  if (PES) {
-    ParticleEnumMap = HepMC3Nu::labels::GetParticleDefinitions(PES->value());
+  std::shared_ptr<HepMC3::DoubleAttribute> FATC_att =
+      gri->attribute<HepMC3::DoubleAttribute>("FluxAveragedTotalCrossSection");
+  if (FATC_att) {
+    FluxAverageTotalCrossSection = FATC_att->value();
   }
 
-  std::shared_ptr<HepMC3::VectorIntAttribute> PEE_k =
-      fGRI->attribute<HepMC3::VectorIntAttribute>("ParticleEnumExtra_keys");
-  std::shared_ptr<HepMC3::VectorStringAttribute> PEE_v =
-      fGRI->attribute<HepMC3::VectorStringAttribute>(
-          "ParticleEnumExtra_values");
-
-  if (PEE_k && PEE_v) {
-    for (size_t i = 0; i < PEE_k->value().size(); ++i) {
-      ParticleEnumMap[PEE_k->value()[i]] = PEE_v->value()[i];
-    }
-  }
-
-  std::shared_ptr<HepMC3::VectorIntAttribute> HSM_k =
-      fGRI->attribute<HepMC3::VectorIntAttribute>("HardScatterMode_keys");
-  std::shared_ptr<HepMC3::VectorStringAttribute> HSM_v =
-      fGRI->attribute<HepMC3::VectorStringAttribute>("HardScatterMode_values");
-
-  if (HSM_k && HSM_v) {
-    for (size_t i = 0; i < HSM_k->value().size(); ++i) {
-      ModeDefinitions[HSM_k->value()[i]] = HSM_v->value()[i];
-    }
-  }
+  ToolInfo = gri->tools();
 }
 
 HepMC3::GenRunInfo::ToolInfo GRIHelper::GetGenToolInfo() const {
-  return GetToolsInfo().front();
+  return GetToolsInfo().size() ? GetToolsInfo().front()
+                               : HepMC3::GenRunInfo::ToolInfo();
 }
-std::vector<HepMC3::GenRunInfo::ToolInfo> GRIHelper::GetToolsInfo() const {
-  return fGRI->tools();
+std::vector<HepMC3::GenRunInfo::ToolInfo> const &
+GRIHelper::GetToolsInfo() const {
+  return ToolInfo;
 }
 std::string GRIHelper::GetVertexEnumString(int vs) const {
   if (VertexEnumMap.count(vs)) {
@@ -82,28 +119,66 @@ std::string GRIHelper::GetModeDefinitionString(int m) const {
 }
 std::string GRIHelper::GetExtraDefinitionString(std::string const &attr_name,
                                                 std::string const &key) const {
-  //If we don't have it, try and lazy load it
-  if (!ExtraDefinitions.count(attr_name)) {
-    std::shared_ptr<HepMC3::VectorStringAttribute> Ex_k =
-        fGRI->attribute<HepMC3::VectorStringAttribute>(attr_name + "_keys");
-    std::shared_ptr<HepMC3::VectorStringAttribute> Ex_v =
-        fGRI->attribute<HepMC3::VectorStringAttribute>(attr_name + "_values");
 
-    if (Ex_k && Ex_v) {
-      for (size_t i = 0; i < Ex_k->value().size(); ++i) {
-        ExtraDefinitions[attr_name][Ex_k->value()[i]] = Ex_v->value()[i];
-      }
-    } else {
-      return "UnknownGeneratorDefinition";
-    }
-  }
-
-  //If you can find it, return it.
-  if (ExtraDefinitions[attr_name].count(key)) {
-    return ExtraDefinitions[attr_name].at(key);
+  // If you can find it, return it.
+  if (ExtraDefinitions.count(attr_name) &&
+      ExtraDefinitions.at(attr_name).count(key)) {
+    return ExtraDefinitions.at(attr_name).at(key);
   }
 
   return "UnknownGeneratorDefinition";
+}
+
+double GRIHelper::GetFluxAverageTotalCrossSection() const {
+  return FluxAverageTotalCrossSection;
+}
+
+std::string GRIHelper::to_string() const {
+  std::stringstream ss("");
+  ss << std::string(80, '*') << std::endl;
+  ss << "GenRunInfo: " << std::endl;
+  ss << "\tGenerator: " << GetGenToolInfo().name << std::endl
+     << "\tVersion: " << GetGenToolInfo().version << std::endl;
+  if (GetGenToolInfo().description.size()) {
+    ss << "\tDescription: " << GetGenToolInfo().description << std::endl;
+  }
+  ss << "\tFlux averaged total cross section: " << FluxAverageTotalCrossSection
+     << std::endl;
+  ss << std::string(80, '*') << std::endl;
+  if (VertexEnumMap.size()) {
+    ss << "Vertex status definitions: " << std::endl;
+    for (auto kv : VertexEnumMap) {
+      ss << "\t" << kv.first << ": " << kv.second << std::endl;
+    }
+    ss << std::string(40, '-') << std::endl;
+  }
+  if (ParticleEnumMap.size()) {
+    ss << "Particle status definitions: " << std::endl;
+    for (auto kv : ParticleEnumMap) {
+      ss << "\t" << kv.first << ": " << kv.second << std::endl;
+    }
+    ss << std::string(40, '-') << std::endl;
+  }
+  if (ModeDefinitions.size()) {
+    ss << "Hard scattering mode definitions: " << std::endl;
+    for (auto kv : ModeDefinitions) {
+      ss << "\t" << kv.first << ": " << kv.second << std::endl;
+    }
+    ss << std::string(40, '-') << std::endl;
+  }
+  if (ExtraDefinitions.size()) {
+    ss << "Generator-specific metadata:" << std::endl;
+    for (auto const &ed : ExtraDefinitions) {
+      ss << "\t" << ed.first << ": " << std::endl;
+      for (auto const &d : ed.second) {
+        ss << "\t\t" << d.first << ": " << d.second << std::endl;
+      }
+      ss << "\t" << std::string(30, '-') << std::endl;
+    }
+  }
+  ss << std::string(80, '*') << std::endl;
+
+  return ss.str();
 }
 
 } // namespace genruninfo

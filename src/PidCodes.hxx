@@ -1,5 +1,6 @@
 #pragma once
 
+#include <algorithm>
 #include <vector>
 
 namespace HepMC3Nu {
@@ -38,6 +39,13 @@ static std::vector<int> const kAntiMatterLeptons{kPosit, kMuBar};
 
 static std::vector<int> const kPions{kPip, kPim, kPi0};
 static std::vector<int> const kChargedPions{kPip, kPim};
+
+inline bool IsLepton(int pid) {
+  return ((std::find(kNeutralLeptons.begin(), kNeutralLeptons.end(), pid) !=
+           kNeutralLeptons.end()) ||
+          (std::find(kChargedLeptons.begin(), kChargedLeptons.end(), pid) !=
+           kChargedLeptons.end()));
+}
 
 } // namespace pid
 } // namespace HepMC3Nu

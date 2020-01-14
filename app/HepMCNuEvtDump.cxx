@@ -3,13 +3,15 @@
 #include "HepMCNuEvtTools/ReaderTools"
 
 #include "HepMC3/Print.h"
-#include "HepMC3/ReaderRootTree.h"
 
 using namespace HepMC3Nu;
+using namespace HepMC3Nu::genruninfo;
 
 int main(int argc, char const *argv[]) {
 
-  HepMC3::ReaderRootTree in(argv[1]);
+  ReaderRootTree in(argv[1]);
+
+  std::unique_ptr<GRIHelper> grih = std::make_unique<GRIHelper>(in.run_info());
 
   size_t it = 0;
   while (!in.failed()) {
@@ -28,6 +30,17 @@ int main(int argc, char const *argv[]) {
     std::cout << "Enu: " << GetProbe(evt)->momentum().e() << std::endl;
     std::cout << "Elep: " << GetFSProbe(evt)->momentum().e() << std::endl;
     std::cout << "Q2: " << GetQ2(evt) << std::endl;
+
+    if (grih) {
+      std::cout
+          << "Mode: "
+          << evt.attribute<HepMC3::IntAttribute>("HardScatterMode")->value()
+          << " = "
+          << grih->GetModeDefinitionString(
+                 evt.attribute<HepMC3::IntAttribute>("HardScatterMode")
+                     ->value())
+          << std::endl;
+    }
   }
 
   in.close();

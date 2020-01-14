@@ -1,5 +1,7 @@
 SET(APPS
   HepMCNuEvtDump
+  HepMCNuGenRunInfoDump
+  HepMCNuEvtWriterTest
 )
 
 foreach(a ${APPS})

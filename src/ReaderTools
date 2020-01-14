@@ -4,3 +4,5 @@
 #include "HepMCNuEvtTools/Topologies.hxx"
 #include "HepMCNuEvtTools/ParticleStackReaderHelper.hxx"
 #include "HepMCNuEvtTools/GenRunInfoReaderHelper.hxx"
+#include "HepMCNuEvtTools/ReaderRootTree.hxx"
+#include "HepMCNuEvtTools/PidCodes.hxx"
