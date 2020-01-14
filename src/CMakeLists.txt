@@ -14,6 +14,8 @@ SET(header_files
   GenRunInfoWriterHelper.hxx
   Enums.hxx
   StandardEnums.hxx
+  ReaderRootTree.hxx
+  WriterRootTree.hxx
   ReaderTools
   WriterTools)
 
