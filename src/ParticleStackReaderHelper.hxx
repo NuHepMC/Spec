@@ -9,6 +9,7 @@
 namespace HepMC3Nu {
 
 HepMC3::ConstGenVertexPtr GetLabFrameVertex(HepMC3::GenEvent const &);
+HepMC3::ConstGenVertexPtr GetHardScatterVertex(HepMC3::GenEvent const &);
 
 std::vector<HepMC3::ConstGenParticlePtr> GetParticles(HepMC3::GenEvent const &,
                                                       int pid, labels::ParticleState);
@@ -76,9 +77,3 @@ inline bool ListContains(List const &L, typename List::value_type const & v){
 }
 
 } // namespace HepMC3Nu
-
-inline std::ostream &operator<<(std::ostream &os,
-                                HepMC3::FourVector const &fv) {
-  return os << "[ " << fv.x() << ", " << fv.y() << ", " << fv.z()
-            << ", E: " << fv.e() << " ]";
-}

@@ -1,8 +1,8 @@
 #pragma once
 
 #include "HepMC3/GenRunInfo.h"
-#include "HepMC3/ReaderRootTree.h"
 #include "HepMC3/Print.h"
+#include "HepMC3/ReaderRootTree.h"
 
 #include "TFile.h"
 #include "TTree.h"
@@ -58,7 +58,13 @@ public:
 
   bool skip(const int i) { return rdr->skip(i); }
 
-  bool read_event(HepMC3::GenEvent &evt) { return rdr->read_event(evt); }
+  bool read_event(HepMC3::GenEvent &evt) {
+    bool rtn = rdr->read_event(evt);
+    evt.set_run_info(run);
+    return rtn;
+  }
+
+  UInt_t get_entries() { return rdr->m_tree->GetEntries(); }
 
   std::shared_ptr<HepMC3::GenRunInfo> run_info() { return run; }
 

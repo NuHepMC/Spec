@@ -2,7 +2,7 @@
 
 #include "HepMCNuEvtTools/ParticleStackReaderHelper.hxx"
 
-#include "HepMCNuEvtTools/PidCodes.hxx"
+#include "HepMCNuEvtTools/PidTools.hxx"
 
 namespace HepMC3Nu {
 

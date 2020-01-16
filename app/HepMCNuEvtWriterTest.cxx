@@ -31,6 +31,8 @@ int main(int argc, char const *argv[]) {
 
   HepMC3::GenEvent evt(HepMC3::Units::MEV, HepMC3::Units::CM);
 
+  nist::GetIsotopeMassEnergy(1,1);
+
   out.write_event(evt);
 
   out.close();

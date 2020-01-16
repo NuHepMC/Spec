@@ -1,6 +1,6 @@
 #pragma once
 
-#include "HepMCNuEvtTools/PidCodes.hxx"
+#include "HepMCNuEvtTools/PidTools.hxx"
 #include "HepMCNuEvtTools/StandardEnums.hxx"
 
 #include <iostream>

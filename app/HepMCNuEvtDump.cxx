@@ -24,23 +24,7 @@ int main(int argc, char const *argv[]) {
       break;
     }
 
-    std::cout << "[INFO]: Read Event " << it++ << std::endl;
-    HepMC3::Print::listing(evt);
-
-    std::cout << "Enu: " << GetProbe(evt)->momentum().e() << std::endl;
-    std::cout << "Elep: " << GetFSProbe(evt)->momentum().e() << std::endl;
-    std::cout << "Q2: " << GetQ2(evt) << std::endl;
-
-    if (grih) {
-      std::cout
-          << "Mode: "
-          << evt.attribute<HepMC3::IntAttribute>("HardScatterMode")->value()
-          << " = "
-          << grih->GetModeDefinitionString(
-                 evt.attribute<HepMC3::IntAttribute>("HardScatterMode")
-                     ->value())
-          << std::endl;
-    }
+    std::cout << HepMC3Nu::Print::listing(evt) << std::endl;
   }
 
   in.close();

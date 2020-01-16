@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <vector>
 
+#include "HepMCNuEvtTools/atomic_mass_nist.hxx"
+
 namespace HepMC3Nu {
 namespace pid {
 
@@ -45,6 +47,13 @@ inline bool IsLepton(int pid) {
            kNeutralLeptons.end()) ||
           (std::find(kChargedLeptons.begin(), kChargedLeptons.end(), pid) !=
            kChargedLeptons.end()));
+}
+
+inline int GetNuclearPID(int Z, int A) {
+  return 1000000000 + A * 10 + Z * 10000;
+}
+inline int GetIsotopeMass(int Z, int A) {
+  return nist::GetIsotopeMassEnergy(Z, A);
 }
 
 } // namespace pid

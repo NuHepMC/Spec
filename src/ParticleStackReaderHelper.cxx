@@ -12,12 +12,22 @@ namespace HepMC3Nu {
 
 HepMC3::ConstGenVertexPtr GetLabFrameVertex(HepMC3::GenEvent const &evt){
   for(auto vtx : evt.vertices()){
-    if(vtx->status() != labels::e2i(labels::VertexState::kLabFrame)){
+    if(vtx->status() == labels::e2i(labels::VertexState::kLabFrame)){
       return vtx;
     }
   }
   return nullptr;
 }
+
+HepMC3::ConstGenVertexPtr GetHardScatterVertex(HepMC3::GenEvent const &evt){
+  for(auto vtx : evt.vertices()){
+    if(vtx->status() == labels::e2i(labels::VertexState::kHardScatter)){
+      return vtx;
+    }
+  }
+  return nullptr;
+}
+
 
 std::vector<HepMC3::ConstGenParticlePtr>
 GetParticles(HepMC3::GenEvent const &evt, int pid, labels::ParticleState st) {
