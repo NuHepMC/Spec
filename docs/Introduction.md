@@ -20,7 +20,7 @@ Specify/Reserve some vertex status codes, others available for use
  1: ISI vertex
  2: Hard scatter vertex
  3: FSI vertex
- 4-9: Reserved for future HepMCNuEvtTools use
+ 4-9: Reserved for future NuHepMC use
  10+: Available for use
 
 Specify/Reserve some particle status codes, others available for use
@@ -29,15 +29,15 @@ Specify/Reserve some particle status codes, others available for use
  2: Outgoing, lab
  3: Re-interacted
  4: Decayed
- 5-9: Reserved for future HepMCNuEvtTools use
+ 5-9: Reserved for future NuHepMC use
  10+: Available for use
 
-It is recommended that generator flags which are a subset of the HepMCNuEvtTools
-definitions should include use the corresponding HEPMCNuEvtTools flag as the
+It is recommended that generator flags which are a subset of the NuHepMC
+definitions should include use the corresponding NuHepMC flag as the
 lowest digit, e.g. GENERATORX has 'Decayed intra-nuclear' and
 'Decayed extra-nuclear' flags, it is recommended, but not enforced, that these
 should be 14 and 24, respectively. If all flags can be used like flag % 10 and
-then correctly project onto the HEPMCNuEvtTools enumerations, the GenRunInfo
+then correctly project onto the NuHepMC enumerations, the GenRunInfo
 attribute StatusEnumsVersion=1.0 should be set. Future versions will be updated
 here.
 

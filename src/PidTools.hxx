@@ -3,9 +3,9 @@
 #include <algorithm>
 #include <vector>
 
-#include "HepMCNuEvtTools/atomic_mass_nist.hxx"
+#include "NuHepMC/atomic_mass_nist.hxx"
 
-namespace HepMC3Nu {
+namespace NuHepMC {
 namespace pid {
 
 static int const kNuE = 12;
@@ -57,4 +57,4 @@ inline int GetIsotopeMass(int Z, int A) {
 }
 
 } // namespace pid
-} // namespace HepMC3Nu
+} // namespace NuHepMC

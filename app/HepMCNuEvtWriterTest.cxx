@@ -1,12 +1,12 @@
 #include <iostream>
 
-#include "HepMCNuEvtTools/WriterTools"
+#include "NuHepMC/WriterTools"
 
 #include "HepMC3/Print.h"
 #include "HepMC3/WriterRootTree.h"
 
-using namespace HepMC3Nu;
-using namespace HepMC3Nu::genruninfo;
+using namespace NuHepMC;
+using namespace NuHepMC::genruninfo;
 
 int main(int argc, char const *argv[]) {
 

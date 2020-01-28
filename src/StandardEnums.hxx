@@ -4,7 +4,7 @@
 #include <map>
 #include <string>
 
-namespace HepMC3Nu {
+namespace NuHepMC {
 
 // This namespace defines enumerations used in the specification
 namespace labels {
@@ -56,20 +56,20 @@ template <typename E> int e2i(E const &e) { return static_cast<int>(e); }
 
 } // namespace labels
 
-} // namespace HepMC3Nu
+} // namespace NuHepMC
 
 inline std::ostream &operator<<(std::ostream &os,
-                                HepMC3Nu::labels::ParticleState s) {
+                                NuHepMC::labels::ParticleState s) {
   switch (s) {
-  case HepMC3Nu::labels::ParticleState::kInitialState:
+  case NuHepMC::labels::ParticleState::kInitialState:
     return os << "kInitialState";
-  case HepMC3Nu::labels::ParticleState::kIntermediate:
+  case NuHepMC::labels::ParticleState::kIntermediate:
     return os << "kIntermediate";
-  case HepMC3Nu::labels::ParticleState::kFinalState:
+  case NuHepMC::labels::ParticleState::kFinalState:
     return os << "kFinalState";
-  case HepMC3Nu::labels::ParticleState::kReinteracted:
+  case NuHepMC::labels::ParticleState::kReinteracted:
     return os << "kReinteracted";
-  case HepMC3Nu::labels::ParticleState::kDecayed:
+  case NuHepMC::labels::ParticleState::kDecayed:
     return os << "kDecayed";
   default:
     return os << "UnknownParticleState";
@@ -77,15 +77,15 @@ inline std::ostream &operator<<(std::ostream &os,
 }
 
 inline std::ostream &operator<<(std::ostream &os,
-                                HepMC3Nu::labels::VertexState s) {
+                                NuHepMC::labels::VertexState s) {
   switch (s) {
-  case HepMC3Nu::labels::VertexState::kLabFrame:
+  case NuHepMC::labels::VertexState::kLabFrame:
     return os << "kLabFrame";
-  case HepMC3Nu::labels::VertexState::kISInteraction:
+  case NuHepMC::labels::VertexState::kISInteraction:
     return os << "kISInteraction";
-  case HepMC3Nu::labels::VertexState::kHardScatter:
+  case NuHepMC::labels::VertexState::kHardScatter:
     return os << "kHardScatter";
-  case HepMC3Nu::labels::VertexState::kFSInteraction:
+  case NuHepMC::labels::VertexState::kFSInteraction:
     return os << "kFSInteraction";
   default:
     return os << "UnknownVertexState";

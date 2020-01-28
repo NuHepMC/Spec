@@ -7,7 +7,7 @@
 #include "TFile.h"
 #include "TTree.h"
 
-namespace HepMC3Nu {
+namespace NuHepMC {
 
 class ReaderRootTree {
   std::unique_ptr<HepMC3::ReaderRootTree> rdr;
@@ -73,4 +73,4 @@ public:
   bool failed() { return rdr->failed(); }
 };
 
-} // namespace HepMC3Nu
+} // namespace NuHepMC

@@ -1,0 +1,50 @@
+#!/bin/bash
+
+#Modify this if moving install from original prefix
+INSTALL_ROOT="@CMAKE_INSTALL_PREFIX@"
+SCRIPTNAME=$0
+
+if [ ${#} -eq 0 ]; then
+  echo "${SCRIPTNAME} [--incdir] [--libdir] [--libs]"
+fi
+
+while [[ ${#} -gt 0 ]]; do
+
+  key="$1"
+  case $key in
+
+      --incdir)
+      echo "${INSTALL_ROOT}/include"
+      ;;
+
+      --libdir)
+      echo "${INSTALL_ROOT}/lib"
+      ;;
+
+      --libs)
+      echo -lNuHepMC
+      ;;
+
+      --version)
+      echo @NuHepMC_VERSION_STRING@
+      ;;
+
+      -?|--help)
+
+      echo "[RUNLIKE] ${SCRIPTNAME}"
+      echo -e "\t--incdir                   : Print location of installed header files."
+      echo -e "\t--libdir                   : Print location of installed libraries."
+      echo -e "\t--libs                     : Print list of NEUT generation library names."
+      echo -e "\t--version                  : Print NEUT version."
+      echo -e "\t-?|--help                  : Print this message."
+      exit 0
+      ;;
+
+      *)
+      # unknown option
+      echo "Unknown option $1"
+      exit 1
+      ;;
+  esac
+  shift # past argument or value
+done

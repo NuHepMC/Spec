@@ -1,9 +1,9 @@
 #pragma once
 
-#include "HepMCNuEvtTools/GenEventReaderHelper.hxx"
-#include "HepMCNuEvtTools/GenRunInfoReaderHelper.hxx"
-#include "HepMCNuEvtTools/Kinematics.hxx"
-#include "HepMCNuEvtTools/ParticleStackReaderHelper.hxx"
+#include "NuHepMC/GenEventReaderHelper.hxx"
+#include "NuHepMC/GenRunInfoReaderHelper.hxx"
+#include "NuHepMC/Kinematics.hxx"
+#include "NuHepMC/ParticleStackReaderHelper.hxx"
 
 #include <sstream>
 #include <string>
@@ -14,7 +14,7 @@ inline std::ostream &operator<<(std::ostream &os,
             << ", E: " << fv.e() << " ]";
 }
 
-namespace HepMC3Nu {
+namespace NuHepMC {
 namespace Print {
 inline std::string listing(HepMC3::GenVertex const &vtx) {
   std::stringstream ss("");
@@ -38,18 +38,18 @@ inline std::string listing(HepMC3::GenEvent const &evt) {
   ss << std::string(80, '*') << std::endl;
   ss << "GenEvent: #" << evt.event_number() << std::endl;
   ss << "Position: " << evt.event_pos() << std::endl;
-  auto probe = HepMC3Nu::GetProbe(evt);
+  auto probe = NuHepMC::GetProbe(evt);
   ss << "Probe: " << probe->pid() << ", p: " << probe->momentum() << std::endl;
-  ss << "Hard Scattering Mode: " << HepMC3Nu::genevent::GetHardScatterMode(evt)
+  ss << "Hard Scattering Mode: " << NuHepMC::genevent::GetHardScatterMode(evt)
      << std::endl;
   ss << std::string(40, '-') << std::endl;
   ss << "Vertices: ";
-  auto LabFrameVtx = HepMC3Nu::GetLabFrameVertex(evt);
+  auto LabFrameVtx = NuHepMC::GetLabFrameVertex(evt);
   if (LabFrameVtx) {
     ss << "Lab frame vertex: " << std::endl;
     ss << listing(*LabFrameVtx);
   }
-  auto HardScatterVtx = HepMC3Nu::GetHardScatterVertex(evt);
+  auto HardScatterVtx = NuHepMC::GetHardScatterVertex(evt);
   if (HardScatterVtx) {
     ss << "Hard scatter vertex: " << std::endl;
     ss << listing(*HardScatterVtx);
@@ -59,4 +59,4 @@ inline std::string listing(HepMC3::GenEvent const &evt) {
   return ss.str();
 }
 } // namespace Print
-} // namespace HepMC3Nu
+} // namespace NuHepMC

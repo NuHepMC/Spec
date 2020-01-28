@@ -6,7 +6,7 @@
 #include "TFile.h"
 #include "TTree.h"
 
-namespace HepMC3Nu {
+namespace NuHepMC {
 
 class WriterRootTree {
   std::unique_ptr<HepMC3::WriterRootTree> wrtr;
@@ -63,4 +63,4 @@ public:
   bool failed() { return wrtr->failed(); }
 };
 
-} // namespace HepMC3Nu
+} // namespace NuHepMC

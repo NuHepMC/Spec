@@ -23,8 +23,8 @@ SET(header_files
   ReaderTools
   WriterTools)
 
-add_library(HepMCNuEvtTools SHARED ${implementation_files})
+add_library(NuHepMC SHARED ${implementation_files})
 
-install(TARGETS HepMCNuEvtTools DESTINATION lib)
+install(TARGETS NuHepMC DESTINATION lib)
 
-install(FILES ${header_files} DESTINATION include/HepMCNuEvtTools)
+install(FILES ${header_files} DESTINATION include/NuHepMC)

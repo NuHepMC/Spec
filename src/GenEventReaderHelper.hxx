@@ -3,7 +3,7 @@
 #include "HepMC3/GenEvent.h"
 #include "HepMC3/GenParticle.h"
 
-namespace HepMC3Nu {
+namespace NuHepMC {
 namespace genevent {
 
 inline int GetHardScatterMode(HepMC3::GenEvent const &evt) {
@@ -12,4 +12,4 @@ inline int GetHardScatterMode(HepMC3::GenEvent const &evt) {
 }
 
 } // namespace genevent
-} // namespace HepMC3Nu
+} // namespace NuHepMC

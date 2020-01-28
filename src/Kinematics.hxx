@@ -4,7 +4,7 @@
 #include "HepMC3/GenParticle.h"
 #include "HepMC3/GenVertex.h"
 
-namespace HepMC3Nu {
+namespace NuHepMC {
 
 HepMC3::FourVector GetFourMomentumTransfer(HepMC3::GenEvent const& evt);
 double GetQ2(HepMC3::GenEvent const& evt);

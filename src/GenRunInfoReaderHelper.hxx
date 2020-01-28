@@ -2,7 +2,7 @@
 
 #include "HepMC3/GenRunInfo.h"
 
-namespace HepMC3Nu {
+namespace NuHepMC {
 
 namespace genruninfo {
 
@@ -36,4 +36,4 @@ public:
 
 } // namespace genruninfo
 
-} // namespace HepMC3Nu
+} // namespace NuHepMC

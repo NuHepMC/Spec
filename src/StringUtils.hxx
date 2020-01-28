@@ -2,7 +2,7 @@
 
 #include <string>
 
-namespace HepMC3Nu {
+namespace NuHepMC {
 namespace strutil {
 inline std::string EncodeForHepMC3VectorStorage(std::string in) {
   std::string out = in;
@@ -50,4 +50,4 @@ inline std::vector<std::string> UnSerializeStringVector(std::string str) {
   return strs;
 }
 } // namespace strutil
-} // namespace HepMC3Nu
+} // namespace NuHepMC

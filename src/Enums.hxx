@@ -1,12 +1,12 @@
 #pragma once
 
-#include "HepMCNuEvtTools/PidTools.hxx"
-#include "HepMCNuEvtTools/StandardEnums.hxx"
+#include "NuHepMC/PidTools.hxx"
+#include "NuHepMC/StandardEnums.hxx"
 
 #include <iostream>
 #include <utility>
 
-namespace HepMC3Nu {
+namespace NuHepMC {
 
 // This namespace defines *expressly* non-exhaustive labels that might be
 // useful internally.
@@ -17,9 +17,9 @@ enum class Current { kCC, kNC, kOther = 999 };
 enum class Matter { kMatter, kAntiMatter, kOther = 999 };
 
 enum class ProbeSpecies {
-  kNuMu = HepMC3Nu::pid::kNuMu,
-  kNue = HepMC3Nu::pid::kNuE,
-  kElec = HepMC3Nu::pid::kElec,
+  kNuMu = NuHepMC::pid::kNuMu,
+  kNue = NuHepMC::pid::kNuE,
+  kElec = NuHepMC::pid::kElec,
   kOther = 999
 };
 
@@ -38,24 +38,24 @@ struct EventSummary {
 
 } // namespace labels
 
-} // namespace HepMC3Nu
+} // namespace NuHepMC
 
-inline std::ostream &operator<<(std::ostream &os, HepMC3Nu::labels::Current c) {
+inline std::ostream &operator<<(std::ostream &os, NuHepMC::labels::Current c) {
   switch (c) {
-  case HepMC3Nu::labels::Current::kCC:
+  case NuHepMC::labels::Current::kCC:
     return os << "kCC";
-  case HepMC3Nu::labels::Current::kNC:
+  case NuHepMC::labels::Current::kNC:
     return os << "kNC";
   default:
     return os << "UnknownCurrent";
   }
 }
 
-inline std::ostream &operator<<(std::ostream &os, HepMC3Nu::labels::Matter m) {
+inline std::ostream &operator<<(std::ostream &os, NuHepMC::labels::Matter m) {
   switch (m) {
-  case HepMC3Nu::labels::Matter::kMatter:
+  case NuHepMC::labels::Matter::kMatter:
     return os << "kMatter";
-  case HepMC3Nu::labels::Matter::kAntiMatter:
+  case NuHepMC::labels::Matter::kAntiMatter:
     return os << "kAntiMatter";
   default:
     return os << "UnknownMatterType";
@@ -63,17 +63,17 @@ inline std::ostream &operator<<(std::ostream &os, HepMC3Nu::labels::Matter m) {
 }
 
 inline std::ostream &operator<<(std::ostream &os,
-                                HepMC3Nu::labels::Topology t) {
+                                NuHepMC::labels::Topology t) {
   switch (t) {
-  case HepMC3Nu::labels::Topology::k0Pi:
+  case NuHepMC::labels::Topology::k0Pi:
     return os << "k0Pi";
-  case HepMC3Nu::labels::Topology::k1Pip:
+  case NuHepMC::labels::Topology::k1Pip:
     return os << "k1Pip";
-  case HepMC3Nu::labels::Topology::k1Pim:
+  case NuHepMC::labels::Topology::k1Pim:
     return os << "k1Pim";
-  case HepMC3Nu::labels::Topology::k1Pi0:
+  case NuHepMC::labels::Topology::k1Pi0:
     return os << "k1Pi0";
-  case HepMC3Nu::labels::Topology::kNPi:
+  case NuHepMC::labels::Topology::kNPi:
     return os << "kNPi";
   default:
     return os << "UnknownTopology";

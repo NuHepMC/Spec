@@ -1,15 +1,15 @@
 #pragma once
 
-#include "HepMCNuEvtTools/Enums.hxx"
+#include "NuHepMC/Enums.hxx"
 
 #include "HepMC3/GenEvent.h"
 
-namespace HepMC3Nu {
+namespace NuHepMC {
 
 namespace topo {
 
-HepMC3Nu::labels::ProbeSummary GetProbeSummary(HepMC3::GenEvent const &);
-HepMC3Nu::labels::EventSummary GetEventSummary(HepMC3::GenEvent const &);
+NuHepMC::labels::ProbeSummary GetProbeSummary(HepMC3::GenEvent const &);
+NuHepMC::labels::EventSummary GetEventSummary(HepMC3::GenEvent const &);
 
 /// These methods are fine for high-level access to event properties where
 /// optimization is not needed, but are inefficient lookups when you want to
@@ -29,4 +29,4 @@ bool IsNC(HepMC3::GenEvent const &);
 
 } // namespace topo
 
-} // namespace HepMC3Nu
+} // namespace NuHepMC

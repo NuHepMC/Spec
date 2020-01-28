@@ -1,4 +1,4 @@
-#include "HepMCNuEvtTools/atomic_mass_nist.hxx"
+#include "NuHepMC/atomic_mass_nist.hxx"
 
 #include <map>
 

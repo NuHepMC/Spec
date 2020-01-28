@@ -1,9 +1,9 @@
-#include "HepMCNuEvtTools/Kinematics.hxx"
-#include "HepMCNuEvtTools/ParticleStackReaderHelper.hxx"
+#include "NuHepMC/Kinematics.hxx"
+#include "NuHepMC/ParticleStackReaderHelper.hxx"
 
 #include <iostream>
 
-namespace HepMC3Nu {
+namespace NuHepMC {
 
 HepMC3::FourVector GetFourMomentumTransfer(HepMC3::GenEvent const &evt) {
   auto ISProbe = GetProbe(evt);
@@ -23,4 +23,4 @@ double GetQ2(HepMC3::GenEvent const &evt) {
   return -GetFourMomentumTransfer(evt).m2();
 }
 
-} // namespace HepMC3Nu
+} // namespace NuHepMC

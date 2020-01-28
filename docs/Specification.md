@@ -5,6 +5,8 @@ NuHepMC Specification Version 0.1
 
 * kLabFrame may not be the best name if there must be one yet other vertices defined within the lab frame are allowed, maybe change to kNuclearTargetVertex.
 
+* Expunge any reference to c++ objects/methods defined in this package and define the specification only in terms of HepMC3 objects.
+
 # Abstract
 
 # Introduction
@@ -21,14 +23,10 @@ format, I/O routines, and C++ object model, and allow this specification
 to focus on  standardizing what is specifically needed for the
 neutrino-scattering MC community.
 
-The NuHepMC API is thus defined to act on HepMC3 C++ object instances via
-their public interface only, exposing methods such as:
-
-```
-HepMC3::ConstGenParticlePtr GetProbe(HepMC3::GenEvent const&);
-std::vector<HepMC3::ConstGenParticlePtr> GetEscapingHadrons(HepMC3::GenEvent const&);
-double GetFourMomentumTransferSquared(HepMC3::GenEvent const&);
-```
+The NuHepMC specification can be adhered to without the use of the
+helper API defined in this package, as it only uses HepMC3-native
+objects. The helper API that can be used by producers and consumers
+of adherent event files is defined in a separate document.
 
 # Objects
 
@@ -49,9 +47,7 @@ The HepMC3::GenRunInfo object is designed to be used to store *Run* level inform
 
 #### NuHepMC Version
 
-The specification version MUST be included via a `HepMC3::StringAttribute` named `NuHepMCV`. A helper method is provided:
-
-`void NuHepMC::gri::SetStandard(HepMC3::GenRunInfo &, NuHepMC::Standard);`
+The specification version MUST be included via a `HepMC3::StringAttribute` named `NuHepMCV`
 
 #### Particle status codes
 

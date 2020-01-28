@@ -1,12 +1,12 @@
 #include <iostream>
 
-#include "HepMCNuEvtTools/ReaderTools"
+#include "NuHepMC/ReaderTools"
 
 #include "HepMC3/Attribute.h"
 #include "HepMC3/Print.h"
 
-using namespace HepMC3Nu;
-using namespace HepMC3Nu::genruninfo;
+using namespace NuHepMC;
+using namespace NuHepMC::genruninfo;
 
 int main(int argc, char const *argv[]) {
 

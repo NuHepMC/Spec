@@ -1,11 +1,11 @@
-#include "HepMCNuEvtTools/GenRunInfoWriterHelper.hxx"
+#include "NuHepMC/GenRunInfoWriterHelper.hxx"
 
-#include "HepMCNuEvtTools/StandardEnums.hxx"
-#include "HepMCNuEvtTools/StringUtils.hxx"
+#include "NuHepMC/StandardEnums.hxx"
+#include "NuHepMC/StringUtils.hxx"
 
 #include "HepMC3/Attribute.h"
 
-namespace HepMC3Nu {
+namespace NuHepMC {
 
 namespace genruninfo {
 
@@ -22,7 +22,7 @@ void AddIntStringMap(std::shared_ptr<HepMC3::GenRunInfo> gri,
                      std::make_shared<HepMC3::VectorIntAttribute>(keys));
   gri->add_attribute(attr_name + ".vals",
                      std::make_shared<HepMC3::StringAttribute>(
-                         HepMC3Nu::strutil::SerializeStringVector(values)));
+                         NuHepMC::strutil::SerializeStringVector(values)));
 }
 
 std::shared_ptr<HepMC3::GenRunInfo> GRIFactory(std::string const &gen_name,
@@ -40,24 +40,24 @@ void SetFluxAveragedTotalCrossSection(std::shared_ptr<HepMC3::GenRunInfo> gri,
                      std::make_shared<HepMC3::DoubleAttribute>(fatc));
 }
 
-/// Set the HepMCNuEvtTools VertexEnumStandard used
+/// Set the NuHepMC VertexEnumStandard used
 /// Use 0.0 to disable
 void SetVertexEnumStandard(std::shared_ptr<HepMC3::GenRunInfo> gri,
                            std::string const &vstr) {
   AddIntStringMap(gri, "VertexEnum",
-                  HepMC3Nu::labels::GetVertexDefinitions(vstr));
+                  NuHepMC::labels::GetVertexDefinitions(vstr));
 }
 void SetExtraVertexEnumDefinitions(std::shared_ptr<HepMC3::GenRunInfo> gri,
                                    std::map<int, std::string> const &defns) {
   AddIntStringMap(gri, "VertexEnumExtra", defns);
 }
 
-/// Set the HepMCNuEvtTools ParticleEnumStandard used
+/// Set the NuHepMC ParticleEnumStandard used
 /// Use 0.0 to disable
 void SetParticleEnumStandard(std::shared_ptr<HepMC3::GenRunInfo> gri,
                              std::string const &vstr) {
   AddIntStringMap(gri, "ParticleEnum",
-                  HepMC3Nu::labels::GetParticleDefinitions(vstr));
+                  NuHepMC::labels::GetParticleDefinitions(vstr));
 }
 void SetExtraParticleEnumDefinitions(std::shared_ptr<HepMC3::GenRunInfo> gri,
                                      std::map<int, std::string> const &defns) {
@@ -80,12 +80,12 @@ void AddGRIKeyValuePairs(std::shared_ptr<HepMC3::GenRunInfo> gri,
   }
   gri->add_attribute(attr_name + ".keys",
                      std::make_shared<HepMC3::StringAttribute>(
-                         HepMC3Nu::strutil::SerializeStringVector(keys)));
+                         NuHepMC::strutil::SerializeStringVector(keys)));
   gri->add_attribute(attr_name + ".vals",
                      std::make_shared<HepMC3::StringAttribute>(
-                         HepMC3Nu::strutil::SerializeStringVector(values)));
+                         NuHepMC::strutil::SerializeStringVector(values)));
 }
 
 } // namespace genruninfo
 
-} // namespace HepMC3Nu
+} // namespace NuHepMC

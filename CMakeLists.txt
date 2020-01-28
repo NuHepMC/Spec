@@ -1,14 +1,14 @@
 cmake_minimum_required (VERSION 2.6 FATAL_ERROR)
 
-project(HepMCNuEvtTools)
+project(NuHepMC)
 
 include(ExternalProject)
 
-set (HepMCNuEvtTools_VERSION_MAJOR 0)
-set (HepMCNuEvtTools_VERSION_MINOR 1)
-set (HepMCNuEvtTools_VERSION_REVISION 0)
+set (NuHepMC_VERSION_MAJOR 0)
+set (NuHepMC_VERSION_MINOR 1)
+set (NuHepMC_VERSION_REVISION 0)
 
-set (HepMCNuEvtTools_VERSION_STRING "v${HepMCNuEvtTools_VERSION_MAJOR}r${HepMCNuEvtTools_VERSION_MINOR}p${HepMCNuEvtTools_VERSION_REVISION}")
+set (NuHepMC_VERSION_STRING "v${NuHepMC_VERSION_MAJOR}r${NuHepMC_VERSION_MINOR}p${NuHepMC_VERSION_REVISION}")
 
 #Set this to TRUE to enable build debugging messages
 set(BUILD_DEBUG_MSGS TRUE)
@@ -63,3 +63,9 @@ configure_file(cmake/setup.sh.in
 install(FILES
   "${PROJECT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/setup.sh" DESTINATION
   ${CMAKE_INSTALL_PREFIX})
+
+configure_file(cmake/NuHepMC-config.in
+  "${PROJECT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/NuHepMC-config" @ONLY)
+install(PROGRAMS
+  "${PROJECT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/NuHepMC-config" DESTINATION
+  ${CMAKE_INSTALL_PREFIX}/bin)

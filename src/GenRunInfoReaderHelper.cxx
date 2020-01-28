@@ -1,11 +1,11 @@
-#include "HepMCNuEvtTools/GenRunInfoReaderHelper.hxx"
+#include "NuHepMC/GenRunInfoReaderHelper.hxx"
 
-#include "HepMCNuEvtTools/StandardEnums.hxx"
-#include "HepMCNuEvtTools/StringUtils.hxx"
+#include "NuHepMC/StandardEnums.hxx"
+#include "NuHepMC/StringUtils.hxx"
 
 #include <algorithm>
 
-namespace HepMC3Nu {
+namespace NuHepMC {
 
 namespace genruninfo {
 
@@ -20,7 +20,7 @@ void ReadIntStringMap(std::shared_ptr<HepMC3::GenRunInfo> const gri,
 
   if (keys && vals) {
     std::vector<std::string> valsv =
-        HepMC3Nu::strutil::UnSerializeStringVector(vals->value());
+        NuHepMC::strutil::UnSerializeStringVector(vals->value());
     for (size_t i = 0; i < keys->value().size(); ++i) {
       m[keys->value()[i]] = valsv[i];
     }
@@ -38,9 +38,9 @@ void ReadStringStringMap(std::shared_ptr<HepMC3::GenRunInfo> const gri,
 
   if (keys && vals) {
     std::vector<std::string> keysv =
-        HepMC3Nu::strutil::UnSerializeStringVector(keys->value());
+        NuHepMC::strutil::UnSerializeStringVector(keys->value());
     std::vector<std::string> valsv =
-        HepMC3Nu::strutil::UnSerializeStringVector(vals->value());
+        NuHepMC::strutil::UnSerializeStringVector(vals->value());
     for (size_t i = 0; i < keysv.size(); ++i) {
       m[keysv[i]] = valsv[i];
     }
@@ -183,4 +183,4 @@ std::string GRIHelper::to_string() const {
 
 } // namespace genruninfo
 
-} // namespace HepMC3Nu
+} // namespace NuHepMC

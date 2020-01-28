@@ -1,12 +1,12 @@
 #pragma once
 
-#include "HepMCNuEvtTools/Enums.hxx"
+#include "NuHepMC/Enums.hxx"
 
 #include "HepMC3/GenEvent.h"
 #include "HepMC3/GenParticle.h"
 #include "HepMC3/GenVertex.h"
 
-namespace HepMC3Nu {
+namespace NuHepMC {
 
 HepMC3::ConstGenVertexPtr GetLabFrameVertex(HepMC3::GenEvent const &);
 HepMC3::ConstGenVertexPtr GetHardScatterVertex(HepMC3::GenEvent const &);
@@ -76,4 +76,4 @@ inline bool ListContains(List const &L, typename List::value_type const & v){
   return (std::find(L.begin(), L.end(), v) != L.end());
 }
 
-} // namespace HepMC3Nu
+} // namespace NuHepMC

@@ -1,10 +1,10 @@
 #pragma once
 
-#include "HepMCNuEvtTools/GenEventReaderHelper.hxx"
-#include "HepMCNuEvtTools/GenRunInfoReaderHelper.hxx"
-#include "HepMCNuEvtTools/Kinematics.hxx"
-#include "HepMCNuEvtTools/ParticleStackReaderHelper.hxx"
-#include "HepMCNuEvtTools/PidTools.hxx"
-#include "HepMCNuEvtTools/ReaderRootTree.hxx"
-#include "HepMCNuEvtTools/Topologies.hxx"
-#include "HepMCNuEvtTools/Print.hxx"
+#include "NuHepMC/GenEventReaderHelper.hxx"
+#include "NuHepMC/GenRunInfoReaderHelper.hxx"
+#include "NuHepMC/Kinematics.hxx"
+#include "NuHepMC/ParticleStackReaderHelper.hxx"
+#include "NuHepMC/PidTools.hxx"
+#include "NuHepMC/ReaderRootTree.hxx"
+#include "NuHepMC/Topologies.hxx"
+#include "NuHepMC/Print.hxx"

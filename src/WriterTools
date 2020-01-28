@@ -1,7 +1,7 @@
 #pragma once
 
-#include "HepMCNuEvtTools/GenRunInfoWriterHelper.hxx"
-#include "HepMCNuEvtTools/GenEventWriterHelper.hxx"
-#include "HepMCNuEvtTools/PidTools.hxx"
-#include "HepMCNuEvtTools/StandardEnums.hxx"
-#include "HepMCNuEvtTools/WriterRootTree.hxx"
+#include "NuHepMC/GenRunInfoWriterHelper.hxx"
+#include "NuHepMC/GenEventWriterHelper.hxx"
+#include "NuHepMC/PidTools.hxx"
+#include "NuHepMC/StandardEnums.hxx"
+#include "NuHepMC/WriterRootTree.hxx"

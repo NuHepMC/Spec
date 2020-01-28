@@ -1,5 +1,5 @@
 
-#include "HepMCNuEvtTools/ParticleStackReaderHelper.hxx"
+#include "NuHepMC/ParticleStackReaderHelper.hxx"
 
 // #define NUEVTHELP_DEBUG
 
@@ -8,7 +8,7 @@
 #include <iostream>
 #endif
 
-namespace HepMC3Nu {
+namespace NuHepMC {
 
 HepMC3::ConstGenVertexPtr GetLabFrameVertex(HepMC3::GenEvent const &evt){
   for(auto vtx : evt.vertices()){
@@ -121,4 +121,4 @@ HepMC3::ConstGenParticlePtr GetFSProbe(HepMC3::GenEvent const &evt) {
   return GetFSProbe(evt, ISProbe->pid());
 }
 
-} // namespace HepMC3Nu
+} // namespace NuHepMC

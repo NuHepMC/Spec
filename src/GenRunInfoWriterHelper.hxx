@@ -2,7 +2,7 @@
 
 #include "HepMC3/GenRunInfo.h"
 
-namespace HepMC3Nu {
+namespace NuHepMC {
 
 namespace genruninfo {
 
@@ -13,14 +13,14 @@ GRIFactory(std::string const &gen_name, std::string const &gen_version,
 void SetFluxAveragedTotalCrossSection(std::shared_ptr<HepMC3::GenRunInfo>,
                                       double);
 
-/// Set the HepMCNuEvtTools VertexEnumStandard used
+/// Set the NuHepMC VertexEnumStandard used
 /// Use 0.0 to disable
 void SetVertexEnumStandard(std::shared_ptr<HepMC3::GenRunInfo>,
                            std::string const &vstr = "0");
 void SetExtraVertexEnumDefinitions(std::shared_ptr<HepMC3::GenRunInfo>,
                                    std::map<int, std::string> const &defns);
 
-/// Set the HepMCNuEvtTools ParticleEnumStandard used
+/// Set the NuHepMC ParticleEnumStandard used
 /// Use 0.0 to disable
 void SetParticleEnumStandard(std::shared_ptr<HepMC3::GenRunInfo>,
                              std::string const &vstr = "0");
@@ -36,4 +36,4 @@ void AddGRIKeyValuePairs(std::shared_ptr<HepMC3::GenRunInfo>,
 
 } // namespace genruninfo
 
-} // namespace HepMC3Nu
+} // namespace NuHepMC
