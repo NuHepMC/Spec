@@ -5,13 +5,17 @@ INSTALL_ROOT="@CMAKE_INSTALL_PREFIX@"
 SCRIPTNAME=$0
 
 if [ ${#} -eq 0 ]; then
-  echo "${SCRIPTNAME} [--incdir] [--libdir] [--libs]"
+  echo "${SCRIPTNAME} [--incdir] [--libdir] [--libs] [--cflags] [--ldflags]"
 fi
 
 while [[ ${#} -gt 0 ]]; do
 
   key="$1"
   case $key in
+
+      --prefix)
+      echo "${INSTALL_ROOT}"
+      ;;
 
       --incdir)
       echo "${INSTALL_ROOT}/include"
@@ -25,6 +29,14 @@ while [[ ${#} -gt 0 ]]; do
       echo -lNuHepMC
       ;;
 
+      --cflags)
+      echo "-I${INSTALL_ROOT}/include -I@HEPMC_INCDIR@"
+      ;;
+
+      --ldflags)
+      echo "-L${INSTALL_ROOT}/lib -lNuHepMC @HEPMC_LIBFLAGS@"
+      ;;
+
       --version)
       echo @NuHepMC_VERSION_STRING@
       ;;
@@ -32,6 +44,7 @@ while [[ ${#} -gt 0 ]]; do
       -?|--help)
 
       echo "[RUNLIKE] ${SCRIPTNAME}"
+      echo -e "\t--prefix                   : Print location of installation tree root."
       echo -e "\t--incdir                   : Print location of installed header files."
       echo -e "\t--libdir                   : Print location of installed libraries."
       echo -e "\t--libs                     : Print list of NEUT generation library names."
