@@ -2,12 +2,17 @@
 
 #include "HepMC3/GenRunInfo.h"
 #include "HepMC3/Print.h"
+
+#define private public
 #include "HepMC3/ReaderRootTree.h"
+#undef private
 
 #include "TFile.h"
 #include "TTree.h"
 
 namespace NuHepMC {
+
+  using GenEvent = HepMC3::GenEvent;
 
 class ReaderRootTree {
   std::unique_ptr<HepMC3::ReaderRootTree> rdr;
@@ -56,7 +61,9 @@ public:
     }
   }
 
-  bool skip(const int i) { return rdr->skip(i); }
+  bool skip(const int i) {
+    return rdr->skip(i);
+  }
 
   bool read_event(HepMC3::GenEvent &evt) {
     bool rtn = rdr->read_event(evt);

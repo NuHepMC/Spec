@@ -10,24 +10,57 @@
 
 namespace NuHepMC {
 
-HepMC3::ConstGenVertexPtr GetLabFrameVertex(HepMC3::GenEvent const &evt){
-  for(auto vtx : evt.vertices()){
-    if(vtx->status() == labels::e2i(labels::VertexState::kLabFrame)){
+HepMC3::ConstGenVertexPtr GetLabFrameVertex(HepMC3::GenEvent const &evt) {
+  for (auto vtx : evt.vertices()) {
+    if (vtx->status() == labels::e2i(labels::VertexState::kLabFrame)) {
       return vtx;
     }
   }
   return nullptr;
 }
 
-HepMC3::ConstGenVertexPtr GetHardScatterVertex(HepMC3::GenEvent const &evt){
-  for(auto vtx : evt.vertices()){
-    if(vtx->status() == labels::e2i(labels::VertexState::kHardScatter)){
+HepMC3::ConstGenVertexPtr GetHardScatterVertex(HepMC3::GenEvent const &evt) {
+  for (auto vtx : evt.vertices()) {
+    if (vtx->status() == labels::e2i(labels::VertexState::kHardScatter)) {
       return vtx;
     }
   }
   return nullptr;
 }
 
+std::vector<HepMC3::ConstGenParticlePtr>
+GetParticles(HepMC3::ConstGenVertexPtr vtx, labels::ParticleState st) {
+  std::vector<HepMC3::ConstGenParticlePtr> rtnlist;
+
+  // These methods only deal with the lab frame vertex
+  if (st == labels::ParticleState::kOther) {
+    return {};
+  }
+
+  if (!vtx) {
+    return {};
+  }
+
+  return (st == labels::ParticleState::kInitialState) ? vtx->particles_in()
+                                                      : vtx->particles_out();
+}
+
+std::vector<HepMC3::ConstGenParticlePtr>
+GetParticles(HepMC3::GenEvent const &evt, labels::ParticleState st) {
+  return GetParticles(GetLabFrameVertex(evt), st);
+}
+
+std::vector<HepMC3::ConstGenParticlePtr>
+GetHardScatterISParticles(HepMC3::GenEvent const &evt) {
+
+  HepMC3::ConstGenVertexPtr vtx = GetHardScatterVertex(evt);
+
+  if (!vtx) {
+    return {};
+  }
+
+  return vtx->particles_in();
+}
 
 std::vector<HepMC3::ConstGenParticlePtr>
 GetParticles(HepMC3::GenEvent const &evt, int pid, labels::ParticleState st) {
@@ -37,23 +70,9 @@ GetParticles(HepMC3::GenEvent const &evt, int pid, labels::ParticleState st) {
             << ", with pid: " << pid << std::endl;
 #endif
 
-  // These methods only deal with the lab frame vertex
-  if (st == labels::ParticleState::kOther) {
-    return {};
-  }
-
   std::vector<HepMC3::ConstGenParticlePtr> rtnlist;
 
-  // Only look at the first vertex
-  HepMC3::ConstGenVertexPtr LabFrameVtx = GetLabFrameVertex(evt);
-
-  if (!LabFrameVtx) {
-    return {};
-  }
-
-  for (auto part : (st == labels::ParticleState::kInitialState)
-                       ? LabFrameVtx->particles_in()
-                       : LabFrameVtx->particles_out()) {
+  for (auto part : GetParticles(evt, st)) {
     if (part->pid() == pid) {
 #ifdef NUEVTHELP_DEBUG
       std::cout << "[INFO]: Found one, " << part->pid()
@@ -111,7 +130,9 @@ HepMC3::ConstGenParticlePtr GetFSProbe(HepMC3::GenEvent const &evt, int pid) {
   case 11: {
     return GetHMFSParticle(evt, pid);
   }
-  default: { return nullptr; }
+  default: {
+    return nullptr;
+  }
   }
 }
 

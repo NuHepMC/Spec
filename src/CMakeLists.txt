@@ -21,7 +21,8 @@ SET(header_files
   GenEventReaderHelper.hxx
   GenEventWriterHelper.hxx
   ReaderTools
-  WriterTools)
+  WriterTools
+  Print.hxx)
 
 add_library(NuHepMC SHARED ${implementation_files})
 

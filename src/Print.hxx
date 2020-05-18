@@ -31,7 +31,9 @@ inline std::string listing(HepMC3::GenVertex const &vtx) {
   }
   return ss.str();
 }
-inline std::string listing(HepMC3::GenEvent const &evt) {
+inline std::string
+listing(HepMC3::GenEvent const &evt,
+        std::unique_ptr<NuHepMC::genruninfo::GRIHelper> const &grih = nullptr) {
 
   std::stringstream ss("");
 
@@ -40,8 +42,15 @@ inline std::string listing(HepMC3::GenEvent const &evt) {
   ss << "Position: " << evt.event_pos() << std::endl;
   auto probe = NuHepMC::GetProbe(evt);
   ss << "Probe: " << probe->pid() << ", p: " << probe->momentum() << std::endl;
-  ss << "Hard Scattering Mode: " << NuHepMC::genevent::GetHardScatterMode(evt)
-     << std::endl;
+  int hsm = NuHepMC::genevent::GetHardScatterMode(evt);
+  ss << "Hard Scattering Mode: " << hsm << std::flush;
+
+  if (grih) {
+    ss << " (" << grih->GetModeDefinitionString(hsm) << ")";
+  }
+
+  ss << std::endl;
+
   ss << std::string(40, '-') << std::endl;
   ss << "Vertices: ";
   auto LabFrameVtx = NuHepMC::GetLabFrameVertex(evt);

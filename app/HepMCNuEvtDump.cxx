@@ -24,7 +24,7 @@ int main(int argc, char const *argv[]) {
       break;
     }
 
-    std::cout << NuHepMC::Print::listing(evt) << std::endl;
+    std::cout << NuHepMC::Print::listing(evt, grih) << std::endl;
   }
 
   in.close();

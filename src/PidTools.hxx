@@ -49,6 +49,9 @@ inline bool IsLepton(int pid) {
            kChargedLeptons.end()));
 }
 
+inline bool IsNuclearPID(int pid) {
+  return (pid > 1000000000) && (pid < 2000000000);
+}
 inline int GetNuclearPID(int Z, int A) {
   return 1000000000 + A * 10 + Z * 10000;
 }
