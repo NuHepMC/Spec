@@ -1,5 +1,6 @@
 #include "NuHepMC/GenRunInfoWriterHelper.hxx"
 
+#include "NuHepMC/AttributeUtils.hxx"
 #include "NuHepMC/StandardEnums.hxx"
 #include "NuHepMC/StringUtils.hxx"
 
@@ -18,11 +19,10 @@ void AddIntStringMap(std::shared_ptr<HepMC3::GenRunInfo> gri,
     keys.push_back(kv.first);
     values.push_back(kv.second);
   }
-  gri->add_attribute(attr_name + ".keys",
-                     std::make_shared<HepMC3::VectorIntAttribute>(keys));
-  gri->add_attribute(attr_name + ".vals",
-                     std::make_shared<HepMC3::StringAttribute>(
-                         NuHepMC::strutil::SerializeStringVector(values)));
+  gri->add_attribute(attr_name + ".keys", AsAttribute(keys));
+  gri->add_attribute(
+      attr_name + ".vals",
+      AsAttribute(NuHepMC::strutil::SerializeStringVector(values)));
 }
 
 std::shared_ptr<HepMC3::GenRunInfo> GRIFactory(std::string const &gen_name,
@@ -36,8 +36,7 @@ std::shared_ptr<HepMC3::GenRunInfo> GRIFactory(std::string const &gen_name,
 
 void SetFluxAveragedTotalCrossSection(std::shared_ptr<HepMC3::GenRunInfo> gri,
                                       double fatc) {
-  gri->add_attribute("FluxAveragedTotalCrossSection",
-                     std::make_shared<HepMC3::DoubleAttribute>(fatc));
+  gri->add_attribute("FluxAveragedTotalCrossSection", AsAttribute(fatc));
 }
 
 /// Set the NuHepMC VertexEnumStandard used
@@ -78,12 +77,12 @@ void AddGRIKeyValuePairs(std::shared_ptr<HepMC3::GenRunInfo> gri,
     keys.push_back(kv.first);
     values.push_back(kv.second);
   }
-  gri->add_attribute(attr_name + ".keys",
-                     std::make_shared<HepMC3::StringAttribute>(
-                         NuHepMC::strutil::SerializeStringVector(keys)));
-  gri->add_attribute(attr_name + ".vals",
-                     std::make_shared<HepMC3::StringAttribute>(
-                         NuHepMC::strutil::SerializeStringVector(values)));
+  gri->add_attribute(
+      attr_name + ".keys",
+      AsAttribute(NuHepMC::strutil::SerializeStringVector(keys)));
+  gri->add_attribute(
+      attr_name + ".vals",
+      AsAttribute(NuHepMC::strutil::SerializeStringVector(values)));
 }
 
 } // namespace genruninfo

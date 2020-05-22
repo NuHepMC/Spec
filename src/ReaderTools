@@ -8,3 +8,4 @@
 #include "NuHepMC/ReaderRootTree.hxx"
 #include "NuHepMC/Topologies.hxx"
 #include "NuHepMC/Print.hxx"
+#include "NuHepMC/AttributeUtils.hxx"

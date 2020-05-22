@@ -7,6 +7,7 @@ SET(implementation_files
   atomic_mass_nist.cxx)
 
 SET(header_files
+  AttributeUtils.hxx
   atomic_mass_nist.hxx
   ParticleStackReaderHelper.hxx
   Kinematics.hxx

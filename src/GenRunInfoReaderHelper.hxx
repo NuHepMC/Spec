@@ -2,6 +2,8 @@
 
 #include "HepMC3/GenRunInfo.h"
 
+#include <memory>
+
 namespace NuHepMC {
 
 namespace genruninfo {

@@ -1,5 +1,6 @@
 #include "NuHepMC/GenRunInfoReaderHelper.hxx"
 
+#include "NuHepMC/AttributeUtils.hxx"
 #include "NuHepMC/StandardEnums.hxx"
 #include "NuHepMC/StringUtils.hxx"
 
@@ -82,11 +83,8 @@ GRIHelper::GRIHelper(std::shared_ptr<HepMC3::GenRunInfo> const gri)
     }
   }
 
-  std::shared_ptr<HepMC3::DoubleAttribute> FATC_att =
-      gri->attribute<HepMC3::DoubleAttribute>("FluxAveragedTotalCrossSection");
-  if (FATC_att) {
-    FluxAverageTotalCrossSection = FATC_att->value();
-  }
+  FromAttribute(gri, "FluxAveragedTotalCrossSection",
+                FluxAverageTotalCrossSection);
 
   ToolInfo = gri->tools();
 }

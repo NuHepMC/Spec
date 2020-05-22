@@ -15,7 +15,7 @@ enum class ParticleState {
   kFinalState,
   kReinteracted,
   kDecayed,
-  kOther = 999
+  kOther = 9
 };
 
 inline std::map<int, std::string>
@@ -35,7 +35,7 @@ enum class VertexState {
   kISInteraction,
   kHardScatter,
   kFSInteraction,
-  kOther = 999
+  kOther = 9
 };
 
 inline std::map<int, std::string>
@@ -52,7 +52,7 @@ GetVertexDefinitions(std::string const &vstring) {
   }
 }
 
-template <typename E> int e2i(E const &e) { return static_cast<int>(e); }
+template <typename E> constexpr int e2i(E const &e) { return static_cast<int>(e); }
 
 } // namespace labels
 

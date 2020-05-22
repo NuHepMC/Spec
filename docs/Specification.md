@@ -7,6 +7,8 @@ NuHepMC Specification Version 0.1
 
 * Expunge any reference to c++ objects/methods defined in this package and define the specification only in terms of HepMC3 objects.
 
+* Add units specification, Expect Vertex positi
+
 # Abstract
 
 # Introduction
@@ -75,9 +77,9 @@ This standard enforces that all *pid* integers MUST conform to the PDG MC partic
   2:      FinalState
   3:      Reinteracted
   4:      Decayed
-  5-9:    Reserved for future standard use
-  10-998: Available
-  999:    Other
+  5-8:    Reserved for future standard use
+  9:      Other
+  10-999: Available
 
 *N.B.* In certain contexts, some particles MUST have a specific status, this is related to their associated vertex and is described in the *Events* section.
 
@@ -98,9 +100,9 @@ Very similar rules about the definition, use, and extensibility of the particle 
   2:      HardScatter
   3:      FSInteraction
   4:      Decayed
-  5-9:    Reserved for future standard use
-  10-998: Available
-  999:    Other
+  5-8:    Reserved for future standard use
+  9:      Other
+  10-999: Available
 
 The semantic meaning and usage constraints for specific status codes are described in the following section that deals with the structure of a full `HepMC3::GenEvent`
 
