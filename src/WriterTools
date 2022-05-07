@@ -1,8 +1,0 @@
-#pragma once
-
-#include "NuHepMC/GenRunInfoWriterHelper.hxx"
-#include "NuHepMC/GenEventWriterHelper.hxx"
-#include "NuHepMC/PidTools.hxx"
-#include "NuHepMC/StandardEnums.hxx"
-#include "NuHepMC/WriterRootTree.hxx"
-#include "NuHepMC/AttributeUtils.hxx"
