@@ -1,13 +1,9 @@
-NuHepMC Specification Version 0.1a
+NuHepMC Specification Version 0.1.0
 ----------------------------------
-
-# TODO:
-* Add details on the Abstract
-* Give more details on HepMC3
 
 # Abstract
 
-In this specification we present an additional set of requirements, conventions, and suggestions for simulated interactions stored in [HepMC3](https://www.arxiv.org/pdf/1912.08005.pdf) format. These are designed to be used in specific context of neutrino event generators and associated simulation and analysis toolchains, and will lower the barrier for working with the output of a range of interaction simulations.
+In this specification we present an additional set of requirements, conventions, and suggestions for simulated interactions stored in [HepMC3](https://www.arxiv.org/pdf/1912.08005.pdf) format. These are designed to be used in specific context of neutrino event generators and associated simulation and analysis toolchains, and will lower the barrier for interfacing with the output of a range of interaction simulations.
 
 # Introduction
 
@@ -20,9 +16,17 @@ The specification is broken down into Requirements, Conventions, and Suggestions
 * V: Vertex Information
 * P: Particle Information
 
-We also provide a reference implementation in C++ and specification validator programme in this repository.
+Where RCs are enumerated like \<Component\>.\<Category\>.\<Index\>, _i.e._ the second Convention for Event information should be referred to as [E.C.2](#ec2-lab-time).
+
+Following named conventions is optional. If conventions prove useful and are considered stable, they may become requirements in future versions of this specification. G.C.1 provides a convention on signalling that certain conventions have been followed. Suggestions cover information that is useful to make available to consumers, but has not always been included in proprietary formats or may not be simple to include in a first implementation.
+
+See [NuHepMC/ReferenceImplementation](https://github.com/NuHepMC/ReferenceImplementation) for reference implementations of an NuHepMC event writer and [NuHepMC/Validator](https://github.com/NuHepMC/Validator) for a NuHepMC event parser and specification validator.
 
 # NuHepMC
+
+### HepMC3 C++ Classes
+
+In this document we often make reference to various HepMC3 C++ classes, _e.g_ `HepMC3::GenRunInfo`, however these are used as a convenient handle for data objects and this specification should not be considered specific to the HepMC3 C++ reference implementation. Anywhere that the RCs are ambiguous outside of this context should be considered a bug in the specification.
 
 ## Generator Run Metadata
 
@@ -40,7 +44,7 @@ A NuHepMC `HepMC3::GenRunInfo` instance must contain the following attributes th
 * type: `HepMC3::IntAttribute`, name: "NuHepMC.Version.Minor" 
 * type: `HepMC3::IntAttribute`, name: "NuHepMC.Version.Patch" 
 
-#### G.R.3 Generator Provenance
+#### G.R.3 Generator Identification
 A NuHepMC `HepMC3::GenRunInfo` instance must contain a `HepMC3::GenRunInfo::ToolInfo` for each 'tool' involved in the production of the file thus far. The `ToolInfo` instance must contain non-empty name and version fields.
 
 #### G.R.4 Process Metadata
@@ -53,35 +57,39 @@ The `HepMC3::GenRunInfo` instance must also contain two other attributes giving 
 
 where \<ID\> enumerates all process IDs present in "NuHepMC.ProcessIDs".
 
-#### G.R.5 Event Weights
+#### G.R.5 Vertex Status Metadata
 
-For weights that will be calculated for every event, HepMC3 provides an interface for storing the weight names only once in the `HepMC3::GenRunInfo` instance. This specification requires that at least one event weight, named "CV" is included on the `HepMC3::GenRunInfo` instance, and filled for every event.
+#### G.R.6 Particle Status Metadata
+
+#### G.R.7 Event Weights
+
+For weights that will be calculated for every event, HepMC3 provides an interface for storing the weight names only once in the `HepMC3::GenRunInfo` instance. At least one event weight, named "CV" must be declared on the `HepMC3::GenRunInfo` instance, and filled for every event. _c.f._ [E.C.1](#ec1-cross-section-weight-units).
 
 ### Conventions
 
-Following named conventions is optional. If conventions prove useful and are considered stable, they may become requirements in future standards.
-
 #### G.C.1 Signalling Followed Conventions
 
-To signal to a consumer that an implementation follows a named convention, add a `HepMC3::VectorStringAttribute` to the `HepMC3::GenRunInfo` instance named "NuHepMC.Conventions" containing the names of the conventions adhered to.
+To signal to a consumer that an implementation follows a named convention from this specification, a `HepMC3::VectorStringAttribute` should be added to the `HepMC3::GenRunInfo` instance named "NuHepMC.Conventions" containing the names of the conventions adhered to.
 
 #### G.C.2 Process Descriptions
 
-Each "NuHepMC.Process\[\<ID\>\].Description" attribute contains a reference to the theory paper the process calculation is based on. If you don't cite your contributing theorists, and make it easy for users of your simulation to cite them as well, then don't come crying to us when they cannot find a job to stay in the field.
+Each "NuHepMC.Process\[\<ID\>\].Description" attribute should contain a reference to the theory paper the process calculation is based on. If you don't cite your contributing theorists, and make it easy for users of your simulation to cite them as well, then don't come crying to us when they cannot find a job to stay in the field.
 
 #### G.C.3 Process IDs
 
-It is not possible (or desireable) to mandate a specific set of interaction processes, and assign them IDs in this standard. Different models make different choices and it is not possible to forsee modelling developments that would require new processes or sub-processes to be enumerated in the future. Instead, we recommend ranges of IDs to use for high-level categories of processes that can be used to guide ID selection. Even if an implementation uses the convention in the table below, it must still adhere to G.R.4 and fully describe its process list in standardised attributes on the `HepMC3::GenRunInfo` instance.
+It is not possible (or desireable) to mandate a specific set of interaction processes, and assign them IDs in this standard. Different models make different choices and it is not possible to forsee modelling developments that would require new processes or sub-processes to be enumerated in the future. Instead, the below ranges of IDs should be used for high-level categorisation of processes. Even if an implementation uses the convention in the table below, it must still adhere to [G.R.4](#gr4-process-metadata).
 
-| Status Code | Process                      |
-| ----------- | -------                      |
-| 100-199     | Coherent Nuclear scattering  |
-| 200-299     | Quasielastic                 |
-| 300-399     | Meson Exchange Current       |
-| 400-499     | Resonance production         |
-| 500-599     | Shallow inelastic scattering |
-| 600-699     | Deep inelastic scattering    |
-| 700-999     | Other process types          |
+| Identifier | Process                      |
+| ---------- | -------                      |
+| 100-199    | Coherent Nuclear scattering  |
+| 200-299    | Quasielastic                 |
+| 300-399    | Meson Exchange Current       |
+| 400-499    | Resonance production         |
+| 500-599    | Shallow inelastic scattering |
+| 600-699    | Deep inelastic scattering    |
+| 700-999    | Other process types          |
+
+Charged current (CC) processes should have identifiers in the X00-X49 block and neutral current (NC) in the X50-X99 block. 
 
 These ranges are subject to change in a future version of this specification.
 
@@ -107,21 +115,21 @@ This section describes RCs for instances of `HepMC3::GenEvent`.
 
 #### E.R.1 Event Number
 
-Each `HepMC3::GenEvent` must have a unique event number within the file.
+Each `HepMC3::GenEvent` must have a unique, positivea event number within the file.
 
 #### E.R.2 Process ID
 
-The process ID that produced the `HepMC3::GenEvent` should be recorded in a `HepMC3::IntAttribute` named "ProcID". The metadata for this process ID must already be defined according to G.R.4.
+The process ID that produced the `HepMC3::GenEvent` must be recorded in a `HepMC3::IntAttribute` named "ProcID". The metadata for this process ID must already be defined according to [G.R.4](#gr4-process-metadata).
 
 #### E.R.3 Units
 
-Energy and position units should be explicitly set in the `HepMC3::GenEvent`.
+Energy and position units must be explicitly set in the `HepMC3::GenEvent`.
 
 #### E.R.4 Lab Position
 
-The position of the event in the lab frame should be added as a `HepMC3::VectorDoubleAttribute`, named "LabPos", with the same units as used when implementing E.R.3.
+The position of the event in the lab frame must be added as a `HepMC3::VectorDoubleAttribute`, named "LabPos", with the same units as used when implementing [E.R.3](#er3-units).
 
-c.f. E.C.2 for how to store time in this vector
+_c.f._ [E.C.2](#ec2-lab-time) for how to optionally store time in this vector
 
 ### Conventions
 
@@ -131,7 +139,7 @@ The "CV" event weight should be used to store the cross-section weight in picoba
 
 #### E.C.2 Lab Time
 
-If the "LabPos" attribute vector contains three entries then it is considered to be just the spatial position, if it contains four then the fourth entry is considered the time of the event in seconds.
+If the "LabPos" attribute vector contains three entries then it is considered to be just contain the spatial position, if it contains four entries then the fourth entry is considered the time of the event in seconds.
 
 ## Vertex Information
 
@@ -139,20 +147,9 @@ If the "LabPos" attribute vector contains three entries then it is considered to
 
 #### V.R.1
 
-### Conventions
-
-#### V.C.1
-
-| Status Code | Meaning             | Usage                            |
-| ----------- | -------             | -----                            |
-| 0           | Not defined         | Vertex with no meaningful status |
-| 1-          | Generator-dependent | For generator usage              |
+Each 
 
 ## Particle Information
-
-### Requirements
-
-#### P.R.1
 
 ### Conventions
 
