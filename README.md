@@ -63,25 +63,25 @@ where \<ID\> enumerates all process IDs present in "NuHepMC.ProcessIDs".
 
 #### G.R.5 Vertex Status Metadata
 
-The NuHepMC `HepMC3::GenRunInfo` instance must contain a `HepMC3::VectorIntAttribute` named "NuHepMC.VertexStatusIDs" listing all possible output vertex statuses as integers.
+The NuHepMC `HepMC3::GenRunInfo` instance must contain a `HepMC3::VectorIntAttribute` named "NuHepMC.VertexStatusIDs" declaring any generator-dependent status codes used. Including the standard HepMC3 codes in this list is optional, but they must not be reused to mean something different than in the HepMC3 specification.
 
-For each valid vertex status, the `HepMC3::GenRunInfo` instance must also contain two other attributes giving a name and description of each:
+For each declared vertex status, the `HepMC3::GenRunInfo` instance must also contain two other attributes giving a name and description of each:
 
 * type: `HepMC3::StringAttribute`, name: "NuHepMC.VertexStatusInfo\[\<ID\>\].Name" 
 * type: `HepMC3::StringAttribute`, name: "NuHepMC.VertexStatusInfo\[\<ID\>\].Description" 
 
-where \<ID\> enumerates all process IDs present in "NuHepMC.VertexStatusIDs". _c.f._ [V.R.1](#vr1-vertex-status-codes) for more details.
+where \<ID\> enumerates all status codes present in "NuHepMC.VertexStatusIDs". _c.f._ [V.R.1](#vr1-vertex-status-codes) for more details.
 
 #### G.R.6 Particle Status Metadata
 
-The NuHepMC `HepMC3::GenRunInfo` instance must contain a `HepMC3::VectorIntAttribute` named "NuHepMC.ParticleStatusIDs" listing all possible output particle statuses as integers.
+The NuHepMC `HepMC3::GenRunInfo` instance must contain a `HepMC3::VectorIntAttribute` named "NuHepMC.ParticleStatusIDs" declaring any generator-dependent status codes used. Including the standard HepMC3 codes in this list is optional, but they must not be reused to mean something different than in the HepMC3 specification.
 
 For each valid particle status, the `HepMC3::GenRunInfo` instance must also contain two other attributes giving a name and description of each:
 
 * type: `HepMC3::StringAttribute`, name: "NuHepMC.ParticleStatusInfo\[\<ID\>\].Name" 
 * type: `HepMC3::StringAttribute`, name: "NuHepMC.ParticleStatusInfo\[\<ID\>\].Description" 
 
-where \<ID\> enumerates all process IDs present in "NuHepMC.VertexStatusIDs". _c.f._ [P.R.1](#pr1-particle-status-codes) for more details.
+where \<ID\> enumerates all status codes present in "NuHepMC.ParticleStatusIDs". _c.f._ [P.R.1](#pr1-particle-status-codes) for more details.
 
 #### G.R.7 Event Weights
 
@@ -160,7 +160,7 @@ _c.f._ [E.C.4](#ec4-lab-time) for how to optionally store time in this attribute
 
 An event must have at least one `HepMC3::GenVertex`, and must have one and only one with a status of 1, which is considered as the primary process. No `HepMC3::GenVertex` may have a status of 0. _c.f._ [V.R.1](#vr1-vertex-status-codes).
 
-#### E.R.5 Particles
+#### E.R.6 Particles
 
 An event must have at least one incoming beam particle. _c.f._ [P.R.1](#pr1-particle-status-codes).
 
@@ -220,7 +220,7 @@ We extend the HepMC3 definition of `HepMC3::GenVertex::status` slightly to inclu
 | 1           | Primary Vertex      | The vertex corresponding to the primary process |
 | 2-999       | Generator-dependent | For generator usage                             |
 
-Any secondary vertex included within a NuHepMC event may have a status between 2 and 999, where [G.R.5](#gr5-vertex-status-metadata) mandates that all status codes must be fully described by attributes on the `HepMC3::GenRunInfo`. 
+Any secondary vertex included within a NuHepMC event may have a status between 2 and 999, where [G.R.5](#gr5-vertex-status-metadata) mandates that all generator-dependent status codes must be fully described by attributes on the `HepMC3::GenRunInfo`. 
 
 ## Particle Information
 
@@ -228,7 +228,7 @@ Any secondary vertex included within a NuHepMC event may have a status between 2
 
 #### P.R.1 Particle Status Codes
 
-The particle status codes defined by HepMC3, reproduced below, must be implemented.
+We extend the HepMC3 definition of `HepMC3::GenVertex::status` slightly to include the concept of a target particle, which for neutrino scattering will often be a target nucleus.
 
 | Status Code | Description                   | Usage                                                   |
 | ----------- | ---------------------------   | --------------                                          |
@@ -238,10 +238,11 @@ The particle status codes defined by HepMC3, reproduced below, must be implement
 | 3           | Documentation line            | Often used to indicate in/out particles in hard process |
 | 4           | Incoming beam particle        | Recommneded for all cases                               |
 | 5-10        | Reserved for future standards | Should not be used                                      |
-| 11-200      | Generator-dependent           | For generator usage                                     |
+| 11          | Target particle               | Recommended for all cases                               |
+| 12-20       | Reserved for future standards | Should not be used                                      |
+| 21-200      | Generator-dependent           | For generator usage                                     |
 | 201-        | Simulation dependent          | For simulation software usage                           |
 
-Note especially that any incoming real particle must have a status of 4, and any outgoing real particle must have a status of 1. This allows consumers to know at-a-glance which simulated particles must be considered 'observable' and which are 'internal' details of the calculation. Special care must be taken when including the effects of initial-state and final-state interactions.
+Note especially that any incoming real particle must have a status of 4 or 11, and any outgoing real particle must have a status of 1. This allows consumers to know at-a-glance which simulated particles must be considered 'observable' and which are 'internal' details of the calculation. Special care must be taken when including the effects of initial-state and final-state interactions.
 
-Any internal particle included within a NuHepMC event may have a status greater than 11, where [G.R.6](#gr6-particle-status-metadata) mandates that all status codes must be fully described by attributes on the `HepMC3::GenRunInfo`. 
-
+Any internal particle included within a NuHepMC event may have a status greater than 21, where [G.R.6](#gr6-particle-status-metadata) mandates that all generator-dependent status codes must be fully described by attributes on the `HepMC3::GenRunInfo`. 
