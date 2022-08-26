@@ -208,6 +208,8 @@ The cross-section for the relevant process ID for the incoming beam particle to 
 
 Some simulations build up an estimate of the cross section as they run, this makes implementing E.C.2 and E.C.3 impractical. Instead, the builtin attribute `HepMC3::GenCrossSection`, accessed via `GenEvent::cross_section` should be used to store the current estimate of the total cross section. A consumer can then use the best estimate on the last generated event to correctly scale an event rate to a cross-section prediction.
 
+If choosing to use E.C.4, the length of the `cross_sections` and `cross_section_errors` data members must be the same length as the number of weights defined in the header. These should be filled with the current estimate of the total cross section for each variation based on all events through the current event. Additionally, the `HepMC3::GenCrossSection` needs to have the data members `accepted_events` and `attempted_events` filled.
+
 #### E.C.5 Cross Section Units
 
 Cross sections should be stored in picobarns (1E-38 cm^2 == 1E-2 pb).
