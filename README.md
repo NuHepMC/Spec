@@ -20,7 +20,7 @@ Where RCs are enumerated like \<Component\>.\<Category\>.\<Index\>, _i.e._ the s
 
 Following named conventions is optional. If conventions prove useful and are considered stable, they may become requirements in future versions of this specification. [G.C.1](#gc1-signalling-followed-conventions) provides a convention on signalling that certain conventions have been followed. Suggestions cover information that is useful to make available to consumers, but has not always been included in proprietary formats or may not be simple to include in a first implementation.
 
-See [NuHepMC/ReferenceImplementation](https://github.com/NuHepMC/ReferenceImplementation) for reference implementations of an NuHepMC event writer and [NuHepMC/Validator](https://github.com/NuHepMC/Validator) for a NuHepMC event parser and specification validator.
+See [NuHepMC/ReferenceImplementation](https://github.com/NuHepMC/ReferenceImplementation) for reference implementations of an NuHepMC event writer and specification validator.
 
 # NuHepMC
 
