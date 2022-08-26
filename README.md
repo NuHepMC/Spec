@@ -16,7 +16,7 @@ The specification is broken down into Requirements, Conventions, and Suggestions
 * V: Vertex Information
 * P: Particle Information
 
-Where RCs are enumerated like \<Component\>.\<Category\>.\<Index\>, _i.e._ the second Convention for Event information should be referred to as [E.C.5](#ec5-lab-time).
+Where RCs are enumerated like \<Component\>.\<Category\>.\<Index\>, _i.e._ the second Convention for Event information should be referred to as [E.C.6](#ec6-lab-time).
 
 Following named conventions is optional. If conventions prove useful and are considered stable, they may become requirements in future versions of this specification. [G.C.1](#gc1-signalling-followed-conventions) provides a convention on signalling that certain conventions have been followed. Suggestions cover information that is useful to make available to consumers, but has not always been included in proprietary formats or may not be simple to include in a first implementation.
 
@@ -87,7 +87,7 @@ where \<ID\> enumerates all status codes present in "NuHepMC.ParticleStatusIDs".
 
 For weights that will be calculated for every event, HepMC3 provides an interface for storing the weight names only once in the `HepMC3::GenRunInfo` instance. At least one event weight, named "CV" must be declared on the `HepMC3::GenRunInfo` instance, and filled for every event. 
 
-This weight can be 1 or constant for every event in a generator run (in the case of an _unweighted_ event vector). This weight must always be included by a consumer when producing correctly-normalized predictions from a NuHepMC file and cannot be assumed to be always 1. The exact form of this weight, whether it is the only information required to properly normalize a prediction, or if additional information is required is an implementation detail. If [G.C.2](#gc2-file-exposure-standalone) and [G.C.4](#gc4-flux-averaged-total-cross-section) are adopted, then the combination of the "CV" weight, the flux-averaged total cross section, and the total file exposure can be unambiguously used to convert an event rate into a cross-section prediction.
+This weight can be 1 or constant for every event in a generator run (in the case of an _unweighted_ event vector). This weight must always be included by a consumer when producing correctly-normalized predictions from a NuHepMC file and must not be assumed to be always 1. The exact form of this weight, whether it is the only information required to properly normalize a prediction, or if additional information is required is an implementation detail. If [G.C.2](#gc2-file-exposure-standalone) and [G.C.4](#gc4-flux-averaged-total-cross-section) are adopted, then the combination of the "CV" weight, the flux-averaged total cross section, and the total file exposure can be unambiguously used to convert an event rate into a cross-section prediction.
 
 This requirement may become more prescriptive in future versions, but it may currently present a barrier to adoption if we require a strict form of the cross-section normalizing factor.
 
@@ -101,7 +101,7 @@ To signal to a consumer that an implementation follows a named convention from t
 
 Each file should contain a description of the exposure of the generator run.
 
-When running a standalone event simulation this will often be the number of events requested, which may differ from the number of events output in some cases where 'blocked' events contribute to the total cross section calculation.
+When running a standalone event simulation this will often be the number of events requested, which may differ from the number of events output in some cases where events that are not written out must contribute to the total cross section calculation.
 
 * type: `HepMC3::LongAttribute`, name: "NuHepMC.Exposure.NEvents"
 
@@ -116,7 +116,11 @@ When simulating with some experimental exposure, often Protons on Target (POT), 
 
 #### G.C.4 Flux-averaged Total Cross Section
 
-When running a standalone simulation, with a target number of events, additional information about the simulated total cross section is required to properly normalize the output event rate to a cross-section prediction. The quantity required is the flux-averaged total cross section which is calculated from the ratio of the integral of incoming flux times the cross section to the integral of the flux. The flux-averaged total cross section should be stored as a `HepMC3::DoubleAttribute` on the `HepMC3::GenRunInfo` named "NuHepMC.FluxAveragedTotalCrossSection".
+When running a standalone simulation, with a target number of events, additional information about the simulated total cross section is required to properly normalize the output event rate to a cross-section prediction. The quantity required is the flux-averaged total cross section, which is calculated from the ratio of the integral of incoming flux times the cross section to the integral of the flux.
+
+This quantity is not always known at the beginning of a generator run. The simulation of events builds up an approximation of the total cross-section as the generator runs, for storing a current 'best estimate' of the total cross-section see [E.C.4](#ec4-estimated-cross-section).
+
+If known, the flux-averaged total cross section should be stored as a `HepMC3::DoubleAttribute` on the `HepMC3::GenRunInfo` named "NuHepMC.FluxAveragedTotalCrossSection".
 
 #### G.C.5 Process Descriptions
 
@@ -140,7 +144,7 @@ This section describes RCs for instances of `HepMC3::GenEvent`.
 
 #### E.R.1 Event Number
 
-Each `HepMC3::GenEvent` must have a unique, positivea event number within the file.
+Each `HepMC3::GenEvent` must have a unique, non-negative event number within the file.
 
 #### E.R.2 Process ID
 
@@ -152,17 +156,21 @@ Energy and position units must be explicitly set in the `HepMC3::GenEvent`.
 
 #### E.R.4 Lab Position
 
-The position of the event in the lab frame must be added as a `HepMC3::VectorDoubleAttribute`, named "LabPos", with the same units as used when implementing [E.R.3](#er3-cross-section-units).
+The position of the event in the lab frame must be added as a `HepMC3::VectorDoubleAttribute`, named "LabPos", with the same units as used when implementing [E.R.3](#er3-units).
 
-_c.f._ [E.C.4](#ec4-lab-time) for how to optionally store time in this attribute.
+_c.f._ [E.C.6](#ec6-lab-time) for how to optionally store time in this attribute.
 
 #### E.R.5 Vertices
 
 An event must have at least one `HepMC3::GenVertex`, and must have one and only one with a status of 1, which is considered as the primary process. No `HepMC3::GenVertex` may have a status of 0. _c.f._ [V.R.1](#vr1-vertex-status-codes).
 
-#### E.R.6 Particles
+#### E.R.6 Beam Particle
 
 An event must have at least one incoming beam particle. _c.f._ [P.R.1](#pr1-particle-status-codes).
+
+#### E.R.7 MC Truth
+
+All simulated incoming and outgoing physical particles must be written to the event so that the full 'MC Truth' of the event is stored.
 
 ### Conventions
 
@@ -192,19 +200,17 @@ The total cross-section for the incoming beam particle should be stored in a `He
 
 The cross-section for the relevant process ID for the incoming beam particle should be stored in a `HepMC3::DoubleAttribute` on the `HepMC3::GenEvent`, named "ProcXS". 
 
-#### E.C.4 Cross Section Units
+#### E.C.4 Estimated Cross Section
+
+Some simulations build up an estimate of the cross section as they run, this makes implementing E.C.2 and E.C.3 impractical. Instead, the builtin attribute `HepMC3::GenCrossSection` should be used to store the current estimate of the total cross section. A consumer can then use the best estimate on the last generated event to correctly scale an event rate to a cross-section prediction.
+
+#### E.C.5 Cross Section Units
 
 Cross sections should be stored in picobarns (1E-38 cm^2 == 1E-2 pb).
 
-#### E.C.5 Lab Time
+#### E.C.6 Lab Time
 
 If the "LabPos" attribute vector contains three entries then it is considered to be just contain the spatial position, if it contains four entries then the fourth entry is considered the time of the event in seconds.
-
-### Suggestions
-
-#### E.S.1 GenCrossSection
-
-It can be useful to include additional information about the generation of a single event and the calculated cross-section. HepMC3 provides the `HepMC3::GenCrossSection` attribute for this purpose.
 
 ## Vertex Information
 
@@ -228,7 +234,7 @@ Any secondary vertex included within a NuHepMC event may have a status between 2
 
 #### P.R.1 Particle Status Codes
 
-We extend the HepMC3 definition of `HepMC3::GenVertex::status` slightly to include the concept of a target particle, which for neutrino scattering will often be a target nucleus.
+We extend the HepMC3 definition of `HepMC3::GenVertex::status` slightly to include the concept of a target particle, which for neutrino scattering will usually be a target nucleus.
 
 | Status Code | Description                   | Usage                                                   |
 | ----------- | ---------------------------   | --------------                                          |
@@ -245,4 +251,4 @@ We extend the HepMC3 definition of `HepMC3::GenVertex::status` slightly to inclu
 
 Note especially that any incoming real particle must have a status of 4 or 11, and any outgoing real particle must have a status of 1. This allows consumers to know at-a-glance which simulated particles must be considered 'observable' and which are 'internal' details of the calculation. Special care must be taken when including the effects of initial-state and final-state interactions.
 
-Any internal particle included within a NuHepMC event may have a status greater than 21, where [G.R.6](#gr6-particle-status-metadata) mandates that all generator-dependent status codes must be fully described by attributes on the `HepMC3::GenRunInfo`. 
+Any internal particle included within a NuHepMC event may have a status greater than 20, where [G.R.6](#gr6-particle-status-metadata) mandates that all generator-dependent status codes must be fully described by attributes on the `HepMC3::GenRunInfo`. 
