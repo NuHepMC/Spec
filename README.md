@@ -105,6 +105,8 @@ When running a standalone event simulation this will often be the number of even
 
 * type: `HepMC3::LongAttribute`, name: "NuHepMC.Exposure.NEvents"
 
+Implementations should not adhere to both G.C.2 and G.C.3 simultaneously.
+
 #### G.C.3 File Exposure (Experimental)
 
 Each file should contain a description of the exposure of the generator run.
@@ -112,7 +114,9 @@ Each file should contain a description of the exposure of the generator run.
 When simulating with some experimental exposure, often Protons on Target (POT), the exposure should be described. Two attributes are reserved for signalling the exposure contained to consumers. One or both can be provided.
 
 * type: `HepMC3::DoubleAttribute`, name: "NuHepMC.Exposure.POT" 
-* type: `HepMC3::DoubleAttribute`, name: "NuHepMC.Exposure.Livetime" 
+* type: `HepMC3::DoubleAttribute`, name: "NuHepMC.Exposure.Livetime"
+
+Implementations should not adhere to both G.C.2 and G.C.3 simultaneously.
 
 #### G.C.4 Flux-averaged Total Cross Section
 
@@ -194,15 +198,15 @@ These ranges are subject to change in a future version of this specification.
 
 #### E.C.2 Total Cross Section
 
-The total cross-section for the incoming beam particle should be stored in a `HepMC3::DoubleAttribute` on the `HepMC3::GenEvent`, named "TotXS". 
+The total cross-section for the incoming beam particle to interact should be stored in a `HepMC3::DoubleAttribute` on the `HepMC3::GenEvent`, named "TotXS". 
 
 #### E.C.3 Process Cross Section
 
-The cross-section for the relevant process ID for the incoming beam particle should be stored in a `HepMC3::DoubleAttribute` on the `HepMC3::GenEvent`, named "ProcXS". 
+The cross-section for the relevant process ID for the incoming beam particle to interact should be stored in a `HepMC3::DoubleAttribute` on the `HepMC3::GenEvent`, named "ProcXS". 
 
 #### E.C.4 Estimated Cross Section
 
-Some simulations build up an estimate of the cross section as they run, this makes implementing E.C.2 and E.C.3 impractical. Instead, the builtin attribute `HepMC3::GenCrossSection` should be used to store the current estimate of the total cross section. A consumer can then use the best estimate on the last generated event to correctly scale an event rate to a cross-section prediction.
+Some simulations build up an estimate of the cross section as they run, this makes implementing E.C.2 and E.C.3 impractical. Instead, the builtin attribute `HepMC3::GenCrossSection`, accessed via `GenEvent::cross_section` should be used to store the current estimate of the total cross section. A consumer can then use the best estimate on the last generated event to correctly scale an event rate to a cross-section prediction.
 
 #### E.C.5 Cross Section Units
 
