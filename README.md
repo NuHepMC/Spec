@@ -16,7 +16,7 @@ The specification is broken down into Requirements, Conventions, and Suggestions
 * V: Vertex Information
 * P: Particle Information
 
-Where RCs are enumerated like \<Component\>.\<Category\>.\<Index\>, _i.e._ the second Convention for Event information should be referred to as [E.C.6](#ec6-lab-time).
+Where RCs are enumerated like \<Component\>.\<Category\>.\<Index\>, _i.e._ the sixth Convention for Event information should be referred to as [E.C.6](#ec6-lab-time).
 
 Following named conventions is optional. If conventions prove useful and are considered stable, they may become requirements in future versions of this specification. [G.C.1](#gc1-signalling-followed-conventions) provides a convention on signalling that certain conventions have been followed. Suggestions cover information that is useful to make available to consumers, but has not always been included in proprietary formats or may not be simple to include in a first implementation.
 
