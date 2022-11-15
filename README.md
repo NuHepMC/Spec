@@ -140,6 +140,10 @@ It is recommended that a NuHepMC `HepMC3::GenRunInfo` instance contains all info
 * type: Implementation defined, name: "NuHepMC.Provenance.RNGState"
   * This might be a single seed number used for RNG initialization, or a more complicated description of the initialized RNG state.
 
+#### G.S.2 Complete Status Metadata
+
+While [G.R.5](gr5-vertex-status-metadata) and [G.R.6](gr6-particle-status-metadata) explicitly do not require implementations to emit metadata for standard status codes defined in the HepMC3 standard, it is suggested that the complete list of status codes used by an implementation are included in the `NuHepMC.VertexStatusInfo` and `NuHepMC.ParticleStatusInfo` attributes.
+
 ## Event Metadata
 
 This section describes RCs for instances of `HepMC3::GenEvent`.
@@ -218,6 +222,10 @@ Cross sections should be stored in picobarns (1E-38 cm^2 == 1E-2 pb).
 
 If the "LabPos" attribute vector contains three entries then it is considered to be just contain the spatial position, if it contains four entries then the fourth entry is considered the time of the event in seconds.
 
+#### E.C.7 Target Particle
+
+An event must have at least one incoming beam particle. _c.f._ [P.R.1](#pr1-particle-status-codes).
+
 ## Vertex Information
 
 ### Requirements
@@ -230,9 +238,10 @@ We extend the HepMC3 definition of `HepMC3::GenVertex::status` slightly to inclu
 | ----------- | -------             | -----                                           |
 | 0           | Not defined         | Do not use                                      |
 | 1           | Primary Vertex      | The vertex corresponding to the primary process |
-| 2-999       | Generator-dependent | For generator usage                             |
+| 2           | Nuclear Vertex      | The vertex corresponding to the separation of the nuclear target and the struck target nucleon |
+| 3-999       | Generator-dependent | For generator usage                             |
 
-Any secondary vertex included within a NuHepMC event may have a status between 2 and 999, where [G.R.5](#gr5-vertex-status-metadata) mandates that all generator-dependent status codes must be fully described by attributes on the `HepMC3::GenRunInfo`. 
+Any secondary vertex included within a NuHepMC event may have a status between 3 and 999, where [G.R.5](#gr5-vertex-status-metadata) mandates that all generator-dependent status codes must be fully described by attributes on the `HepMC3::GenRunInfo`. 
 
 ## Particle Information
 
@@ -240,7 +249,7 @@ Any secondary vertex included within a NuHepMC event may have a status between 2
 
 #### P.R.1 Particle Status Codes
 
-We extend the HepMC3 definition of `HepMC3::GenVertex::status` slightly to include the concept of a target particle, which for neutrino scattering will usually be a target nucleus.
+We extend the HepMC3 definition of `HepMC3::GenParticle::status` slightly to include the concept of a target particle, which for neutrino scattering will usually be a target nucleus.
 
 | Status Code | Description                   | Usage                                                   |
 | ----------- | ---------------------------   | --------------                                          |
@@ -248,13 +257,18 @@ We extend the HepMC3 definition of `HepMC3::GenVertex::status` slightly to inclu
 | 1           | Undecayed physical particle   | Recommended for all cases                               |
 | 2           | Decayed physical particle     | Recommended for all cases                               |
 | 3           | Documentation line            | Often used to indicate in/out particles in hard process |
-| 4           | Incoming beam particle        | Recommneded for all cases                               |
+| 4           | Incoming beam particle        | Recommended for all cases                               |
 | 5-10        | Reserved for future standards | Should not be used                                      |
 | 11          | Target particle               | Recommended for all cases                               |
 | 12-20       | Reserved for future standards | Should not be used                                      |
 | 21-200      | Generator-dependent           | For generator usage                                     |
 | 201-        | Simulation dependent          | For simulation software usage                           |
 
-Note especially that any incoming real particle must have a status of 4 or 11, and any outgoing real particle must have a status of 1. This allows consumers to know at-a-glance which simulated particles must be considered 'observable' and which are 'internal' details of the calculation. Special care must be taken when including the effects of initial-state and final-state interactions.
+Note especially that any incoming real particle must have a status of 4 or 11, and any outgoing real particle must have a status of 1. This allows consumers to know at a glance which simulated particles must be considered 'observable' and which are 'internal' details of the calculation. Special care must be taken when including the effects of initial-state and final-state interactions.
 
 Any internal particle included within a NuHepMC event may have a status greater than 20, where [G.R.6](#gr6-particle-status-metadata) mandates that all generator-dependent status codes must be fully described by attributes on the `HepMC3::GenRunInfo`. 
+
+#### P.C.1 Struck Nucleon Status Code
+
+When an interaction with a bound nucleon with definite kinematics is simulated, the internal particle corresponding to the stuck nucleon should have status code 21. If this convention is signalled via the mechanism described in [G.C.1](gc1-signalling-followed-conventions), then status code 21 need not be included in the implementation of [G.R.6](#gr6-particle-status-metadata).
+
