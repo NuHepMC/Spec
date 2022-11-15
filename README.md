@@ -224,7 +224,7 @@ If the "LabPos" attribute vector contains three entries then it is considered to
 
 #### E.C.7 Target Particle
 
-An event must have at least one incoming beam particle. _c.f._ [P.R.1](#pr1-particle-status-codes).
+An event should have a single incoming target particle. _c.f._ [P.R.1](#pr1-particle-status-codes). This is expected to be a real nucleus or free nucleon target. See [P.C.1](#pcr1-struck-nucleon-status) for an optional convention for marking the kinematics of a struck bound nucleon if they are definite.
 
 ## Vertex Information
 
@@ -268,7 +268,7 @@ Note especially that any incoming real particle must have a status of 4 or 11, a
 
 Any internal particle included within a NuHepMC event may have a status greater than 20, where [G.R.6](#gr6-particle-status-metadata) mandates that all generator-dependent status codes must be fully described by attributes on the `HepMC3::GenRunInfo`. 
 
-#### P.C.1 Struck Nucleon Status Code
+#### P.C.1 Struck Nucleon Status
 
 When an interaction with a bound nucleon with definite kinematics is simulated, the internal particle corresponding to the stuck nucleon should have status code 21. If this convention is signalled via the mechanism described in [G.C.1](gc1-signalling-followed-conventions), then status code 21 need not be included in the implementation of [G.R.6](#gr6-particle-status-metadata).
 
