@@ -150,7 +150,7 @@ Each vector should contain a description of the exposure of the generator run. W
 
 Implementations should not adhere to both [G.C.2](#gc2-vector-exposure-(standalone)) and [G.C.3](#gc3-vector-exposure-experimental) simultaneously.
 
-#### G.C.5 Cross Section Units and Target Scaling
+#### G.C.4 Cross Section Units and Target Scaling
 
 There are a variety of units conventions used for both published and predicted cross sections in HEP. For neutrino measurements specifically, `10^-38 cm^2` per nucleon is common, but not ubiquitous. We want to provide the flexibility to signal different conventions, but provide a sensible default that we strongly recommend implementations adhere to. One or both of the following `HepMC3::StringAttribute` may be included on the `HepMC3::GenRunInfo` to fully qualify cross section units conventions used within a vector.
 
@@ -169,7 +169,7 @@ If these attributes are not present, then the cross section will be assumed to b
 
 We _strongly_ recommend that implementations use this default.
 
-#### G.C.6 Flux-averaged Total Cross Section
+#### G.C.5 Flux-averaged Total Cross Section
 
 When running a standalone simulation, with a requested number of simulated events, additional information about the simulated total cross section is required to properly normalize the output event rate to a cross-section prediction. The quantity required is the flux-averaged total cross section, which is calculated from the ratio of the integral of incoming flux times the cross section to the integral of the flux.
 
@@ -181,7 +181,7 @@ Optionally, the uncertainty in the flux-averaged total cross section may be stor
 
 See [G.C.4](#gc4-cross-section-units-and-target-scaling) for a convention on the units of this value.
 
-#### G.C.7 Citation Metadata
+#### G.C.6 Citation Metadata
 
 Modelling components implemented based on published work should always be fully cited. The `HepMC3::GenRunInfo` should contain at least one `HepMC3::VectorStringAttribute` for each relevant modelling component, named according to the pattern `"NuHepMC.Citations.\<Comp\>.\<Type\>"`. 
 
@@ -195,7 +195,7 @@ If you don't cite your contributing theorists, and make it easy for users of you
 
 We hope that automatic bibliography generation tools using this metadata will be built.
 
-#### G.C.8 Beam Energy Distribution Description
+#### G.C.7 Beam Energy Distribution Description
 
 Each vector should contain a description of the beam particle flux used to simulate the output event vector. For many truth studies and experimental simulations where the detector is not physically close to the source, a simple beam energy distribution is enough to describe the beam. The two types of energy distribution covered by this convention are mono-energetic beams and those with distributions described by a histogram. The type should be signalled via a `HepMC3::StringAttribute` named `"NuHepMC.Beam\[\<PDG\>\].Type"` with value `"MonoEnergetic"` or `"Histogram"` stored on the `HepMC3::GenRunInfo`. For both types, relevant units can be signalled via two attributes.
 
@@ -211,7 +211,7 @@ For the case of a `"Histogram`-type distribution, the histogram should be encode
 
 where `\[\<PDG\>\]` enumerates the PDG particle numbers of all beam particles present in the event vector. _N.B._ the number of entries in the `"BinEdges"` vector should always be one more than the number of entries in the `"BinContent"` vector.
 
-For a suggestion on how to encode useful information about more realistic neutrino beam descriptions, see [E.S.1](#es1-beam-description--beam-simulation-).
+For a suggestion on how to encode useful information about more realistic neutrino beam descriptions, see [E.S.1](#es1-beam-description-beam-simulation).
 
 ### Suggestions
 
@@ -301,7 +301,7 @@ The cross-section for the relevant process Id for the incoming beam particle, wi
 
 #### E.C.4 Estimated Cross Section
 
-Some simulations build up an estimate of the cross section as they run, this makes implementing [G.C.6](#gc6-particle-status-metadata) impractical. Instead, the builtin attribute `HepMC3::GenCrossSection`, accessed via `GenEvent::cross_section`, should be used to store the current estimate of the total cross section. A user can then use the best estimate on the last generated event to correctly scale an event rate to a cross-section prediction.
+Some simulations build up an estimate of the cross section as they run, this makes implementing [G.C.5](#gc5-flux-averaged-total-cross-section) impractical. Instead, the builtin attribute `HepMC3::GenCrossSection`, accessed via `GenEvent::cross_section`, should be used to store the current estimate of the total cross section. A user can then use the best estimate on the last generated event to correctly scale an event rate to a cross-section prediction.
 
 If choosing to use [E.C.4](#ec4-estimated-cross-section), the length of the `cross_sections` and `cross_section_errors` data members must be the same length as the number of weights defined in the header. These should be filled with the current estimate of the total cross section for each variation based on all events through the current event. Additionally, the `HepMC3::GenCrossSection` needs to have the data members `accepted_events` and `attempted_events` filled.
 
@@ -313,7 +313,7 @@ If the "LabPos" attribute vector contains three entries then it is considered to
 
 #### E.S.1 Beam Description (Beam Simulation)
 
-For more complex beam simulations can not adequetly be described by a single energy or energy histogram (see [G.C.7](#gc7-citation-metadata)), it is suggested that the full parent decay history is included in the `HepMC3::GenEvent`. A full set of conventions for the description of beam particle production and parent particle decay chains (for the case of neutrino beams) is currently outside the scope of this specification, but generator implementations can signal that they adhere to this suggestion to notify users that some or all of the beam particle production information is included in the event.
+For more complex beam simulations can not adequetly be described by a single energy or energy histogram (see [G.C.6](#gc6-citation-metadata)), it is suggested that the full parent decay history is included in the `HepMC3::GenEvent`. A full set of conventions for the description of beam particle production and parent particle decay chains (for the case of neutrino beams) is currently outside the scope of this specification, but generator implementations can signal that they adhere to this suggestion to notify users that some or all of the beam particle production information is included in the event.
 
 ## Vertex Information
 
