@@ -26,7 +26,7 @@ In this specification we present an additional set of *Requirements*, *Conventio
     * [Conventions](#pc1-struck-nucleon-status)
 * [Contributing and NuHepMC Revisions](#contributing-and-nuhepmc-revisions)
 * [Examples](#examples)
-* [Contact]
+* [Contact](#contact)
 
 # Introduction
 
