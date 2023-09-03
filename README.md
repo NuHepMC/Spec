@@ -81,10 +81,10 @@ A NuHepMC `HepMC3::GenRunInfo` instance must contain a `HepMC3::VectorIntAttribu
 
 For each valid process Id, the `HepMC3::GenRunInfo` instance must also contain two other attributes giving a name and description of each:
 
-* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ProcessInfo\[\<Id\>\].Name"` 
-* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ProcessInfo\[\<Id\>\].Description"` 
+* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ProcessInfo[<Id>].Name"` 
+* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ProcessInfo[<Id>].Description"` 
 
-where `\<Id\>` enumerates all process Ids present in `"NuHepMC.ProcessIds"`. (See also [E.R.1](#er1-process-id))
+where `<Id>` enumerates all process Ids present in `"NuHepMC.ProcessIds"`. (See also [E.R.1](#er1-process-id))
 
 #### G.R.5 Vertex Status Metadata
 
@@ -92,10 +92,10 @@ The NuHepMC `HepMC3::GenRunInfo` instance must contain a `HepMC3::VectorIntAttri
 
 For each declared vertex status, the `HepMC3::GenRunInfo` instance must also contain two other attributes giving a name and description of each:
 
-* type: `HepMC3::StringAttribute`, name: `"NuHepMC.VertexStatusInfo\[\<Id\>\].Name"` 
-* type: `HepMC3::StringAttribute`, name: `"NuHepMC.VertexStatusInfo\[\<Id\>\].Description"` 
+* type: `HepMC3::StringAttribute`, name: `"NuHepMC.VertexStatusInfo[<Id>].Name"` 
+* type: `HepMC3::StringAttribute`, name: `"NuHepMC.VertexStatusInfo[<Id>].Description"` 
 
-where `\<Id\>` enumerates all status codes present in `"NuHepMC.VertexStatusIds"`. (See also [V.R.1](#vr1-vertex-status-codes))
+where `<Id>` enumerates all status codes present in `"NuHepMC.VertexStatusIds"`. (See also [V.R.1](#vr1-vertex-status-codes))
 
 #### G.R.6 Particle Status Metadata
 
@@ -103,10 +103,10 @@ The NuHepMC `HepMC3::GenRunInfo` instance must contain a `HepMC3::VectorIntAttri
 
 For each valid particle status, the `HepMC3::GenRunInfo` instance must also contain two other attributes giving a name and description of each:
 
-* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ParticleStatusInfo\[\<Id\>\].Name"` 
-* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ParticleStatusInfo\[\<Id\>\].Description"` 
+* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ParticleStatusInfo[<Id>].Name"` 
+* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ParticleStatusInfo[<Id>].Description"` 
 
-where `\<Id\>` enumerates all status codes present in `"NuHepMC.ParticleStatusIds"`. (See also [P.R.1](#pr1-particle-status-codes))
+where `<Id>` enumerates all status codes present in `"NuHepMC.ParticleStatusIds"`. (See also [P.R.1](#pr1-particle-status-codes))
 
 #### G.R.7 Event Weights
 
@@ -138,9 +138,9 @@ specification.
 For each additional particle number, the `HepMC3::GenRunInfo` instance must also contain an attribute giving a unique name to the represented particle
 species:
 
-* type: `HepMC3::StringAttribute`, name: `"NuHepMC.AdditionalParticleNumber\[\<PDG\>\].Name"` 
+* type: `HepMC3::StringAttribute`, name: `"NuHepMC.AdditionalParticleNumber[<PDG>].Name"` 
 
-where `\<PDG\>` enumerates all particle numbers present in `"NuHepMC.AdditionalParticleNumbers"`.
+where `<PDG>` enumerates all particle numbers present in `"NuHepMC.AdditionalParticleNumbers"`.
 
 ### Conventions
 
@@ -195,13 +195,13 @@ See [G.C.4](#gc4-cross-section-units-and-target-scaling) for a convention on the
 
 #### G.C.6 Citation Metadata
 
-Modelling components implemented based on published work should always be fully cited. The `HepMC3::GenRunInfo` should contain at least one `HepMC3::VectorStringAttribute` for each relevant modelling component, named according to the pattern `"NuHepMC.Citations.\<Comp\>.\<Type\>"`. 
+Modelling components implemented based on published work should always be fully cited. The `HepMC3::GenRunInfo` should contain at least one `HepMC3::VectorStringAttribute` for each relevant modelling component, named according to the pattern `"NuHepMC.Citations.<Comp>.<Type>"`. 
 
-Valid substitutions for the `\<Comp\>` and `\<Type\>` fields are not restricted by this standard. We suggest using `\<Comp\>=Generator` for specifying the main citation for the interaction generator and `\<Comp\>=Process\[\<Id\>\]` for individual processes. For common reference formats in the HEP field, we suggest some common values for the `\<Type\>` field: 
+Valid substitutions for the `<Comp>` and `<Type>` fields are not restricted by this standard. We suggest using `<Comp>=Generator` for specifying the main citation for the interaction generator and `<Comp>=Process[<Id>]` for individual processes. For common reference formats in the HEP field, we suggest some common values for the `<Type>` field: 
 
-* `"NuHepMC.Process\[\<Id\>\].InspireHEP"` might contain one or more unique InspireHep identifiers (texkeys).
-* `"NuHepMC.Process\[\<Id\>\].arXiv"` might contain one or more unique arXiv identifiers (eprint numbers).
-* `"NuHepMC.Process\[\<Id\>\].DOI"` might contain one or more unique Digital Object Identifiers.
+* `"NuHepMC.Process[<Id>].InspireHEP"` might contain one or more unique InspireHep identifiers (texkeys).
+* `"NuHepMC.Process[<Id>].arXiv"` might contain one or more unique arXiv identifiers (eprint numbers).
+* `"NuHepMC.Process[<Id>].DOI"` might contain one or more unique Digital Object Identifiers.
 
 If you don't cite your contributing theorists, and make it easy for users of your simulation to cite them as well, then don't come crying to us when they cannot find a job to stay in the field.
 
@@ -209,19 +209,19 @@ We hope that automatic bibliography generation tools using this metadata will be
 
 #### G.C.7 Beam Energy Distribution Description
 
-Each vector should contain a description of the beam particle flux used to simulate the output event vector. For many truth studies and experimental simulations where the detector is not physically close to the source, a simple beam energy distribution is enough to describe the particle beam. The two types of energy distribution covered by this convention are mono-energetic beams and those with distributions described by a histogram. The type should be signalled via a `HepMC3::StringAttribute` named `"NuHepMC.Beam\[\<PDG\>\].Type"` with value `"MonoEnergetic"` or `"Histogram"` stored on the `HepMC3::GenRunInfo`. For both types, relevant units can be signalled via two attributes:
+Each vector should contain a description of the beam particle flux used to simulate the output event vector. For many truth studies and experimental simulations where the detector is not physically close to the source, a simple beam energy distribution is enough to describe the particle beam. The two types of energy distribution covered by this convention are mono-energetic beams and those with distributions described by a histogram. The type should be signalled via a `HepMC3::StringAttribute` named `"NuHepMC.Beam[<PDG>].Type"` with value `"MonoEnergetic"` or `"Histogram"` stored on the `HepMC3::GenRunInfo`. For both types, relevant units can be signalled via two attributes:
 
-* `"NuHepMC.Beam\[\<PDG\>\].EnergyUnit"`. Possible values of the attribute are not restricted, but we reserve the meanings of `"MEV"` and `"GEV"`. This attribute should always exist and be not empty.
-* `"NuHepMC.Beam\[\<PDG\>\].RateUnit"`. Possible values of the attribute are not restricted, but we reserve the meaning of `"Arbitrary"` to signal that the normalization of the distribution was not known or used by the simulation. If this attribute is not used then the normalization will be assumed arbitrary.
+* `"NuHepMC.Beam[<PDG>].EnergyUnit"`. Possible values of the attribute are not restricted, but we reserve the meanings of `"MEV"` and `"GEV"`. This attribute should always exist and be not empty.
+* `"NuHepMC.Beam[<PDG>].RateUnit"`. Possible values of the attribute are not restricted, but we reserve the meaning of `"Arbitrary"` to signal that the normalization of the distribution was not known or used by the simulation. If this attribute is not used then the normalization will be assumed arbitrary.
 
-For the case of a `"MonoEnergetic"`-type distribution, all beam particles in the vector must have identical energy. The attribute `"NuHepMC.Beam\[\<PDG\>\].MonoEnergetic.Energy"` can be used to signal the beam energy in the lab frame, but the usage of this attribute is optional as the energy can be determined from the first (or any) event in the vector.
+For the case of a `"MonoEnergetic"`-type distribution, all beam particles in the vector must have identical energy. The attribute `"NuHepMC.Beam[<PDG>].MonoEnergetic.Energy"` can be used to signal the beam energy in the lab frame, but the usage of this attribute is optional as the energy can be determined from the first (or any) event in the vector.
 
 For the case of a `"Histogram"`-type distribution, the histogram should be encoded into two `HepMC3::VectorDoubleAttribute` per beam species on the `HepMC3::GenRunInfo`:
 
-* `"NuHepMC.Beam\[\<PDG\>\].Histogram.BinEdges"`
-* `"NuHepMC.Beam\[\<PDG\>\].Histogram.BinContent"`
+* `"NuHepMC.Beam[<PDG>].Histogram.BinEdges"`
+* `"NuHepMC.Beam[<PDG>].Histogram.BinContent"`
 
-where `\[\<PDG\>\]` enumerates the PDG particle numbers of all beam particles present in the event vector. _N.B._ the number of entries in the `"BinEdges"` vector should always be one more than the number of entries in the `"BinContent"` vector.
+where `[<PDG>]` enumerates the PDG particle numbers of all beam particles present in the event vector. _N.B._ the number of entries in the `"BinEdges"` vector should always be one more than the number of entries in the `"BinContent"` vector.
 
 For a suggestion on how to encode useful information about more realistic neutrino beam descriptions, see [E.S.1](#es1-beam-description-beam-simulation).
 
@@ -239,7 +239,7 @@ It is recommended that a NuHepMC  instance contains all information required to 
 
 For each additional particle number declared in the `"NuHepMC.AdditionalParticleNumbers"` attribute, according to [G.R.8](#gr8-non-standard-particle-numbers-pdg-mc-codes), the `HepMC3::GenRunInfo` instance may contain an attribute giving a description of the particle:
 
-* type: `HepMC3::StringAttribute`, name: `"NuHepMC.AdditionalParticleNumber\[\<PDG\>\].Description"` 
+* type: `HepMC3::StringAttribute`, name: `"NuHepMC.AdditionalParticleNumber[<PDG>].Description"` 
 
 #### G.S.3 Complete Status Metadata
 
@@ -268,7 +268,7 @@ Energy and position units must be explicitly set in the `HepMC3::GenEvent`.
 
 The position of the event in the lab frame must be added as a `HepMC3::VectorDoubleAttribute`, named `"LabPos"`, with the same units as used when implementing [E.R.3](#er3-units). See [E.C.6](#ec6-lab-time) for how to optionally store time in this attribute.
 
-If the simulation did not involve a macroscopic geometry, then this attribute should be set to `\[0, 0, 0\]`.
+If the simulation did not involve a macroscopic geometry, then this attribute should be set to `[0, 0, 0]`.
 
 #### E.R.5 Vertices
 
