@@ -427,6 +427,6 @@ Converted with:
 
 # Contact
 
-S. Gardiner: `gardiner[at]fnal[dot]gov`
-J. Isaacson: `isaacson[at]fnal[dot]gov`
-L. Pickering: `luke.pickering[at]rhul[dot]ac[dot]uk`
+* S. Gardiner: `gardiner[at]fnal[dot]gov`
+* J. Isaacson: `isaacson[at]fnal[dot]gov`
+* L. Pickering: `luke.pickering[at]rhul[dot]ac[dot]uk`
