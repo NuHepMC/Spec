@@ -336,15 +336,14 @@ in the present version of the NuHepMC standard.
 
 #### V.R.1 Vertex Status Codes
 
-We extend the HepMC3 definition of `HepMC3::GenVertex::status` to include the concept of a primary vertex, corresponding to the _primary_ process (_i.e._ the one labelled by [E.C.1](#ec1-process-ids)), and initial and final state interaction (ISI and FSI) summary vertices. Implementations are free to define specific vertex status codes to refer to individual ISI and FSI processes and output as much information as they require, but a single summary vertex may be useful if the full process history is too detailed or not relevant to users.
+We extend the HepMC3 definition of `HepMC3::GenVertex::status` to include the concept of a primary vertex, corresponding to the _primary_ process (_i.e._ the one labelled by [E.C.1](#ec1-process-ids)), and a final state interaction FSI summary vertex. Implementations are free to define specific vertex status codes to refer to individual FSI (or ISI) processes and output as much information as they they require. However, a single summary vertex may be useful for some simulated vectors if the full FSI history, which can be complicated for the target use case of hard-scatter produced hadron transport out of a struck nucleus in, is very detailed or not often needed by users.
 
 | Status Code | Meaning                               | Usage                     |
 | ----------- | ------------------------------------- | ------------------------- |
 | 0           | Not defined                           | Do not use                |
 | 1           | Primary vertex                        | Recommended for all cases |
-| 2           | ISI Summary vertex                    | Recommended for all cases |
-| 3           | FSI Summary vertex                    | Recommended for all cases |
-| 5-10        | Reserved for future NuHepMC standards | Do not use                |
+| 2           | FSI Summary vertex                    | Recommended for all cases |
+| 3-10        | Reserved for future NuHepMC standards | Do not use                |
 | 11-999      | Generator-dependent                   | For generator usage       |
 
 Any secondary vertex included within a NuHepMC event may have a status in the range 11-999, where [G.R.5](#gr5-vertex-status-metadata) requires that all generator-specific status codes must be fully described by attributes on the `HepMC3::GenRunInfo`. 
