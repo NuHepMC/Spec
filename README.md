@@ -24,6 +24,7 @@ In this specification we present an additional set of *Requirements*, *Conventio
   * [Particle Information](#particle-information)
     * [Requirements](#pr1-particle-status-codes)
     * [Conventions](#pc1-struck-nucleon-status)
+* [Generator Adoption of NuHepMC](#generator-adoption-of-nuhepmc)
 * [Contributing and NuHepMC Revisions](#contributing-and-nuhepmc-revisions)
 * [Examples](#examples)
 * [Contact](#contact)
@@ -387,6 +388,20 @@ Any internal particle included within a NuHepMC event may have a status in the r
 #### P.C.1 Struck Nucleon Status
 
 When an interaction with a nucleon, with definite kinematics, bound within a nucleus is simulated, the internal `HepMC3::GenParticle` corresponding to the stuck nucleon should have status code 21. If this convention is signalled via the mechanism described in [G.C.1](gc1-signalling-followed-conventions), then status code 21 need not be included in the implementation of [G.R.6](#gr6-particle-status-metadata).
+
+# Generator Adoption of NuHepMC
+
+The current status of support for the NuHepMC standard, along with links to converters if publicly available.
+
+| Generator | Supports NuHepMC   | Notes                                  | 
+| --------- | ------------------ | -------------------------------------- |
+| Achilles  | Yes                | Native output format                   |
+| GENIE     | No                 | Private converter available by request |
+| GiBUU     | Yes (version 2025) | Native output format                   |
+| Marley    | Yes                | Native output format                   |
+| NEUT      | No                 | Public converter available [here]()    |
+| NuWro     | No                 | Public converter available [here]()    |
+
 
 # Contributing and NuHepMC Revisions
 
