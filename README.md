@@ -41,7 +41,7 @@ The specification is broken down into *Requirements*, *Conventions*, and *Sugges
 
 Where RCs are enumerated like \<Component\>.\<Category\>.\<Index\>, _i.e._ the _fifth_ _Convention_ for _Event_ information should be referred to as [E.C.5](#ec5-lab-time).
 
-Following named conventions is optional. If conventions prove useful and are considered stable, they may become requirements in future versions. Suggestions cover information that is useful to make available to users, but has not always been included in proprietary formats or may not be simple to include in a first implementation. [G.C.1](#gc1-signalling-followed-conventions) provides a convention on signalling that certain Conventions or Suggestions have been followed.  
+Following named conventions is optional. If conventions prove useful and are considered stable, they may become requirements in future versions. Suggestions cover information that is useful to make available to users, but has not always been included in proprietary formats or may not be simple to include in a first implementation. [G.C.1](#gc1-signalling-followed-conventions) provides a convention on signalling that certain Conventions or Suggestions have been followed.
 
 See [NuHepMC/ReferenceImplementation](https://github.com/NuHepMC/ReferenceImplementation) for reference implementations of an NuHepMC event writer and [NuHepMC/Validator](https://github.com/NuHepMC/Validator) specification validator.
 
@@ -81,8 +81,8 @@ A NuHepMC `HepMC3::GenRunInfo` instance must contain a `HepMC3::VectorIntAttribu
 
 For each valid process Id, the `HepMC3::GenRunInfo` instance must also contain two other attributes giving a name and description of each:
 
-* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ProcessInfo[<ID>].Name"` 
-* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ProcessInfo[<ID>].Description"` 
+* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ProcessInfo[<ID>].Name"`
+* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ProcessInfo[<ID>].Description"`
 
 where `<ID>` enumerates all process IDs present in `"NuHepMC.ProcessIDs"`. (See also [E.C.1](#ec1-process-id))
 
@@ -92,8 +92,8 @@ The NuHepMC `HepMC3::GenRunInfo` instance must contain a `HepMC3::VectorIntAttri
 
 For each declared vertex status, the `HepMC3::GenRunInfo` instance must also contain two other attributes giving a name and description of each:
 
-* type: `HepMC3::StringAttribute`, name: `"NuHepMC.VertexStatusInfo[<ID>].Name"` 
-* type: `HepMC3::StringAttribute`, name: `"NuHepMC.VertexStatusInfo[<ID>].Description"` 
+* type: `HepMC3::StringAttribute`, name: `"NuHepMC.VertexStatusInfo[<ID>].Name"`
+* type: `HepMC3::StringAttribute`, name: `"NuHepMC.VertexStatusInfo[<ID>].Description"`
 
 where `<ID>` enumerates all status codes present in `"NuHepMC.VertexStatusIDs"`. (See also [V.R.1](#vr1-vertex-status-codes))
 
@@ -103,14 +103,14 @@ The NuHepMC `HepMC3::GenRunInfo` instance must contain a `HepMC3::VectorIntAttri
 
 For each valid particle status, the `HepMC3::GenRunInfo` instance must also contain two other attributes giving a name and description of each:
 
-* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ParticleStatusInfo[<ID>].Name"` 
-* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ParticleStatusInfo[<ID>].Description"` 
+* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ParticleStatusInfo[<ID>].Name"`
+* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ParticleStatusInfo[<ID>].Description"`
 
 where `<ID>` enumerates all status codes present in `"NuHepMC.ParticleStatusIDs"`. (See also [P.R.1](#pr1-particle-status-codes))
 
 #### G.R.7 Event Weights
 
-For weights that will be calculated for every event, HepMC3 provides an interface for storing the weight names only once in the `HepMC3::GenRunInfo` instance. At least one event weight, named `"CV"` must be declared on the `HepMC3::GenRunInfo` instance, and filled for every event. 
+For weights that will be calculated for every event, HepMC3 provides an interface for storing the weight names only once in the `HepMC3::GenRunInfo` instance. At least one event weight, named `"CV"` must be declared on the `HepMC3::GenRunInfo` instance, and filled for every event.
 
 This weight may be 1 or constant for every event in a generator run (in the case of an _unweighted_ event vector). This weight must always be included by a user when producing correctly-normalized predictions from a NuHepMC vector and must not be assumed to be always 1. The exact form of this weight and whether it is the only information required to properly normalize a prediction are considered implementation details.
 
@@ -136,7 +136,7 @@ specification.
 For each additional particle number, the `HepMC3::GenRunInfo` instance must also contain an attribute giving a unique name to the represented particle
 species:
 
-* type: `HepMC3::StringAttribute`, name: `"NuHepMC.AdditionalParticleNumber[<PDG>].Name"` 
+* type: `HepMC3::StringAttribute`, name: `"NuHepMC.AdditionalParticleNumber[<PDG>].Name"`
 
 where `<PDG>` enumerates all particle numbers present in `"NuHepMC.AdditionalParticleNumbers"`.
 
@@ -183,7 +183,7 @@ predicted cross sections in HEP. For neutrino cross sections specifically, `10^-
 
 If this convention is signalled, the chosen units should be assumed to apply to cross section information according to [G.C.5](#gc5-flux-averaged-total-cross-section), [E.C.4](), [E.C.2](#ec2-total-cross-section), and [E.C.3](). _n.b._ The exact interpretation of the `TargetScale` value depends on which cross-section signalling convention is used. For further discussion of the schemes detailed above, see Appendix A of the [NuHepMC paper](https://arxiv.org/abs/2310.13211).
 
-It is ultimately up to the user to parse these attributes and decide whether any additional scaling is needed for their purposes. If these attributes are not present, then the cross section should be assumed to be in picobarns per target. This default value of picobarns is chosen to remain consistent with the assumptions of other tools that read and write HepMC3 files outside the neutrino community, such as [Rivet](https://gitlab.com/hepcedar/rivet/). Rivet is a similar tool to Nuisance, but developed by the collider community. Being consistent between all these tools allows for more interoperability and overall can help to reduce overall maintenance burdens within the HEP community.
+It is ultimately up to the user to parse these attributes and decide whether any additional scaling is needed for their purposes. If these attributes are not present, then the cross section should be assumed to be in picobarns per target. This default value of picobarns is chosen to remain consistent with the assumptions of other tools that read and write HepMC3 files outside the neutrino community, such as [Rivet](https://gitlab.com/hepcedar/rivet/). Rivet is a similar tool to Nuisance, but developed by the collider community. Being consistent between all these tools allows for more interoperability and overall can help to reduce maintenance burdens within the HEP community.
 
 #### G.C.5 Flux-averaged Total Cross Section
 
@@ -194,9 +194,9 @@ Optionally, the uncertainty in the flux-averaged total cross section may be stor
 
 #### G.C.6 Citation Metadata
 
-Modelling components implemented based on published work should always be fully cited. The `HepMC3::GenRunInfo` should contain at least one `HepMC3::VectorStringAttribute` for each relevant modelling component, named according to the pattern `"NuHepMC.Citations.<Comp>.<Type>"`. 
+Modelling components implemented based on published work should always be fully cited. The `HepMC3::GenRunInfo` should contain at least one `HepMC3::VectorStringAttribute` for each relevant modelling component, named according to the pattern `"NuHepMC.Citations.<Comp>.<Type>"`.
 
-Valid substitutions for the `<Comp>` and `<Type>` fields are not restricted by this standard beyond the requirement that they are pure mixed-case alpha-numeric. We suggest using `<Comp>=Generator` for specifying the main citation for the interaction generator and `<Comp>=Process[<ID>]` for individual processes. For common reference formats in the HEP field, we suggest some common values for the `<Type>` field: 
+Valid substitutions for the `<Comp>` and `<Type>` fields are not restricted by this standard beyond the requirement that they are pure mixed-case alpha-numeric. We suggest using `<Comp>=Generator` for specifying the main citation for the interaction generator and `<Comp>=Process[<ID>]` for individual processes. For common reference formats in the HEP field, we suggest some common values for the `<Type>` field:
 
 * `"InspireHEP"` might contain one or more unique InspireHep identifiers (texkeys).
 * `"arXiv"` might contain one or more unique arXiv identifiers (eprint numbers).
@@ -345,7 +345,7 @@ Some simulations build up an estimate of the cross section as they run. This mak
 
 For event generators that do not currently provide the value of the total cross section in the output, Appendix B of the [NuHepMC paper](https://arxiv.org/abs/2310.13211) provides suggestions for algorithms for computing a running estimate and associated Monte Carlo statistical uncertainty as events are produced.
 
-When implementing this convention, ensure that the `cross_sections` and `cross_section_errors` data members are the same length as the number of weights defined in the header. These should be filled with the current estimate of the total cross section for each variation based on all events generated so far, including the current event. 
+When implementing this convention, ensure that the `cross_sections` and `cross_section_errors` data members are the same length as the number of weights defined in the header. These should be filled with the current estimate of the total cross section for each variation based on all events generated so far, including the current event.
 Additionally, the `HepMC3::GenCrossSection` data members `accepted_events` and `attempted_events` should be filled with appropriate values.
 
 #### E.C.5 Lab Time
@@ -378,7 +378,7 @@ We extend the HepMC3 definition of `HepMC3::GenVertex::status` to include the co
 | 3-20        | Reserved for future NuHepMC standards | Do not use                |
 | 21-999      | Generator-dependent                   | For generator usage       |
 
-Any secondary vertex included within a NuHepMC event may have a status between 21 and 999. Note that [G.R.5](#gr5-vertex-status-metadata) requires that all generator-specific status codes must be fully described by attributes stored in the `HepMC3::GenRunInfo`. 
+Any secondary vertex included within a NuHepMC event may have a status between 21 and 999. Note that [G.R.5](#gr5-vertex-status-metadata) requires that all generator-specific status codes must be fully described by attributes stored in the `HepMC3::GenRunInfo`.
 
 ### Conventions
 
@@ -413,7 +413,7 @@ The status codes are defined in the table below.
 
 Note especially that any incoming real particle must have a status of 4 or 20, and any outgoing real particle must have a status of 1. Special care must be taken when including the effects of initial-state and final-state interactions.
 
-Any internal particle included within a NuHepMC event may have a status in the range 21-200. Note that [G.R.6](#gr6-particle-status-metadata) requires that all generator-specific status codes must be fully described by attributes stored in the `HepMC3::GenRunInfo`. 
+Any internal particle included within a NuHepMC event may have a status in the range 21-200. Note that [G.R.6](#gr6-particle-status-metadata) requires that all generator-specific status codes must be fully described by attributes stored in the `HepMC3::GenRunInfo`.
 
 ### Conventions
 
