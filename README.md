@@ -24,6 +24,7 @@ In this specification we present an additional set of *Requirements*, *Conventio
   * [Particle Information](#particle-information)
     * [Requirements](#pr1-particle-status-codes)
     * [Conventions](#pc1-struck-nucleon-status)
+* [Generator Adoption of NuHepMC](#generator-adoption-of-nuhepmc)
 * [Contributing and NuHepMC Revisions](#contributing-and-nuhepmc-revisions)
 * [Examples](#examples)
 * [Contact](#contact)
@@ -41,7 +42,7 @@ The specification is broken down into *Requirements*, *Conventions*, and *Sugges
 
 Where RCs are enumerated like \<Component\>.\<Category\>.\<Index\>, _i.e._ the _sixth_ _Convention_ for _Event_ information should be referred to as [E.C.5](#ec5-lab-time).
 
-Following named conventions is optional. If conventions prove useful and are considered stable, they may become requirements in future versions. Suggestions cover information that is useful to make available to users, but has not always been included in proprietary formats or may not be simple to include in a first implementation. [G.C.1](#gc1-signalling-followed-conventions) provides a convention on signalling that certain Conventions or Suggestions have been followed.  
+Following named conventions is optional. If conventions prove useful and are considered stable, they may become requirements in future versions. Suggestions cover information that is useful to make available to users, but has not always been included in proprietary formats or may not be simple to include in a first implementation. [G.C.1](#gc1-signalling-followed-conventions) provides a convention on signalling that certain Conventions or Suggestions have been followed.
 
 See [NuHepMC/ReferenceImplementation](https://github.com/NuHepMC/ReferenceImplementation) for reference implementations of an NuHepMC event writer and [NuHepMC/Validator](https://github.com/NuHepMC/Validator) specification validator.
 
@@ -81,8 +82,8 @@ A NuHepMC `HepMC3::GenRunInfo` instance must contain a `HepMC3::VectorIntAttribu
 
 For each valid process Id, the `HepMC3::GenRunInfo` instance must also contain two other attributes giving a name and description of each:
 
-* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ProcessInfo[<Id>].Name"` 
-* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ProcessInfo[<Id>].Description"` 
+* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ProcessInfo[<Id>].Name"`
+* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ProcessInfo[<Id>].Description"`
 
 where `<Id>` enumerates all process Ids present in `"NuHepMC.ProcessIds"`. (See also [E.R.1](#er1-process-id))
 
@@ -92,8 +93,8 @@ The NuHepMC `HepMC3::GenRunInfo` instance must contain a `HepMC3::VectorIntAttri
 
 For each declared vertex status, the `HepMC3::GenRunInfo` instance must also contain two other attributes giving a name and description of each:
 
-* type: `HepMC3::StringAttribute`, name: `"NuHepMC.VertexStatusInfo[<Id>].Name"` 
-* type: `HepMC3::StringAttribute`, name: `"NuHepMC.VertexStatusInfo[<Id>].Description"` 
+* type: `HepMC3::StringAttribute`, name: `"NuHepMC.VertexStatusInfo[<Id>].Name"`
+* type: `HepMC3::StringAttribute`, name: `"NuHepMC.VertexStatusInfo[<Id>].Description"`
 
 where `<Id>` enumerates all status codes present in `"NuHepMC.VertexStatusIds"`. (See also [V.R.1](#vr1-vertex-status-codes))
 
@@ -103,14 +104,14 @@ The NuHepMC `HepMC3::GenRunInfo` instance must contain a `HepMC3::VectorIntAttri
 
 For each valid particle status, the `HepMC3::GenRunInfo` instance must also contain two other attributes giving a name and description of each:
 
-* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ParticleStatusInfo[<Id>].Name"` 
-* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ParticleStatusInfo[<Id>].Description"` 
+* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ParticleStatusInfo[<Id>].Name"`
+* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ParticleStatusInfo[<Id>].Description"`
 
 where `<Id>` enumerates all status codes present in `"NuHepMC.ParticleStatusIds"`. (See also [P.R.1](#pr1-particle-status-codes))
 
 #### G.R.7 Event Weights
 
-For weights that will be calculated for every event, HepMC3 provides an interface for storing the weight names only once in the `HepMC3::GenRunInfo` instance. At least one event weight, named `"CV"` must be declared on the `HepMC3::GenRunInfo` instance, and filled for every event. 
+For weights that will be calculated for every event, HepMC3 provides an interface for storing the weight names only once in the `HepMC3::GenRunInfo` instance. At least one event weight, named `"CV"` must be declared on the `HepMC3::GenRunInfo` instance, and filled for every event.
 
 This weight may be 1 or constant for every event in a generator run (in the case of an _unweighted_ event vector). This weight must always be included by a user when producing correctly-normalized predictions from a NuHepMC vector and must not be assumed to be always 1. The exact form of this weight, whether it is the only information required to properly normalize a prediction, or if additional information is required is an implementation detail. If [G.C.2](#gc2-vector-exposure-standalone) and [G.C.4](#gc4-flux-averaged-total-cross-section) are adopted, then the combination of the `"CV"` weight, the flux-averaged total cross section, and the total vector exposure can be unambiguously used to convert an event rate into a cross-section prediction.
 
@@ -138,7 +139,7 @@ specification.
 For each additional particle number, the `HepMC3::GenRunInfo` instance must also contain an attribute giving a unique name to the represented particle
 species:
 
-* type: `HepMC3::StringAttribute`, name: `"NuHepMC.AdditionalParticleNumber[<PDG>].Name"` 
+* type: `HepMC3::StringAttribute`, name: `"NuHepMC.AdditionalParticleNumber[<PDG>].Name"`
 
 where `<PDG>` enumerates all particle numbers present in `"NuHepMC.AdditionalParticleNumbers"`.
 
@@ -195,9 +196,9 @@ See [G.C.4](#gc4-cross-section-units-and-target-scaling) for a convention on the
 
 #### G.C.6 Citation Metadata
 
-Modelling components implemented based on published work should always be fully cited. The `HepMC3::GenRunInfo` should contain at least one `HepMC3::VectorStringAttribute` for each relevant modelling component, named according to the pattern `"NuHepMC.Citations.<Comp>.<Type>"`. 
+Modelling components implemented based on published work should always be fully cited. The `HepMC3::GenRunInfo` should contain at least one `HepMC3::VectorStringAttribute` for each relevant modelling component, named according to the pattern `"NuHepMC.Citations.<Comp>.<Type>"`.
 
-Valid substitutions for the `<Comp>` and `<Type>` fields are not restricted by this standard. We suggest using `<Comp>=Generator` for specifying the main citation for the interaction generator and `<Comp>=Process[<Id>]` for individual processes. For common reference formats in the HEP field, we suggest some common values for the `<Type>` field: 
+Valid substitutions for the `<Comp>` and `<Type>` fields are not restricted by this standard. We suggest using `<Comp>=Generator` for specifying the main citation for the interaction generator and `<Comp>=Process[<Id>]` for individual processes. For common reference formats in the HEP field, we suggest some common values for the `<Type>` field:
 
 * `"NuHepMC.Process[<Id>].InspireHEP"` might contain one or more unique InspireHep identifiers (texkeys).
 * `"NuHepMC.Process[<Id>].arXiv"` might contain one or more unique arXiv identifiers (eprint numbers).
@@ -239,7 +240,7 @@ It is recommended that a NuHepMC  instance contains all information required to 
 
 For each additional particle number declared in the `"NuHepMC.AdditionalParticleNumbers"` attribute, according to [G.R.8](#gr8-non-standard-particle-numbers-pdg-mc-codes), the `HepMC3::GenRunInfo` instance may contain an attribute giving a description of the particle:
 
-* type: `HepMC3::StringAttribute`, name: `"NuHepMC.AdditionalParticleNumber[<PDG>].Description"` 
+* type: `HepMC3::StringAttribute`, name: `"NuHepMC.AdditionalParticleNumber[<PDG>].Description"`
 
 #### G.S.3 Complete Status Metadata
 
@@ -298,7 +299,7 @@ It is not appropriate to mandate a specific set of interaction processes, and as
 | 600-699    | Deep inelastic scattering    |
 | 700-999    | Other process types          |
 
-Charged current (CC) processes should have identifiers in the X00-X49 block and neutral current (NC) in the X50-X99 block. 
+Charged current (CC) processes should have identifiers in the X00-X49 block and neutral current (NC) in the X50-X99 block.
 
 These ranges are subject to change in a future version of this specification.
 
@@ -346,7 +347,7 @@ We extend the HepMC3 definition of `HepMC3::GenVertex::status` to include the co
 | 3-10        | Reserved for future NuHepMC standards | Do not use                |
 | 11-999      | Generator-dependent                   | For generator usage       |
 
-Any secondary vertex included within a NuHepMC event may have a status in the range 11-999, where [G.R.5](#gr5-vertex-status-metadata) requires that all generator-specific status codes must be fully described by attributes on the `HepMC3::GenRunInfo`. 
+Any secondary vertex included within a NuHepMC event may have a status in the range 11-999, where [G.R.5](#gr5-vertex-status-metadata) requires that all generator-specific status codes must be fully described by attributes on the `HepMC3::GenRunInfo`.
 
 ### Conventions
 
@@ -380,13 +381,27 @@ We extend the HepMC3 definition of `HepMC3::GenParticle::status` slightly to inc
 
 Note especially that any incoming real particle must have a status of 4 or 11, and any outgoing real particle must have a status of 1. This allows users to know at a glance which simulated particles must be considered 'observable' and which are 'internal' details of the calculation. Special care must be taken when including the effects of initial-state and final-state interactions.
 
-Any internal particle included within a NuHepMC event may have a status in the range 21-200, where [G.R.6](#gr6-particle-status-metadata) requires that all generator-specific status codes must be fully described by attributes on the `HepMC3::GenRunInfo`. 
+Any internal particle included within a NuHepMC event may have a status in the range 21-200, where [G.R.6](#gr6-particle-status-metadata) requires that all generator-specific status codes must be fully described by attributes on the `HepMC3::GenRunInfo`.
 
 ### Conventions
 
 #### P.C.1 Struck Nucleon Status
 
 When an interaction with a nucleon, with definite kinematics, bound within a nucleus is simulated, the internal `HepMC3::GenParticle` corresponding to the stuck nucleon should have status code 21. If this convention is signalled via the mechanism described in [G.C.1](gc1-signalling-followed-conventions), then status code 21 need not be included in the implementation of [G.R.6](#gr6-particle-status-metadata).
+
+# Generator Adoption of NuHepMC
+
+The current status of support for the NuHepMC standard, along with links to converters if publicly available.
+
+| Generator | Supports NuHepMC   | Notes                                  |
+| --------- | ------------------ | -------------------------------------- |
+| Achilles  | Yes                | Native output format                   |
+| GENIE     | No                 | Private converter available by request |
+| GiBUU     | Yes (version 2025) | Native output format                   |
+| MARLEY    | Yes (upcoming v2)  | Native output format                   |
+| NEUT      | No                 | Public converter available [here]()    |
+| NuWro     | No                 | Public converter available [here](https://github.com/NuHepMC/nuwro2hepmc3)    |
+
 
 # Contributing and NuHepMC Revisions
 
