@@ -399,7 +399,7 @@ The current status of support for the NuHepMC standard, along with links to conv
 | GENIE     | No                 | Private converter available by request |
 | GiBUU     | Yes (version 2025) | Native output format                   |
 | MARLEY    | Yes (upcoming v2)  | Native output format                   |
-| NEUT      | No                 | Public converter available [here]()    |
+| NEUT      | No                 | Public converter available [here](https://github.com/neut-devel/neutvect-converter)    |
 | NuWro     | No                 | Public converter available [here](https://github.com/NuHepMC/nuwro2hepmc3)    |
 
 
