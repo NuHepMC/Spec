@@ -24,6 +24,7 @@ In this specification we present an additional set of *Requirements*, *Conventio
   * [Particle Information](#particle-information)
     * [Requirements](#pr1-particle-status-codes)
     * [Conventions](#pc1-struck-nucleon-status)
+* [Generator Adoption of NuHepMC](#generator-adoption-of-nuhepmc)
 * [Contributing and NuHepMC Revisions](#contributing-and-nuhepmc-revisions)
 * [Examples](#examples)
 * [Contact](#contact)
@@ -81,8 +82,8 @@ A NuHepMC `HepMC3::GenRunInfo` instance must contain a `HepMC3::VectorIntAttribu
 
 For each valid process Id, the `HepMC3::GenRunInfo` instance must also contain two other attributes giving a name and description of each:
 
-* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ProcessInfo[<ID>].Name"`
-* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ProcessInfo[<ID>].Description"`
+* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ProcessInfo[<Id>].Name"`
+* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ProcessInfo[<Id>].Description"`
 
 where `<ID>` enumerates all process IDs present in `"NuHepMC.ProcessIDs"`. (See also [E.C.1](#ec1-process-id))
 
@@ -92,8 +93,8 @@ The NuHepMC `HepMC3::GenRunInfo` instance must contain a `HepMC3::VectorIntAttri
 
 For each declared vertex status, the `HepMC3::GenRunInfo` instance must also contain two other attributes giving a name and description of each:
 
-* type: `HepMC3::StringAttribute`, name: `"NuHepMC.VertexStatusInfo[<ID>].Name"`
-* type: `HepMC3::StringAttribute`, name: `"NuHepMC.VertexStatusInfo[<ID>].Description"`
+* type: `HepMC3::StringAttribute`, name: `"NuHepMC.VertexStatusInfo[<Id>].Name"`
+* type: `HepMC3::StringAttribute`, name: `"NuHepMC.VertexStatusInfo[<Id>].Description"`
 
 where `<ID>` enumerates all status codes present in `"NuHepMC.VertexStatusIDs"`. (See also [V.R.1](#vr1-vertex-status-codes))
 
@@ -103,8 +104,8 @@ The NuHepMC `HepMC3::GenRunInfo` instance must contain a `HepMC3::VectorIntAttri
 
 For each valid particle status, the `HepMC3::GenRunInfo` instance must also contain two other attributes giving a name and description of each:
 
-* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ParticleStatusInfo[<ID>].Name"`
-* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ParticleStatusInfo[<ID>].Description"`
+* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ParticleStatusInfo[<Id>].Name"`
+* type: `HepMC3::StringAttribute`, name: `"NuHepMC.ParticleStatusInfo[<Id>].Description"`
 
 where `<ID>` enumerates all status codes present in `"NuHepMC.ParticleStatusIDs"`. (See also [P.R.1](#pr1-particle-status-codes))
 
@@ -431,6 +432,20 @@ The number is chosen, according to the PDG scheme (see the [Monte Carlo Particle
 If the kinematics of the nuclear remnant are not known, but the number of protons and neutrons are well defined, then the PDG nuclear number may be added as a `HepMC3::IntAttribute` on the `HepMC3::GenParticle` named `"remnant_particle_number"`.
 
 If this convention is signaled via the mechanism described in [G.C.1](#gc1-signalling-followed-conventions), then the particle number 2009900000 need not be included in the implementation of [G.R.8](#gr8-non-standard-particle-numbers-pdg-mc-codes).
+
+# Generator Adoption of NuHepMC
+
+The current status of support for the NuHepMC standard, along with links to converters if publicly available.
+
+| Generator | Supports NuHepMC   | Notes                                  |
+| --------- | ------------------ | -------------------------------------- |
+| Achilles  | Yes                | Native output format                   |
+| GENIE     | No                 | Private converter available by request |
+| GiBUU     | Yes (version 2025) | Native output format                   |
+| MARLEY    | Yes (upcoming v2)  | Native output format                   |
+| NEUT      | No                 | Public converter available [here](https://github.com/neut-devel/neutvect-converter)    |
+| NuWro     | No                 | Public converter available [here](https://github.com/NuHepMC/nuwro2hepmc3)    |
+
 
 # Contributing and NuHepMC Revisions
 
