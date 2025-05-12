@@ -1,0 +1,313 @@
+HepMC::Version 3.03.01
+HepMC::Asciiv3-START_EVENT_LISTING
+W CV
+T NuWro\|UNKNOWN-VERSION\|https://doi.org/10.1016/j.nuclphysbps.2012.09.136
+T nuwro2hepmc3\|0.9.4\|github.com/NuHepMC/nuwro2hepmc3
+A NuHepMC.Conventions G.C.2 E.C.1
+A NuHepMC.Exposure.NEvents 100
+A NuHepMC.FluxAveragedTotalCrossSection 0.0463227184476711
+A NuHepMC.ParticleStatusIDs 1 2 3 4 20 21
+A NuHepMC.ParticleStatusInfo[1].Description Physical final state particles produced by this simulation
+A NuHepMC.ParticleStatusInfo[1].Name UndecayedPhysicalParticle
+A NuHepMC.ParticleStatusInfo[20].Description The target particle in the hard scatter
+A NuHepMC.ParticleStatusInfo[20].Name TargetParticle
+A NuHepMC.ParticleStatusInfo[21].Description The nucleon involved in the hard scatter
+A NuHepMC.ParticleStatusInfo[21].Name StruckNucleon
+A NuHepMC.ParticleStatusInfo[2].Description Particle was decayed by the simulation
+A NuHepMC.ParticleStatusInfo[2].Name DecayedPhysical
+A NuHepMC.ParticleStatusInfo[3].Description Documentation line, not considered a real particle
+A NuHepMC.ParticleStatusInfo[3].Name DocumentationLine
+A NuHepMC.ParticleStatusInfo[4].Description Incoming beam particle
+A NuHepMC.ParticleStatusInfo[4].Name IncomingBeamParticle
+A NuHepMC.ProcessIDs 100 150 200 201 250 251 300 350 400 450 500 550 600 650 700 750
+A NuHepMC.ProcessInfo[100].Description coherent
+A NuHepMC.ProcessInfo[100].Name CC coh
+A NuHepMC.ProcessInfo[150].Description coherent
+A NuHepMC.ProcessInfo[150].Name NC coh
+A NuHepMC.ProcessInfo[200].Description (quasi) elastic
+A NuHepMC.ProcessInfo[200].Name CC qel
+A NuHepMC.ProcessInfo[201].Description hyperon production
+A NuHepMC.ProcessInfo[201].Name CC hyp
+A NuHepMC.ProcessInfo[250].Description (quasi) elastic
+A NuHepMC.ProcessInfo[250].Name NC qel
+A NuHepMC.ProcessInfo[251].Description hyperon production
+A NuHepMC.ProcessInfo[251].Name NC hyp
+A NuHepMC.ProcessInfo[300].Description meson exhange current
+A NuHepMC.ProcessInfo[300].Name CC mec
+A NuHepMC.ProcessInfo[350].Description meson exhange current
+A NuHepMC.ProcessInfo[350].Name NC mec
+A NuHepMC.ProcessInfo[400].Description delta resonant
+A NuHepMC.ProcessInfo[400].Name CC res
+A NuHepMC.ProcessInfo[450].Description delta resonant
+A NuHepMC.ProcessInfo[450].Name NC res
+A NuHepMC.ProcessInfo[500].Description non-delta single pion
+A NuHepMC.ProcessInfo[500].Name CC non-delta SPP
+A NuHepMC.ProcessInfo[550].Description non-delta single pion
+A NuHepMC.ProcessInfo[550].Name NC non-delta SPP
+A NuHepMC.ProcessInfo[600].Description deep inelastic
+A NuHepMC.ProcessInfo[600].Name CC dis
+A NuHepMC.ProcessInfo[650].Description deep inelastic
+A NuHepMC.ProcessInfo[650].Name NC dis
+A NuHepMC.ProcessInfo[700].Description neutrino-lepton
+A NuHepMC.ProcessInfo[700].Name CC lep
+A NuHepMC.ProcessInfo[750].Description neutrino-lepton
+A NuHepMC.ProcessInfo[750].Name NC lep
+A NuHepMC.Provenance.NuWro.MEC_cm_direction 0
+A NuHepMC.Provenance.NuWro.MEC_cm_direction_np 0.7
+A NuHepMC.Provenance.NuWro.MEC_cm_direction_pn 0.8
+A NuHepMC.Provenance.NuWro.MEC_cm_direction_pp 0.77
+A NuHepMC.Provenance.NuWro.MEC_cm_strength_np 3
+A NuHepMC.Provenance.NuWro.MEC_cm_strength_pn 4
+A NuHepMC.Provenance.NuWro.MEC_cm_strength_pp 4
+A NuHepMC.Provenance.NuWro.MEC_pauli_blocking 1
+A NuHepMC.Provenance.NuWro.beam_atmo_files 
+A NuHepMC.Provenance.NuWro.beam_content 
+A NuHepMC.Provenance.NuWro.beam_direction 0 0 1
+A NuHepMC.Provenance.NuWro.beam_energy 1000
+A NuHepMC.Provenance.NuWro.beam_file_first 1
+A NuHepMC.Provenance.NuWro.beam_file_limit 0
+A NuHepMC.Provenance.NuWro.beam_folder flux
+A NuHepMC.Provenance.NuWro.beam_inputroot /opt/nuisance/git_master/data/flux/bin_content_is_rate/flux_dune_neutrino_ND.root
+A NuHepMC.Provenance.NuWro.beam_inputroot_flux numu_flux
+A NuHepMC.Provenance.NuWro.beam_inputroot_nue 
+A NuHepMC.Provenance.NuWro.beam_inputroot_nueb 
+A NuHepMC.Provenance.NuWro.beam_inputroot_numu 
+A NuHepMC.Provenance.NuWro.beam_inputroot_numub 
+A NuHepMC.Provenance.NuWro.beam_inputroot_nutau 
+A NuHepMC.Provenance.NuWro.beam_inputroot_nutaub 
+A NuHepMC.Provenance.NuWro.beam_length_units cm
+A NuHepMC.Provenance.NuWro.beam_offset 0 0 0
+A NuHepMC.Provenance.NuWro.beam_particle 14
+A NuHepMC.Provenance.NuWro.beam_placement 0
+A NuHepMC.Provenance.NuWro.beam_pot_per_file -1
+A NuHepMC.Provenance.NuWro.beam_test_only 0
+A NuHepMC.Provenance.NuWro.beam_type 5
+A NuHepMC.Provenance.NuWro.beam_weighted 0
+A NuHepMC.Provenance.NuWro.bkgrscaling 0
+A NuHepMC.Provenance.NuWro.cc_smoothing 0
+A NuHepMC.Provenance.NuWro.coh_kind 2
+A NuHepMC.Provenance.NuWro.coh_mass_correction 1
+A NuHepMC.Provenance.NuWro.coh_new 1
+A NuHepMC.Provenance.NuWro.delta_FF_set 1
+A NuHepMC.Provenance.NuWro.delta_angular 2
+A NuHepMC.Provenance.NuWro.delta_s 0
+A NuHepMC.Provenance.NuWro.delta_selfenergy 0
+A NuHepMC.Provenance.NuWro.dyn_coh_cc 1
+A NuHepMC.Provenance.NuWro.dyn_coh_nc 1
+A NuHepMC.Provenance.NuWro.dyn_dis_cc 1
+A NuHepMC.Provenance.NuWro.dyn_dis_nc 1
+A NuHepMC.Provenance.NuWro.dyn_hyp_cc 1
+A NuHepMC.Provenance.NuWro.dyn_lep 1
+A NuHepMC.Provenance.NuWro.dyn_mec_cc 1
+A NuHepMC.Provenance.NuWro.dyn_mec_nc 1
+A NuHepMC.Provenance.NuWro.dyn_qel_cc 1
+A NuHepMC.Provenance.NuWro.dyn_qel_el 0
+A NuHepMC.Provenance.NuWro.dyn_qel_nc 1
+A NuHepMC.Provenance.NuWro.dyn_res_cc 1
+A NuHepMC.Provenance.NuWro.dyn_res_el 0
+A NuHepMC.Provenance.NuWro.dyn_res_nc 1
+A NuHepMC.Provenance.NuWro.e_spp_ff_set 4
+A NuHepMC.Provenance.NuWro.eel_alg old
+A NuHepMC.Provenance.NuWro.el_costh_del 1
+A NuHepMC.Provenance.NuWro.el_costh_lab 0.5
+A NuHepMC.Provenance.NuWro.first_step 1
+A NuHepMC.Provenance.NuWro.flux_correction 0
+A NuHepMC.Provenance.NuWro.formation_length 1
+A NuHepMC.Provenance.NuWro.formation_zone fz-new
+A NuHepMC.Provenance.NuWro.geo_d 2000 2000 5000
+A NuHepMC.Provenance.NuWro.geo_file target/ND280_v9r7p5.root
+A NuHepMC.Provenance.NuWro.geo_name ND280Geometry_v9r7p5
+A NuHepMC.Provenance.NuWro.geo_o 0 0 0
+A NuHepMC.Provenance.NuWro.geo_volume 
+A NuHepMC.Provenance.NuWro.geom_density_convert 1
+A NuHepMC.Provenance.NuWro.geom_length_units cm
+A NuHepMC.Provenance.NuWro.hyp_Lambda_Eb 27
+A NuHepMC.Provenance.NuWro.hyp_Sigma_Eb -70
+A NuHepMC.Provenance.NuWro.hyp_axial_mass 1030
+A NuHepMC.Provenance.NuWro.hyp_effmass 1
+A NuHepMC.Provenance.NuWro.hyp_g2_Im_part 0
+A NuHepMC.Provenance.NuWro.hyp_g2_Re_part 0
+A NuHepMC.Provenance.NuWro.hyp_lambda 1
+A NuHepMC.Provenance.NuWro.hyp_sigma_minus 1
+A NuHepMC.Provenance.NuWro.hyp_sigma_zero 1
+A NuHepMC.Provenance.NuWro.hyp_su3_sym_breaking 0
+A NuHepMC.Provenance.NuWro.kaskada_NN_angle 3
+A NuHepMC.Provenance.NuWro.kaskada_NN_corr 1
+A NuHepMC.Provenance.NuWro.kaskada_NN_inel 2
+A NuHepMC.Provenance.NuWro.kaskada_NN_mfp_scale 1
+A NuHepMC.Provenance.NuWro.kaskada_NN_xsec 2
+A NuHepMC.Provenance.NuWro.kaskada_events 0
+A NuHepMC.Provenance.NuWro.kaskada_events_file 
+A NuHepMC.Provenance.NuWro.kaskada_on 1
+A NuHepMC.Provenance.NuWro.kaskada_piN_xsec 1
+A NuHepMC.Provenance.NuWro.kaskada_redo 0
+A NuHepMC.Provenance.NuWro.kaskada_w 7
+A NuHepMC.Provenance.NuWro.kaskada_writeall 0
+A NuHepMC.Provenance.NuWro.mec_back_to_back_smearing 0
+A NuHepMC.Provenance.NuWro.mec_central_motion 0
+A NuHepMC.Provenance.NuWro.mec_kind 3
+A NuHepMC.Provenance.NuWro.mec_pb_trials 30
+A NuHepMC.Provenance.NuWro.mec_ratio_pp 0.85
+A NuHepMC.Provenance.NuWro.mec_ratio_ppp 0.8
+A NuHepMC.Provenance.NuWro.mec_scaling 0
+A NuHepMC.Provenance.NuWro.mixed_order 1
+A NuHepMC.Provenance.NuWro.nucleus_E_b 34
+A NuHepMC.Provenance.NuWro.nucleus_kf 220
+A NuHepMC.Provenance.NuWro.nucleus_model 1
+A NuHepMC.Provenance.NuWro.nucleus_n 6
+A NuHepMC.Provenance.NuWro.nucleus_p 6
+A NuHepMC.Provenance.NuWro.nucleus_target 2
+A NuHepMC.Provenance.NuWro.number_of_events 1000000
+A NuHepMC.Provenance.NuWro.number_of_test_events 2000000
+A NuHepMC.Provenance.NuWro.path_to_data 
+A NuHepMC.Provenance.NuWro.pauli_blocking 1
+A NuHepMC.Provenance.NuWro.pion_C5A 1.19
+A NuHepMC.Provenance.NuWro.pion_axial_mass 0.94
+A NuHepMC.Provenance.NuWro.qel_axial_ff_set 1
+A NuHepMC.Provenance.NuWro.qel_cc_axial_mass 1030
+A NuHepMC.Provenance.NuWro.qel_cc_vector_mass 840
+A NuHepMC.Provenance.NuWro.qel_deuterium_ff_scale 0
+A NuHepMC.Provenance.NuWro.qel_kinematics 0
+A NuHepMC.Provenance.NuWro.qel_minerva_ff_scale 0
+A NuHepMC.Provenance.NuWro.qel_nc_axial_mass 1030
+A NuHepMC.Provenance.NuWro.qel_rpa 1
+A NuHepMC.Provenance.NuWro.qel_s_axial_mass 1030
+A NuHepMC.Provenance.NuWro.qel_strange 1
+A NuHepMC.Provenance.NuWro.qel_strangeEM 0
+A NuHepMC.Provenance.NuWro.qel_vector_ff_set 2
+A NuHepMC.Provenance.NuWro.random_seed 1203
+A NuHepMC.Provenance.NuWro.res_dis_blending_end 1900
+A NuHepMC.Provenance.NuWro.res_dis_blending_start 1600
+A NuHepMC.Provenance.NuWro.res_dis_cut 1600
+A NuHepMC.Provenance.NuWro.res_hybrid_resampling 0
+A NuHepMC.Provenance.NuWro.res_hybrid_sampling 4
+A NuHepMC.Provenance.NuWro.res_kind 2
+A NuHepMC.Provenance.NuWro.save_test_events 0
+A NuHepMC.Provenance.NuWro.sf_coulomb 1
+A NuHepMC.Provenance.NuWro.sf_fsi 1
+A NuHepMC.Provenance.NuWro.sf_method 0
+A NuHepMC.Provenance.NuWro.sf_pb 1
+A NuHepMC.Provenance.NuWro.spp_precision 500
+A NuHepMC.Provenance.NuWro.step 0.2
+A NuHepMC.Provenance.NuWro.table_path 
+A NuHepMC.Provenance.NuWro.target_content 
+A NuHepMC.Provenance.NuWro.target_type 0
+A NuHepMC.Provenance.NuWro.tau 8
+A NuHepMC.Provenance.NuWro.user_events 0
+A NuHepMC.Provenance.NuWro.user_params 
+A NuHepMC.Units.CrossSection.TargetScale PerNucleon
+A NuHepMC.Units.CrossSection.Unit pb
+A NuHepMC.Version.Major 0
+A NuHepMC.Version.Minor 9
+A NuHepMC.Version.Patch 6
+A NuHepMC.VertexStatusIDs 1 2 21
+A NuHepMC.VertexStatusInfo[1].Description The neutrino hard-scatter vertex
+A NuHepMC.VertexStatusInfo[1].Name PrimaryVertex
+A NuHepMC.VertexStatusInfo[21].Description Impulse approximation vertex that represents the separation of the single target nucleon from the target nucleus ground state.
+A NuHepMC.VertexStatusInfo[21].Name NucleonSeparationVertex
+A NuHepMC.VertexStatusInfo[2].Description A single vertex representing the cascade
+A NuHepMC.VertexStatusInfo[2].Name FSIVertex
+E 0 3 17
+U MEV CM
+W 1.0000000000000000000000e+00
+A 0 lab_pos 0.000000 0.000000 0.000000 0.000000
+A 2 remnant_particle_number 1000060110
+A 0 signal_process_id 600
+P 1 0 1000060120 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 20
+V -1 21 [1]
+P 2 -1 2009900000 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 3
+P 3 -1 2112 5.8418622540181261e+01 1.6947435897273436e+02 3.2163624080347979e+01 9.5705338500404105e+02 9.3956499999999994e+02 21
+P 4 0 14 0.0000000000000000e+00 0.0000000000000000e+00 2.1645138932994338e+04 2.1645138932994338e+04 0.0000000000000000e+00 4
+V -2 1 [3,4]
+P 5 -2 13 8.2474971312758851e+02 1.8066670110723753e+03 1.3857181098259549e+04 1.3999174596422708e+04 1.0565799999971934e+02 3
+P 6 -2 211 -1.0443350119423276e+02 -1.7913481468556623e+02 -8.9059802377823999e+01 2.6534330838311109e+02 1.3956999999999914e+02 3
+P 7 -2 211 -2.4921132595258335e+01 -6.3192068940080537e+02 3.1855174806181576e+03 3.2506839626094802e+03 1.3956999999999189e+02 3
+P 8 -2 111 -8.9772845349441226e+01 3.5820302634028486e+01 9.0648857257410793e+02 9.2156572768868318e+02 1.3498000000000121e+02 3
+P 9 -2 2112 -3.5344007946903702e+02 -3.9734877452582998e+02 2.6214045933536863e+03 2.8350237680393548e+03 9.3956999999999903e+02 3
+P 10 -2 -211 -1.9376353197943698e+02 -4.6460867612146615e+02 1.1957706146470000e+03 1.3048956571334550e+03 1.3956999999999707e+02 3
+V -3 2 [2,5,6,7,8,9,10]
+P 11 -3 2009900000 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 1
+P 12 -3 13 8.2474971312758851e+02 1.8066670110723753e+03 1.3857181098259549e+04 1.3999174596422708e+04 1.0565799999971934e+02 1
+P 13 -3 211 -2.4921132595258335e+01 -6.3192068940080537e+02 3.1855174806181576e+03 3.2506839626094802e+03 1.3956999999999189e+02 1
+P 14 -3 2112 -3.4986601053691732e+02 -3.9333069057682781e+02 2.5948963356323320e+03 2.8095184703177811e+03 9.3956999999999903e+02 1
+P 15 -3 -211 -1.9376353197943698e+02 -4.6460867612146615e+02 1.1957706146470000e+03 1.3048956571334550e+03 1.3956999999999707e+02 1
+P 16 -3 111 -8.9772845349441297e+01 3.5820302634028494e+01 9.0648857257410782e+02 9.2156572768868318e+02 1.3498000000000121e+02 1
+P 17 -3 211 -1.0443350119423279e+02 -1.7913481468556623e+02 -8.9059802377824042e+01 2.6534330838311092e+02 1.3956999999999914e+02 1
+E 1 3 17
+U MEV CM
+W 1.0000000000000000000000e+00
+A 0 lab_pos 0.000000 0.000000 0.000000 0.000000
+A 2 remnant_particle_number 1000060110
+A 0 signal_process_id 600
+P 1 0 1000060120 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 20
+V -1 21 [1]
+P 2 -1 2009900000 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 3
+P 3 -1 2112 -8.5951914051395249e+01 -1.9802571407990031e+00 -4.4530523817241402e+01 9.4454063423649484e+02 9.3956499999999994e+02 21
+P 4 0 14 0.0000000000000000e+00 0.0000000000000000e+00 2.2797657951401954e+04 2.2797657951401954e+04 0.0000000000000000e+00 4
+V -2 1 [3,4]
+P 5 -2 13 -6.8709024524455697e+02 1.1097305216126097e+03 1.7863675133520916e+04 1.7911606508759796e+04 1.0565799999987340e+02 3
+P 6 -2 211 4.6465529912817976e+02 -5.7974601667654179e+02 2.7420138003259349e+03 2.8443152878923402e+03 1.3956999999997805e+02 3
+P 7 -2 2112 -6.9003421900679129e+01 -2.2354237528019510e+02 1.0911236489401481e+03 1.4587924005684906e+03 9.3957000000000073e+02 3
+P 8 -2 -211 1.0295050077827955e+02 1.0632537032149838e+02 3.9788543321289569e+02 4.4687413535302761e+02 1.3957000000000014e+02 3
+P 9 -2 211 1.5561738218442048e+02 7.7513348727740265e+01 4.6816926143434523e+02 5.1854347081117567e+02 1.3957000000000011e+02 3
+P 10 -2 111 -5.3081428997046444e+01 -4.9226110584589861e+02 1.9026015015042083e+02 5.4731815205441171e+02 1.3497999999999988e+02 3
+V -3 2 [2,5,6,7,8,9,10]
+P 11 -3 2009900000 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 1
+P 12 -3 13 -6.8709024524455697e+02 1.1097305216126097e+03 1.7863675133520916e+04 1.7911606508759796e+04 1.0565799999987340e+02 1
+P 13 -3 211 4.6465529912817976e+02 -5.7974601667654179e+02 2.7420138003259349e+03 2.8443152878923402e+03 1.3956999999997805e+02 1
+P 14 -3 2112 -6.7806878532230300e+01 -2.1966607263691731e+02 1.0722031848481467e+03 1.4440437703693481e+03 9.3957000000000073e+02 1
+P 15 -3 -211 1.0295050077827966e+02 1.0632537032149860e+02 3.9788543321289563e+02 4.4687413535302761e+02 1.3957000000000014e+02 1
+P 16 -3 211 1.5561738218442053e+02 7.7513348727740436e+01 4.6816926143434506e+02 5.1854347081117555e+02 1.3957000000000011e+02 1
+P 17 -3 111 -5.3081428997046217e+01 -4.9226110584589856e+02 1.9026015015042060e+02 5.4731815205441137e+02 1.3497999999999988e+02 1
+E 2 3 12
+U MEV CM
+W 1.0000000000000000000000e+00
+A 0 lab_pos 0.000000 0.000000 0.000000 0.000000
+A 2 remnant_particle_number 1000050090
+A 0 signal_process_id 250
+P 1 0 1000060120 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 20
+V -1 21 [1]
+P 2 -1 2009900000 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 3
+P 3 -1 2112 -1.3222149657245853e+02 1.2299565903358730e+02 4.0132017347077209e+01 9.5760295756556286e+02 9.3956499999999994e+02 21
+P 4 0 14 0.0000000000000000e+00 0.0000000000000000e+00 2.4487281623666636e+03 2.4487281623666636e+03 0.0000000000000000e+00 4
+V -2 1 [3,4]
+P 5 -2 14 8.1089651202365656e+02 2.7666569979204047e+02 1.3886453004813602e+03 1.6316963054448945e+03 0.0000000000000000e+00 3
+P 6 -2 2112 -9.4311800859611515e+02 -1.5367004075845315e+02 1.1002148792323815e+03 1.7338803964732776e+03 9.3956499999999994e+02 3
+V -3 2 [2,5,6]
+P 7 -3 2009900000 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 1
+P 8 -3 14 8.1089651202365656e+02 2.7666569979204047e+02 1.3886453004813602e+03 1.6316963054448945e+03 0.0000000000000000e+00 1
+P 9 -3 2212 -3.2864533832719593e+02 1.2995420469227696e+02 2.7832703271100740e+02 1.0405364658882040e+03 9.3827200000000005e+02 1
+P 10 -3 2112 -5.5030766746447352e+02 -1.4777848906148949e+02 2.2813559261531748e+02 1.1222768145793748e+03 9.3956499999999994e+02 1
+P 11 -3 2112 -1.8634538452759131e+02 6.6511491187272284e+01 2.0420752181497656e+02 9.8164733075861034e+02 9.3956499999999994e+02 1
+P 12 -3 111 1.3608120753730961e+02 -3.1631300946391389e+02 2.1988867561724723e+02 4.3028111182648718e+02 1.3497700000000000e+02 1
+E 3 3 21
+U MEV CM
+W 1.0000000000000000000000e+00
+A 0 lab_pos 0.000000 0.000000 0.000000 0.000000
+A 2 remnant_particle_number 1000060110
+A 0 signal_process_id 600
+P 1 0 1000060120 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 20
+V -1 21 [1]
+P 2 -1 2009900000 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 3
+P 3 -1 2112 5.8759624331979360e+01 6.1787411165258931e+01 3.6467557829413920e+01 9.4413063165495362e+02 9.3956499999999994e+02 21
+P 4 0 14 0.0000000000000000e+00 0.0000000000000000e+00 2.5824100253492994e+04 2.5824100253492994e+04 0.0000000000000000e+00 4
+V -2 1 [3,4]
+P 5 -2 13 6.9884079233753326e+01 7.0748182514782263e+02 4.0053444519775885e+03 4.0693196125883869e+03 1.0565800000002690e+02 3
+P 6 -2 211 -9.3479542759009874e+01 -3.6774646111864831e+02 1.1327494209080338e+04 1.1334706909586515e+04 1.3956999999996009e+02 3
+P 7 -2 3122 5.8677347037514073e+02 2.3113456749974205e+02 1.8019121402166984e+03 2.2111887113699045e+03 1.1156799999999987e+03 3
+P 8 -2 321 -2.4492681335779801e+02 1.4602104946749423e+01 6.8583316724591932e+03 6.8804474167620374e+03 4.9359999999999707e+02 3
+P 9 -2 -211 5.1162728351397824e+01 -1.9507786827443476e+02 8.0565658625990204e+02 8.4216110058991421e+02 1.3956999999999971e+02 3
+P 10 -2 -211 -1.1524696958976895e+02 -2.1410599439598695e+02 1.1258770457041599e+02 3.0212417473011828e+02 1.3957000000000090e+02 3
+P 11 -2 211 -3.8488493299658650e+01 1.2886556324430347e+02 6.2625521638194573e+02 6.5556317655306657e+02 1.3956999999999996e+02 3
+P 12 -2 111 -1.5691883462207755e+02 -2.4336632588429015e+02 3.2298583037637792e+02 4.5430181185802871e+02 1.3497999999999968e+02 3
+V -3 2 [2,5,6,7,8,9,10,11,12]
+P 13 -3 2009900000 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 1
+P 14 -3 13 6.9884079233753326e+01 7.0748182514782263e+02 4.0053444519775885e+03 4.0693196125883869e+03 1.0565800000002690e+02 1
+P 15 -3 321 -2.4492681335779801e+02 1.4602104946749423e+01 6.8583316724591932e+03 6.8804474167620374e+03 4.9359999999999707e+02 1
+P 16 -3 211 -9.3479542759009874e+01 -3.6774646111864831e+02 1.1327494209080338e+04 1.1334706909586515e+04 1.3956999999996009e+02 1
+P 17 -3 211 -3.8488493299658650e+01 1.2886556324430347e+02 6.2625521638194573e+02 6.5556317655306657e+02 1.3956999999999996e+02 1
+P 18 -3 -211 -1.1524696958976895e+02 -2.1410599439598695e+02 1.1258770457041601e+02 3.0212417473011817e+02 1.3957000000000090e+02 1
+P 19 -3 111 -1.5691883462207755e+02 -2.4336632588429021e+02 3.2298583037637792e+02 4.5430181185802866e+02 1.3497999999999968e+02 1
+P 20 -3 -211 5.1162728351397803e+01 -1.9507786827443499e+02 8.0565658625990181e+02 8.4216110058991467e+02 1.3956999999999971e+02 1
+P 21 -3 3122 5.8677347037514153e+02 2.3113456749974290e+02 1.8019121402167013e+03 2.2111887113699072e+03 1.1156799999999987e+03 1
+HepMC::Asciiv3-END_EVENT_LISTING
