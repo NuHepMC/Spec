@@ -366,10 +366,10 @@ with value `"MonoEnergetic"` or `"Histogram"` stored on the
 `HepMC3::GenRunInfo`. For both types, relevant units can be signalled via two 
 attributes:
 
-* `"NuHepMC.Beam[<PDG>].EnergyUnit"`. Possible values of the attribute are not 
+* `"NuHepMC.Beam.EnergyUnit"`. Possible values of the attribute are not 
   restricted, but we reserve the meanings of `"MEV"` and `"GEV"`. This attribute
   should always exist and be not empty.
-* `"NuHepMC.Beam[<PDG>].RateUnit"`. Possible values of the attribute are not 
+* `"NuHepMC.Beam.FluxUnit"`. Possible values of the attribute are not 
   restricted, but we reserve the meaning of `"Arbitrary"` to signal that the 
   normalization of the distribution was not known or used by the simulation. 
   If this attribute is not used then the normalization will be assumed 
@@ -457,6 +457,18 @@ implementations to emit metadata for standard status codes defined in the HepMC3
 standard, it is suggested that the complete list of status codes used by an 
 implementation are included in the `"NuHepMC.VertexStatusInfo"` and 
 `"NuHepMC.ParticleStatusInfo"` attributes.
+
+#### G.S.3 Target Atomic Abundances
+
+Using the flux-averaged total cross section, it is straightforward to compute partial cross sections for specific final states, interaction modes, and components of the overall target material used in a run. An example of the last of these is a flux-averaged cross section for interactions with `C` when a composite `CH` target was simulated.
+
+In some cases, it can be desirable to use an existing vector to create cross-section predictions for a target material with a different composition than the one initially used, _e.g._, distributions for `CH_2` from a vector generated for a `CH` target. Making such predictions requires a knowledge of the flux-averaged relative abundances of the nuclides present in the original target material. For situations in which these are known at the start of a run, a
+`HepMC3::VectorStringAttribute` named
+`"NuHepMC.TargetMaterialRelativeAtomicAbundance`
+may be stored in the `HepMC3::GenRunInfo`. Each element
+of the vector should be a string of the form `"100ZZZAAA0[x]"` containing a nuclear PDG code and the corresponding relative abundance enclosed in square brackets, `"[x]"`. For nuclides with a relative abundance of 1, the nuclear PDG code may optionally be used alone. For example, a pure `CH_2` target might be represented in this format as `["1000060120[0.5]", "1000010010"]`.  
+
+For realistic experimental simulations that involve a detector and a non-uniform neutrino beam, the flux-averaged relative abundances are typically difficult to calculate analytically. While running estimates of the abundances can in principle be obtained as the generator runs (using techniques akin to those in [E.C.4](#ec4-estimated-flux-averaged-total-cross-section)), alternative approaches will generally be simpler to implement. Cases in which a particular detector material is of interest can be addressed by selecting events based on their position within the lab frame (_c.f._ [E.R.5](#er5-lab-position)). Further exploration of this topic is left to future standardization efforts focused on neutrino fluxes and detector geometries.
 
 ## Event Metadata
 
@@ -818,6 +830,8 @@ repository.
     clarified to: 
     + "PerTargetAtom" -> "PerAtom"
     + "PerTargetNucleon" -> "PerNucleon"
+  * One of the attributes specified in (G.C.7 -> G.C.4) was renamed for clarity:
+    + "NuHepMC.Beam.RateUnit" -> "NuHepMC.Beam.FluxUnit"
   * A number of Event attribute names were changed to snake_case for 
     consistency:
     + E.R.5 "LabPos" -> "lab_pos"

@@ -61,7 +61,8 @@ def update_gri_090_100(run_info):
     if an == "NuHepMC.Units.CrossSection.TargetScale":
       at = sattr(attrs, an)
 
-      update_map = { "PerTargetAtom": "PerAtom",
+      update_map = { "PerTarget": "PerAtom",
+                     "PerTargetAtom": "PerAtom",
                      "PerTargetNucleon": "PerNucleon",
                      "PerTargetMolecule": None,
                      "PerTargetMolecularNucleon": None }
