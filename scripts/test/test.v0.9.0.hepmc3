@@ -6,6 +6,7 @@ T nuwro2hepmc3\|0.9.4\|github.com/NuHepMC/nuwro2hepmc3
 A NuHepMC.Conventions G.C.1 G.C.2 G.C.5 G.C.4 E.C.1
 A NuHepMC.Exposure.NEvents 100
 A NuHepMC.FluxAveragedTotalCrossSection 0.0463227184476711
+A NuHepMC.Beam.RateUnit Arbitrary
 A NuHepMC.ParticleStatusIDs 1 2 3 4 20 21
 A NuHepMC.ParticleStatusInfo[1].Description Physical final state particles produced by this simulation
 A NuHepMC.ParticleStatusInfo[1].Name UndecayedPhysicalParticle

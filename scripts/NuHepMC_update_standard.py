@@ -58,6 +58,12 @@ def update_gri_090_100(run_info):
       run_info.add_attribute("NuHepMC.Conventions",
         hm.VectorStringAttribute(std.vector_std_string(cvs_new)))
 
+    if an == "NuHepMC.Beam.RateUnit":
+      at = sattr(attrs, an)
+      run_info.add_attribute("NuHepMC.Beam.FluxUnit", 
+            hm.StringAttribute(at))
+      run_info.remove_attribute(an)
+
     if an == "NuHepMC.Units.CrossSection.TargetScale":
       at = sattr(attrs, an)
 
