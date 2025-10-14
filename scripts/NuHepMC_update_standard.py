@@ -89,21 +89,11 @@ def update_gri(run_info, vin):
 
   return run_info
 
-def update_event_010_090(evt):
-  update_map = { "ProcID": "signal_process_id",}
-
-  for an in evt.attribute_names():
-    if an in update_map.keys():
-      evt.add_attribute(update_map[an], hm.StringAttribute(evt.attribute_as_string(an)))
-      evt.remove_attribute(an)
-
-  return evt
-
 def update_event_090_100(evt):
   update_map = { "LabPos": "lab_pos",
                  "TotXS": "tot_xs",
-                 "ProcXS": "proc_xs" }
-
+                 "ProcXS": "proc_xs",
+                 "ProcID": "signal_process_id" }
   for an in evt.attribute_names():
     if an in update_map.keys():
       evt.add_attribute(update_map[an], hm.StringAttribute(evt.attribute_as_string(an)))
